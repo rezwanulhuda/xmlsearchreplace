@@ -11,15 +11,21 @@ namespace XmlSearchReplaceConsoleLib
         ArgumentParser _Parser = null;
         XmlSearchReplace _Replacer = null;
         XmlDocument _Document = null;
-        public SearchReplaceConsoleMain(string[] args)
+
+        public SearchReplaceConsoleMain(string args)
         {
-            _Parser = new ArgumentParser(Environment.CommandLine);
+            _Parser = new ArgumentParser(args);
             _Replacer = new XmlSearchReplace(
                 _Parser.GetLocationOptions()
                 , _Parser.GetOperationOptions()
                 , _Parser.GetSearchString()
                 , _Parser.GetReplaceString());
             _Document = new XmlDocument();
+        }
+
+        public SearchReplaceConsoleMain(string[] args)
+            : this(String.Join(" ", args))
+        {            
         }
 
         public void ProcessAll()

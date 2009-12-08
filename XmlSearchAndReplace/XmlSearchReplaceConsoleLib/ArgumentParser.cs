@@ -54,7 +54,7 @@ namespace XmlSearchReplaceConsoleLib
             {
                 string[] argParts = param.Split(_ArgsKeyValueSeparatorCharacter.ToCharArray());
 
-                if (argParts.Length == 0 || argParts.Length > 2)
+                if (argParts.Length > 2)
                     throw new InvalidArgumentOptionException(String.Format("The command line parameter '{0}' is invalid", param));
                                 
                 string arg = argParts[0].Trim();
@@ -74,13 +74,13 @@ namespace XmlSearchReplaceConsoleLib
             }
         }        
 
-        public KeyValuePair<string, string> this[int index]
-        {
-            get 
-            {
-                return _Keys[index];
-            }           
-        }
+        //public KeyValuePair<string, string> this[int index]
+        //{
+        //    get 
+        //    {
+        //        return _Keys[index];
+        //    }           
+        //}
         
         public SearchReplaceLocationOptions GetLocationOptions()
         {

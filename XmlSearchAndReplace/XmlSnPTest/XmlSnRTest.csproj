@@ -50,6 +50,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="ArgumentParserTest.cs" />
+    <Compile Include="SearchReplaceConsoleMainTest.cs" />
     <Compile Include="UtilityTest.cs" />
     <Compile Include="XmlSearchReplaceTest.cs" />
   </ItemGroup>

@@ -3,7 +3,8 @@
   <Description>This is a default test run configuration for a local test run.</Description>
   <CodeCoverage enabled="true">
     <Regular>
-      <CodeCoverageItem binaryFile="XmlSearchReplaceLib\bin\Release\XmlSearchReplaceLib.dll" pdbFile="XmlSearchReplaceLib\bin\Release\XmlSearchReplaceLib.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.dll" pdbFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.dll" pdbFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.pdb" instrumentInPlace="true" />
     </Regular>
   </CodeCoverage>
   <TestTypeSpecific />
