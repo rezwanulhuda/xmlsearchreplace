@@ -10,21 +10,20 @@ namespace XmlSearchReplaceConsoleLib
 {
     public class ArgumentParser
     {
-        List<KeyValuePair<string, string>> _Keys;
+        //List<KeyValuePair<string, string>> _Keys;
+        CommandLineParameterCollection _Keys;
         const string _ArgsKeyValueSeparatorCharacter = "=";
 
         public ArgumentParser(string[] commandLineArgs)
             : this(String.Join(" ", commandLineArgs))
         {
-            
-                        
+
+
         }
-
-
 
         public ArgumentParser(string commandLine)
         {
-            _Keys = new List<KeyValuePair<string, string>>();
+            _Keys = new CommandLineParameterCollection();
             CreateKeys(GetAppArgsFromCommandLine(commandLine));
         }
 
@@ -36,12 +35,12 @@ namespace XmlSearchReplaceConsoleLib
 
         private string GetStringValue(string key)
         {
-            return _Keys.Find(delegate(KeyValuePair<string, string> k) { return String.Compare(k.Key, key, true) == 0; }).Value;
+            return _Keys.Find(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
         }
 
         private bool GetBoolValue(string key)
         {
-            if (_Keys.Exists(delegate(KeyValuePair<string, string> k) { return String.Compare(k.Key, key, true) == 0; }))
+            if (_Keys.Exists(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }))
                 return true;
 
             return false;
@@ -70,17 +69,9 @@ namespace XmlSearchReplaceConsoleLib
                     val = argParts[1].Trim();
                 }
                 
-                _Keys.Add(new KeyValuePair<string,string>(arg, val));
+                _Keys.Add(new CommandLineParameter(arg, val));
             }
-        }        
-
-        //public KeyValuePair<string, string> this[int index]
-        //{
-        //    get 
-        //    {
-        //        return _Keys[index];
-        //    }           
-        //}
+        }                
         
         public SearchReplaceLocationOptions GetLocationOptions()
         {
