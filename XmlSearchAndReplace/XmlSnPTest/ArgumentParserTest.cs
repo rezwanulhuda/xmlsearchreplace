@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XmlSearchReplaceLib;
 using XmlSearchReplaceConsoleLib;
+using System;
 
 namespace XmlSnRTest
 {
@@ -91,8 +92,7 @@ namespace XmlSnRTest
             Assert.Fail();
         }
 
-        [TestMethod]
-        [ExpectedExceptionAttribute(typeof(InvalidArgumentOptionException))]
+        [TestMethod]        
         public void CheckArguments_InvalidValueWithOptionEmpty()
         {
             string[] args = { "/=", "av,ev,en,an" };
@@ -102,10 +102,10 @@ namespace XmlSnRTest
             {
                 ArgumentParser argParser = new ArgumentParser(args);
             }
-            catch (InvalidArgumentOptionException ex)
+            catch (ArgumentException ex)
             {
-                Assert.AreEqual("The command line parameter '= av,ev,en,an' has an empty option", ex.Message);
-                throw;
+                Assert.AreEqual("Parameter '' (/= av,ev,en,an) is not supported", ex.Message);
+                return;
             }
 
             Assert.Fail();
@@ -169,6 +169,23 @@ namespace XmlSnRTest
             Assert.AreEqual(" hello world ", argParser.GetSearchString());
             Assert.AreEqual(" how are you ", argParser.GetReplaceString());
             Assert.AreEqual(" c:\\documents and settings\\blah blah.html ", argParser.GetFileName());
+        }
+
+        [TestMethod]
+        public void CheckUnsupportedParametersAreReported()
+        {
+            string argument = @"/Q";
+
+            try
+            {
+                ArgumentParser argParser = new ArgumentParser(argument);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.AreEqual("Parameter 'Q' (/Q) is not supported", ex.Message);
+                return;
+            }
+            Assert.Fail();
         }
 
         

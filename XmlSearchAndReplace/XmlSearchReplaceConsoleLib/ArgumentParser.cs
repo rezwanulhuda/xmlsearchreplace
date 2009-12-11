@@ -11,7 +11,7 @@ namespace XmlSearchReplaceConsoleLib
     public class ArgumentParser
     {
         //List<KeyValuePair<string, string>> _Keys;
-        CommandLineParameterCollection _Keys;
+        CommandLineParameterCollection _Params;
         const string _ArgsKeyValueSeparatorCharacter = "=";
 
         public ArgumentParser(string[] commandLineArgs)
@@ -23,7 +23,7 @@ namespace XmlSearchReplaceConsoleLib
 
         public ArgumentParser(string commandLine)
         {
-            _Keys = new CommandLineParameterCollection();
+            _Params = new CommandLineParameterCollection();
             CreateKeys(GetAppArgsFromCommandLine(commandLine));
         }
 
@@ -35,12 +35,12 @@ namespace XmlSearchReplaceConsoleLib
 
         private string GetStringValue(string key)
         {
-            return _Keys.Find(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
+            return _Params.Find(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
         }
 
         private bool GetBoolValue(string key)
         {
-            if (_Keys.Exists(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }))
+            if (_Params.Exists(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }))
                 return true;
 
             return false;
@@ -55,13 +55,13 @@ namespace XmlSearchReplaceConsoleLib
 
                 if (argParts.Length > 2)
                     throw new InvalidArgumentOptionException(String.Format("The command line parameter '{0}' is invalid", param));
+
+                
                                 
                 string arg = argParts[0].Trim();
 
-                if (String.IsNullOrEmpty(arg))
-                {
-                    throw new InvalidArgumentOptionException(String.Format("The command line parameter '{0}' has an empty option", param));
-                }
+                if (!CommandLineParameterCollection.SupporedParams.Exists(p => String.Compare(p.GetName(), arg, true) == 0))
+                    throw new ArgumentException(String.Format("Parameter '{0}' (/{1}) is not supported", arg, param));                
 
                 string val = String.Empty;
                 if (argParts.Length > 1)
@@ -69,7 +69,7 @@ namespace XmlSearchReplaceConsoleLib
                     val = argParts[1].Trim();
                 }
                 
-                _Keys.Add(new CommandLineParameter(arg, val));
+                _Params.Add(new CommandLineParameter(arg, val));
             }
         }                
         
