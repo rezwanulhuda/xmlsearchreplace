@@ -72,25 +72,25 @@ namespace XmlSnRTest
             Assert.AreEqual(true, argParser.ContinueOnError);
         }
 
-        [TestMethod]
-        [ExpectedExceptionAttribute(typeof(InvalidArgumentOptionException))]
-        public void CheckArguments_InvalidValueWithDoubleEquals()
-        {
-            string[] args = { "/O=", "av,ev,=en,an"};
+        //[TestMethod]
+        //[ExpectedExceptionAttribute(typeof(InvalidArgumentOptionException))]
+        //public void CheckArguments_InvalidValueWithDoubleEquals()
+        //{
+        //    string[] args = { "/O=", "av,ev,=en,an"};
 
             
-            try
-            {
-                ArgumentParser argParser = new ArgumentParser(args);
-            }
-            catch (InvalidArgumentOptionException ex)
-            {
-                Assert.AreEqual("The command line parameter 'O= av,ev,=en,an' is invalid", ex.Message);
-                throw;
-            }
+        //    try
+        //    {
+        //        ArgumentParser argParser = new ArgumentParser(args);
+        //    }
+        //    catch (InvalidArgumentOptionException ex)
+        //    {
+        //        Assert.AreEqual("The command line parameter 'O= av,ev,=en,an' is invalid", ex.Message);
+        //        throw;
+        //    }
 
-            Assert.Fail();
-        }
+        //    Assert.Fail();
+        //}
 
         [TestMethod]        
         public void CheckArguments_InvalidValueWithOptionEmpty()
@@ -186,6 +186,29 @@ namespace XmlSnRTest
                 return;
             }
             Assert.Fail();
+        }
+
+
+        [TestMethod]
+        public void DblQuoteInSearchString_WillReturnStringWithDblQuote()
+        {
+            string argument = @"/S=""hello""world""how are you""/R=""hello world "" how are you?""""";
+
+            ArgumentParser argParser = new ArgumentParser(argument);
+
+            Assert.AreEqual(@"hello""world""how are you", argParser.GetSearchString());
+            Assert.AreEqual(@"hello world "" how are you?""", argParser.GetReplaceString());
+        }
+
+        [TestMethod]
+        public void EqualsSignInSearchReplaceString_WillReturnStringWithEqual()
+        {
+            string argument = @"/S=""hello=world how are you""/R=""hello world = "" how are you? """"";
+
+            ArgumentParser argParser = new ArgumentParser(argument);
+
+            Assert.AreEqual(@"hello=world how are you", argParser.GetSearchString());
+            Assert.AreEqual(@"hello world = "" how are you? """, argParser.GetReplaceString());
         }
 
         

@@ -10,20 +10,17 @@ namespace XmlSearchReplaceConsoleLib
 {
     public class ArgumentParser
     {
-        //List<KeyValuePair<string, string>> _Keys;
-        CommandLineParameterCollection _Params;
+        CommandLineParameterValueCollection _Params;
         const string _ArgsKeyValueSeparatorCharacter = "=";
 
         public ArgumentParser(string[] commandLineArgs)
             : this(String.Join(" ", commandLineArgs))
         {
-
-
         }
 
         public ArgumentParser(string commandLine)
         {
-            _Params = new CommandLineParameterCollection();
+            _Params = new CommandLineParameterValueCollection();
             CreateKeys(GetAppArgsFromCommandLine(commandLine));
         }
 
@@ -35,15 +32,15 @@ namespace XmlSearchReplaceConsoleLib
 
         private string GetStringValue(string key)
         {
-            return _Params.Find(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
+            return _Params.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
         }
 
         private bool GetBoolValue(string key)
         {
-            if (_Params.Exists(delegate(CommandLineParameter k) { return String.Compare(k.GetName(), key, true) == 0; }))
-                return true;
-
-            return false;
+            CommandLineParameterValue value = _Params.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), key, true) == 0; });
+            if (value == null)
+                return false;
+            return true;
         }
         
 
@@ -51,26 +48,38 @@ namespace XmlSearchReplaceConsoleLib
         {
             foreach (string param in allApplicatioinArgs)
             {
-                string[] argParts = param.Split(_ArgsKeyValueSeparatorCharacter.ToCharArray());
 
-                if (argParts.Length > 2)
-                    throw new InvalidArgumentOptionException(String.Format("The command line parameter '{0}' is invalid", param));
+                string arg = GetArgumentFromWholeParam(param);
+                string val = GetValueFromWholeParam(param);
 
-                
-                                
-                string arg = argParts[0].Trim();
+                CommandLineParameter commandLineParam = CommandLineParameterCollection.SupporedParams.Find(p => String.Compare(p.GetName(), arg, true) == 0);
 
-                if (!CommandLineParameterCollection.SupporedParams.Exists(p => String.Compare(p.GetName(), arg, true) == 0))
-                    throw new ArgumentException(String.Format("Parameter '{0}' (/{1}) is not supported", arg, param));                
 
-                string val = String.Empty;
-                if (argParts.Length > 1)
-                {
-                    val = argParts[1].Trim();
-                }
-                
-                _Params.Add(new CommandLineParameter(arg, val));
+                if (commandLineParam == null)
+                    throw new ArgumentException(String.Format("Parameter '{0}' (/{1}) is not supported", arg, param));
+
+                _Params.Add(new CommandLineParameterValue(commandLineParam, val));
             }
+        }
+
+        private string GetValueFromWholeParam(string param)
+        {
+            int indexOfEquals = param.IndexOf('=');
+            if (indexOfEquals >= 0)
+            {
+                return param.Substring(indexOfEquals + 1).Trim();
+            }
+            return String.Empty;
+        }
+
+        private string GetArgumentFromWholeParam(string param)
+        {
+            int indexOfEquals = param.IndexOf('=');
+            if (indexOfEquals >= 0)
+            {
+                return param.Substring(0, param.IndexOf('=')).Trim();
+            }
+            return param.Trim();
         }                
         
         public SearchReplaceLocationOptions GetLocationOptions()
@@ -134,7 +143,19 @@ namespace XmlSearchReplaceConsoleLib
 
         private string TrimDoubleQuotes(string input)
         {
-            return input.TrimEnd("\"".ToCharArray()).TrimStart("\"".ToCharArray());
+            if (input.Length == 0) return input;
+
+            if (!SurroundedByQuotes(input)) return input;
+
+            string trimmed = input.Substring(1);
+            trimmed = trimmed.Substring(0, trimmed.Length - 1);
+            return trimmed;                            
+            
+        }
+
+        private bool SurroundedByQuotes(string input)
+        {
+            return input[0] == '"' && input[input.Length - 1] == '"';                
         }
 
         public bool ContinueOnError
