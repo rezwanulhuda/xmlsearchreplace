@@ -53,9 +53,9 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="ArgumentParser.cs" />
-    <Compile Include="CommandLineParameterValue.cs" />
     <Compile Include="CommandLineParameter.cs" />
     <Compile Include="CommandLineParameterCollection.cs" />
+    <Compile Include="CommandLineParameterValue.cs" />
     <Compile Include="CommandLineParameterValueCollection.cs" />
     <Compile Include="InvalidArgumentOptionException.cs" />
     <Compile Include="SearchReplaceConsoleMain.cs" />

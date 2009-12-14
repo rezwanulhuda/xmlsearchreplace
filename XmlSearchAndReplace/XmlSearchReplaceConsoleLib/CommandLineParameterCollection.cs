@@ -12,13 +12,13 @@ namespace XmlSearchReplaceConsoleLib
             get
             {
                 CommandLineParameterCollection supportedParams = new CommandLineParameterCollection();
-                supportedParams.Add(new CommandLineParameter("C", String.Empty));
-                supportedParams.Add(new CommandLineParameter("I", String.Empty));
-                supportedParams.Add(new CommandLineParameter("F", String.Empty));
-                supportedParams.Add(new CommandLineParameter("S", String.Empty));
-                supportedParams.Add(new CommandLineParameter("R", String.Empty));
-                supportedParams.Add(new CommandLineParameter("O", String.Empty));
-                supportedParams.Add(new CommandLineParameter("W", String.Empty));
+                supportedParams.Add(new CommandLineParameter("C"));
+                supportedParams.Add(new CommandLineParameter("I"));
+                supportedParams.Add(new CommandLineParameter("F"));
+                supportedParams.Add(new CommandLineParameter("S"));
+                supportedParams.Add(new CommandLineParameter("R"));
+                supportedParams.Add(new CommandLineParameter("O"));
+                supportedParams.Add(new CommandLineParameter("W"));
 
                 return supportedParams;
             }
