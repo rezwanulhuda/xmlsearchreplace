@@ -72,25 +72,7 @@ namespace XmlSnRTest
             Assert.AreEqual(true, argParser.ContinueOnError);
         }
 
-        //[TestMethod]
-        //[ExpectedExceptionAttribute(typeof(InvalidArgumentOptionException))]
-        //public void CheckArguments_InvalidValueWithDoubleEquals()
-        //{
-        //    string[] args = { "/O=", "av,ev,=en,an"};
-
-            
-        //    try
-        //    {
-        //        ArgumentParser argParser = new ArgumentParser(args);
-        //    }
-        //    catch (InvalidArgumentOptionException ex)
-        //    {
-        //        Assert.AreEqual("The command line parameter 'O= av,ev,=en,an' is invalid", ex.Message);
-        //        throw;
-        //    }
-
-        //    Assert.Fail();
-        //}
+        
 
         [TestMethod]        
         public void CheckArguments_InvalidValueWithOptionEmpty()
@@ -192,7 +174,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void DblQuoteInSearchString_WillReturnStringWithDblQuote()
         {
-            string argument = @"/S=""hello""world""how are you""/R=""hello world "" how are you?""""";
+            string argument = @"/S=""hello\""world\""how are you""/R=""hello world "" how are you?""""";
 
             ArgumentParser argParser = new ArgumentParser(argument);
 
@@ -211,6 +193,174 @@ namespace XmlSnRTest
             Assert.AreEqual(@"hello world = "" how are you? """, argParser.GetReplaceString());
         }
 
+        [TestMethod]
+        public void GetArgumentsFromString_EmptyString_WillReturn0Args()
+        {
+            string commandLine = String.Empty;
+
+            Assert.AreEqual(0, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_1BoolArgument_WillReturn1Args()
+        {
+            string commandLine = "/W";
+
+            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("W", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+        }
+
+
+
+        [TestMethod]
+        public void GetArgumentsFromString_2BoolArgument_WillReturn2Args()
+        {
+            string commandLine = "/W /Q";
+
+            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("W", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("Q", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_2BoolArgumentWithoutSpace_WillReturn2Args()
+        {
+            string commandLine = "/W/Q";
+
+            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("W", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("Q", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_1StringArgumentWithoutSpecialChars_WillReturn1Arg()
+        {
+            string commandLine = "/S=helloworld";
+
+            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("S=helloworld", ArgumentParser.GetArgumentsFromString(commandLine)[0]);            
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_2StringArgumentWithoutSpecialChars_WillReturn2Arg()
+        {
+            string commandLine = "/S=helloworld /R=howareyou";
+
+            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("S=helloworld", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("R=howareyou", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_1StringArgumentWithFrontSlashInValue_WillReturn2Args()
+        {
+            string commandLine = @"/S=hello/world";
+
+            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("S=hello", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("world", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_1StringArgumentWithDblQuotes_WillReturn1Args()
+        {
+            string commandLine = @"/S=""hello/world""";
+
+            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello/world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_1StringArgumentContainingDblQuotes_WillReturn1Args()
+        {
+            string commandLine = @"/S=""hello\""/world""";
+
+            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello""/world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_1StringArgumentContainingBackSlash_WillReturn1Args()
+        {
+            string commandLine = @"/S=hello\world";
+
+            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=hello\world", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_3StringArgument_WillReturn3Args()
+        {
+            string commandLine = @"/S=""hello world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj""";
+
+            Assert.AreEqual(3, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
+        }        
+
+        [TestMethod]
+        public void GetArgumentsFromString_CombinationOfAll()
+        {
+            string commandLine = @"/S=""hello ""world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj"" /W /C /""I"" /O=""en,ev,an,av""";
+
+            Assert.AreEqual(8, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello """, ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"world""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+            Assert.AreEqual(@"W", ArgumentParser.GetArgumentsFromString(commandLine)[4]);
+            Assert.AreEqual(@"C", ArgumentParser.GetArgumentsFromString(commandLine)[5]);
+            Assert.AreEqual(@"""I""", ArgumentParser.GetArgumentsFromString(commandLine)[6]);
+            Assert.AreEqual(@"O=""en,ev,an,av""", ArgumentParser.GetArgumentsFromString(commandLine)[7]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_InvalidInput1_UnterminatedString()
+        {
+            string commandLine = @"/S=""hello ""world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj""";
+
+            Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello """, ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"world""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_InvalidInput2_InvalidArgument()
+        {
+            string commandLine = @"/S=""hello \""world"" /R=How are /u doing /F=""c:\dellshare.com\*.csproj""";
+
+            Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);            
+            Assert.AreEqual(@"R=How are", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_InvalidInput3_UnendingDblQuoteAtEnd()
+        {
+            string commandLine = @"/S=""hello \""world"" /R=How are /u doing /F=""c:\dellshare.com\*.csproj";
+
+            Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"R=How are", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_InvalidInput4_UnendingDblQuoteAtEnd()
+        {
+            string commandLine = @"/S=""hello \""world"" /R=""How are u doing /F=""c:\dellshare.com\*.csproj";
+
+            //Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"R=""How are u doing /F=""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"c:\dellshare.com\*.csproj", ArgumentParser.GetArgumentsFromString(commandLine)[2]);            
+        }
         
     }
 }

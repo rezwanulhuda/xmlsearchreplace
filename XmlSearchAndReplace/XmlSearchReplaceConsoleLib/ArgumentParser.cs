@@ -24,10 +24,10 @@ namespace XmlSearchReplaceConsoleLib
             CreateKeys(GetAppArgsFromCommandLine(commandLine));
         }
 
-        private static string[] GetAppArgsFromCommandLine(string commandLine)
-        {            
-            string[] applicatioinArgs = commandLine.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            return applicatioinArgs;
+        private List<string> GetAppArgsFromCommandLine(string commandLine)
+        {
+            List<string> applicationArgs = GetArgumentsFromString(commandLine);
+            return applicationArgs;
         }
 
         private string GetStringValue(string key)
@@ -44,7 +44,7 @@ namespace XmlSearchReplaceConsoleLib
         }
         
 
-        private void CreateKeys(string[] allApplicatioinArgs)
+        private void CreateKeys(List<string> allApplicatioinArgs)
         {
             foreach (string param in allApplicatioinArgs)
             {
@@ -165,6 +165,85 @@ namespace XmlSearchReplaceConsoleLib
                 return GetBoolValue("C"); 
             
             }
+        }
+
+        public static List<string> GetArgumentsFromString(string commandLine)
+        {
+
+            List<string> argsWithValues = new List<string>();
+
+            int x = commandLine.IndexOf('/', 0);
+
+            while (x >= 0 && x < commandLine.Length)
+            {
+                int next = x + 1;
+                if (next >= commandLine.Length) break;
+
+                string arg = String.Empty;
+                int iSlash = commandLine.IndexOf('/', next);
+                int iEqual = commandLine.IndexOf('=', next);
+
+                if (iSlash < 0 && next < commandLine.Length)
+                {
+                    arg = commandLine.Substring(next);
+                    argsWithValues.Add(arg);
+                    break;
+                }
+                else if (iEqual < 0 || iSlash < iEqual)
+                {
+                    arg = commandLine.Substring(next, iSlash - next).Trim();
+                    argsWithValues.Add(arg);
+                    x = iSlash;
+                }
+                else
+                {
+                    if (commandLine[iEqual + 1] == '"')
+                    {
+
+                        int iDblQuote = findClosingDblQuote(commandLine, iEqual + 2);                         
+                        if (iDblQuote < 0)
+                            throw new Exception("invalid commandline");
+                        else
+                        {
+                            arg = commandLine.Substring(next, iDblQuote - next + 1).Trim();
+                            arg = arg.Replace(@"\""", @"""");                            
+                            argsWithValues.Add(arg);
+                            x = iDblQuote;
+                        }
+
+                    }
+                    else
+                    {
+                        arg = commandLine.Substring(next, iSlash - next).Trim();
+                        argsWithValues.Add(arg);
+                        x = iSlash;
+                    }
+                }
+            }
+
+            argsWithValues.RemoveAll(s => String.IsNullOrEmpty(s));
+
+            return argsWithValues;
+        }
+
+        private static int findClosingDblQuote(string commandLine, int start)
+        {
+            
+            while (true)
+            {
+                int iDblQuote = commandLine.IndexOf('"', start);
+                if (iDblQuote < 0)
+                    return iDblQuote;
+                if (commandLine[iDblQuote - 1] == '\\')
+                {
+                    start = iDblQuote + 1;
+                }
+                else
+                {
+                    return iDblQuote;
+                }
+            }
+
         }
 
         
