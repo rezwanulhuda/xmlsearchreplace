@@ -126,4 +126,14 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>Set ReleaseDir="$(SolutionDir)Releases"
+if "$(ConfigurationName)"=="Release" (
+if not exist %25ReleaseDir%25 md %25ReleaseDir%25
+xcopy "$(TargetDir)XmlSearchReplace*.dll" %25ReleaseDir%25
+xcopy "$(TargetDir)XmlSearchReplace.exe" %25ReleaseDir%25
+cd %25ReleaseDir%25
+"C:\Program Files\WinRAR\winrar.exe" a -afzip -mczip -df -ibck -agyyyymmdd -x*.zip XmlSearchReplaceExecutable "*.*"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

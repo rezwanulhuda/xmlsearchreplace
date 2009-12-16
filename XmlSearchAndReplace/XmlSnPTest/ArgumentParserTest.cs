@@ -72,6 +72,20 @@ namespace XmlSnRTest
             Assert.AreEqual(true, argParser.ContinueOnError);
         }
 
+        [TestMethod]
+        public void StringArgumentsWithMoreThanOneEqualsSignShouldWork()
+        {
+            string[] args = { "/O=", "av,ev,en,an", @"/R==", "/F=c:\\documents", "and", "settings\\desktop\\file.xml", "/S=Equals /W /i /c" };
+
+            ArgumentParser argParser = new ArgumentParser(args);
+            Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, argParser.GetLocationOptions());
+            Assert.AreEqual("c:\\documents and settings\\desktop\\file.xml", argParser.GetFileName());
+            Assert.AreEqual("Equals", argParser.GetSearchString());
+            Assert.AreEqual("=", argParser.GetReplaceString());
+            Assert.AreEqual(SearchReplaceOperationOptions.CaseInsensitive | SearchReplaceOperationOptions.WholeWordOnly, argParser.GetOperationOptions());
+            Assert.AreEqual(true, argParser.ContinueOnError);
+        }
+
         
 
         [TestMethod]        
