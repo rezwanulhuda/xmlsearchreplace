@@ -57,6 +57,7 @@ namespace XmlSearchReplaceConsole
             usage += "C - Continue on error when processing multiple files" + Environment.NewLine;
             usage += "Example:" + Environment.NewLine;
             usage += execName + @" /O=ev,av /S=""Book"" /R=""LibraryBook"" /F=""C:\xmls\*.csproj"" /W /I /C";
+            usage += "see project documentation for further details. http://xmlsearchreplace.codeplex.com/documentation";
 
             // TODO features            
             // 3. Commandline argument validation            
