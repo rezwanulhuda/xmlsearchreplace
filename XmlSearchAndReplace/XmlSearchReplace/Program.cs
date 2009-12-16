@@ -27,8 +27,12 @@ namespace XmlSearchReplaceConsole
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (RequiredParameterMissingException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                ShowUsage();
+            }
             catch (BaseException ex)
-
             {
                 Console.WriteLine(ex.Message);
             }
