@@ -57,6 +57,7 @@
     <Compile Include="CommandLineParameterCollection.cs" />
     <Compile Include="CommandLineParameterValue.cs" />
     <Compile Include="CommandLineParameterValueCollection.cs" />
+    <Compile Include="HelpText.cs" />
     <Compile Include="InvalidArgumentOptionException.cs" />
     <Compile Include="SearchReplaceConsoleMain.cs" />
   </ItemGroup>

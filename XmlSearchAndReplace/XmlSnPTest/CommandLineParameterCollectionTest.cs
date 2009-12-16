@@ -1,0 +1,56 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using XmlSearchReplaceConsoleLib;
+
+namespace XmlSnRTest
+{
+    /// <summary>
+    /// Summary description for CommandLineParameterCollectionTest
+    /// </summary>
+    [TestClass]
+    public class CommandLineParameterCollectionTest
+    {
+        public CommandLineParameterCollectionTest()
+        {            
+        }
+
+        private TestContext testContextInstance;
+        
+        public TestContext TestContext
+        {
+            get
+            {
+                return testContextInstance;
+            }
+            set
+            {
+                testContextInstance = value;
+            }
+        }
+
+        [TestMethod]
+        public void GetUsage_WillReturnValidUsage()
+        {
+            string expectedCommandLine = @"/S=""search"" /R=""replace"" /O=en,ev,an,av /F=""C:\Files\*.xml"" /C /I /W";
+            Assert.AreEqual(expectedCommandLine, CommandLineParameterCollection.GetUsage());
+        }
+
+        [TestMethod]
+        public void GetHelpText_WillReturnHelpText()
+        {
+            string expectedHelpText = "S - " + HelpText.SearchString + Environment.NewLine;
+            expectedHelpText += "R - " + HelpText.ReplaceString + Environment.NewLine;
+            expectedHelpText += "O - " + HelpText.Option + Environment.NewLine;            
+            expectedHelpText += "F - " + HelpText.FileName + Environment.NewLine;            
+            expectedHelpText += "C - " + HelpText.ContinueOnError + Environment.NewLine;
+            expectedHelpText += "I - " + HelpText.IgnoreCase + Environment.NewLine;
+            expectedHelpText += "W - " + HelpText.WholeWordOnly + Environment.NewLine;
+            expectedHelpText += HelpText.MoreInfo;
+
+            Assert.AreEqual(expectedHelpText, CommandLineParameterCollection.GetHelpText());
+        }
+    }
+}

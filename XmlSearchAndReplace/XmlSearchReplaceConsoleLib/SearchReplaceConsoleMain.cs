@@ -67,6 +67,14 @@ namespace XmlSearchReplaceConsoleLib
             Utility.CreateBackupOf(file);
             docReplaced.Save(file);            
         }
+
+        public static string GetUsage(string hostExecutableName)
+        {
+            string usage = String.Format("{0} {1}", hostExecutableName, CommandLineParameterCollection.GetUsage()) + Environment.NewLine;
+            usage += CommandLineParameterCollection.GetHelpText();
+            return usage;
+
+        }
        
     }
 }
