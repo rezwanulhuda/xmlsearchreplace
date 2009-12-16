@@ -22,6 +22,12 @@ namespace XmlSearchReplaceConsoleLib
         {
             _Params = new CommandLineParameterValueCollection();
             CreateKeys(GetAppArgsFromCommandLine(commandLine));
+            
+            CommandLineParameterCollection missingParams = _Params.GetMissingMandatoryParams(CommandLineParameterCollection.SupporedParams);
+            if (missingParams.Count > 0)
+            {
+                throw new RequiredParameterMissingException("Required parameter missing", missingParams);
+            }
         }
 
         private List<string> GetAppArgsFromCommandLine(string commandLine)

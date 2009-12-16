@@ -122,7 +122,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckSearchStringReplaceFileName_WithSpaceBeforeAndAfterWithoutSurroundingDoubleQutoes_ShouldTrimInput()
         {
-            string argument = "/S= hello world /R= how are you /F=  c:\\documents and settings\\blah blah.html  ";
+            string argument = "/S= hello world /R= how are you /F=  c:\\documents and settings\\blah blah.html  /O=av";
 
             ArgumentParser argParser = new ArgumentParser(argument);
             
@@ -134,7 +134,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckSearchStringReplaceFileName_WithSurroundingDoubleQutoes_ShouldGiveStringWithoutQuotes()
         {
-            string argument = @"/S=""hello world"" /R=""how are you"" /F=""c:\documents and settings\blah blah.html""";
+            string argument = @"/S=""hello world"" /R=""how are you"" /F=""c:\documents and settings\blah blah.html"" /O=av";
 
             ArgumentParser argParser = new ArgumentParser(argument);
 
@@ -146,7 +146,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckSearchStringReplaceFileName_WithSurroundingDoubleQutoesButSpaceBeforeAndAfter_ShouldTrimAndGiveStringWithoutQuotes()
         {
-            string argument = @"/S=  ""hello world""   /R=   ""how are you""   /F=   ""c:\documents and settings\blah blah.html""   ";
+            string argument = @"/S=  ""hello world""   /R=   ""how are you""   /F=   ""c:\documents and settings\blah blah.html""   /O=av";
 
             ArgumentParser argParser = new ArgumentParser(argument);
 
@@ -158,7 +158,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckSearchStringReplaceFileName_WithSurroundingDoubleQutoesAndSpaceInsideQuotes_ShouldNotTrimAndGiveStringWithoutQuotes()
         {
-            string argument = @"/S=  "" hello world ""   /R=   "" how are you ""   /F=   "" c:\documents and settings\blah blah.html ""   ";
+            string argument = @"/S=  "" hello world ""   /R=   "" how are you ""   /F=   "" c:\documents and settings\blah blah.html ""   /O=av";
 
             ArgumentParser argParser = new ArgumentParser(argument);
 
@@ -188,7 +188,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void DblQuoteInSearchString_WillReturnStringWithDblQuote()
         {
-            string argument = @"/S=""hello\""world\""how are you""/R=""hello world "" how are you?""""";
+            string argument = @"/O=av/F=something/S=""hello\""world\""how are you""/R=""hello world "" how are you?""""";
 
             ArgumentParser argParser = new ArgumentParser(argument);
 
@@ -199,7 +199,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void EqualsSignInSearchReplaceString_WillReturnStringWithEqual()
         {
-            string argument = @"/S=""hello=world how are you""/R=""hello world = "" how are you? """"";
+            string argument = @"/O=av/F=something/S=""hello=world how are you""/R=""hello world = "" how are you? """"";
 
             ArgumentParser argParser = new ArgumentParser(argument);
 
@@ -374,6 +374,26 @@ namespace XmlSnRTest
             Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
             Assert.AreEqual(@"R=""How are u doing /F=""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
             Assert.AreEqual(@"c:\dellshare.com\*.csproj", ArgumentParser.GetArgumentsFromString(commandLine)[2]);            
+        }
+
+        [TestMethod]
+        public void GetArgumentsFromString_CheckMandatoryParameters()
+        {
+            string commandLine = @"/S=""hello \""world"" /R=""How are u doing""";
+
+            try
+            {
+                ArgumentParser parser = new ArgumentParser(commandLine);
+            }
+            catch (RequiredParameterMissingException ex)
+            {
+                Assert.AreEqual(2, ex.GetMissginParameters().Count);
+                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
+                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));
+                return;
+            }
+
+            Assert.Fail();
         }
         
     }

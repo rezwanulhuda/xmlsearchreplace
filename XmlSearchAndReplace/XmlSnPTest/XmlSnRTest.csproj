@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="ArgumentParserTest.cs" />
     <Compile Include="CommandLineParameterCollectionTest.cs" />
+    <Compile Include="CommandLineParameterValueCollectionTest.cs" />
     <Compile Include="SearchReplaceConsoleMainTest.cs">
       <SubType>Code</SubType>
     </Compile>

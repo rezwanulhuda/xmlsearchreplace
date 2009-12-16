@@ -10,12 +10,14 @@ namespace XmlSearchReplaceConsoleLib
         string _Name;
         string _Usage;
         string _HelpText;
+        bool _IsMandatory;
 
-        public CommandLineParameter(string name, string usage, string helpText)
+        public CommandLineParameter(string name, string usage, string helpText, bool isMandatory)
         {        
             this._Name = name;
             this._Usage = usage;
             this._HelpText = helpText;
+            this._IsMandatory = isMandatory;
         }     
         public string GetName() { return _Name; }
 
@@ -27,6 +29,11 @@ namespace XmlSearchReplaceConsoleLib
         public string GetHelpText()
         {
             return _HelpText;
+        }
+
+        public bool IsMandatory
+        {
+            get { return _IsMandatory; }
         }
     }
 }

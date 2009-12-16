@@ -28,6 +28,7 @@ namespace XmlSearchReplaceConsole
                 Console.WriteLine(ex.Message);
             }
             catch (BaseException ex)
+
             {
                 Console.WriteLine(ex.Message);
             }
