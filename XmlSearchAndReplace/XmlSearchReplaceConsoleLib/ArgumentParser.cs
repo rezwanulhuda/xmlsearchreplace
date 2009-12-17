@@ -36,18 +36,7 @@ namespace XmlSearchReplaceConsoleLib
             return applicationArgs;
         }
 
-        private string GetStringValue(string key)
-        {
-            return _Params.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
-        }
-
-        private bool GetBoolValue(string key)
-        {
-            CommandLineParameterValue value = _Params.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), key, true) == 0; });
-            if (value == null)
-                return false;
-            return true;
-        }
+        
         
 
         private void CreateKeys(List<string> allApplicatioinArgs)
@@ -73,7 +62,7 @@ namespace XmlSearchReplaceConsoleLib
             int indexOfEquals = param.IndexOf('=');
             if (indexOfEquals >= 0)
             {
-                return param.Substring(indexOfEquals + 1).Trim();
+                return TrimDoubleQuotes(param.Substring(indexOfEquals + 1).Trim());
             }
             return String.Empty;
         }
@@ -86,88 +75,6 @@ namespace XmlSearchReplaceConsoleLib
                 return param.Substring(0, param.IndexOf('=')).Trim();
             }
             return param.Trim();
-        }                
-        
-        public SearchReplaceLocationOptions GetLocationOptions()
-        {
-
-            string optionsS = GetStringValue("O").ToLower();            
-            SearchReplaceLocationOptions options = SearchReplaceLocationOptions.ReplaceNone;
-            if (optionsS.Contains("ev"))
-            {
-                options |= SearchReplaceLocationOptions.ReplaceElementValue;
-            }
-
-            if (optionsS.Contains("av")) 
-            {
-                options |= SearchReplaceLocationOptions.ReplaceAttributeValue;
-            }
-
-            if (optionsS.Contains("en"))
-            {
-                options |= SearchReplaceLocationOptions.ReplaceElementName;
-            }
-
-            if (optionsS.Contains("an"))
-            {
-                options |= SearchReplaceLocationOptions.ReplaceAttributeName;
-            }
-
-            return options;
-        }
-
-        public SearchReplaceOperationOptions GetOperationOptions()
-        {
-            SearchReplaceOperationOptions opOptions = SearchReplaceOperationOptions.CaseSensitivePartialWord;
-            if (GetBoolValue("W"))
-            {
-                opOptions |= SearchReplaceOperationOptions.WholeWordOnly;
-            }
-
-            if (GetBoolValue("I"))
-            {
-                opOptions |= SearchReplaceOperationOptions.CaseInsensitive;
-            }
-
-            return opOptions;
-        }
-
-        public string GetFileName()
-        {
-            return TrimDoubleQuotes(GetStringValue("F"));
-        }
-
-        public string GetSearchString()
-        {
-            return TrimDoubleQuotes(GetStringValue("S"));
-        }
-
-        public string GetReplaceString()
-        {
-            return TrimDoubleQuotes(GetStringValue("R"));            
-        }
-
-        private string TrimDoubleQuotes(string input)
-        {
-            if (input.Length == 0) return input;
-
-            if (!SurroundedByQuotes(input)) return input;
-
-            return input.Substring(1, input.Length - 2);           
-        }
-
-        private bool SurroundedByQuotes(string input)
-        {
-            return input[0] == '"' && input[input.Length - 1] == '"';                
-        }
-
-        public bool ContinueOnError
-        {
-            get 
-            {
-                return GetBoolValue("C"); 
-            
-            }
         }
 
         public static List<string> GetArgumentsFromString(string commandLine)
@@ -203,13 +110,13 @@ namespace XmlSearchReplaceConsoleLib
                     if (commandLine[iEqual + 1] == '"')
                     {
 
-                        int iDblQuote = FindClosingDblQuote(commandLine, iEqual + 2);                         
+                        int iDblQuote = FindClosingDblQuote(commandLine, iEqual + 2);
                         if (iDblQuote < 0)
                             throw new Exception("invalid commandline");
                         else
                         {
                             arg = commandLine.Substring(next, iDblQuote - next + 1).Trim();
-                            arg = arg.Replace(@"\""", @"""");                            
+                            arg = arg.Replace(@"\""", @"""");
                             argsWithValues.Add(arg);
                             x = iDblQuote;
                         }
@@ -231,7 +138,7 @@ namespace XmlSearchReplaceConsoleLib
 
         private static int FindClosingDblQuote(string commandLine, int start)
         {
-            
+
             while (true)
             {
                 int iDblQuote = commandLine.IndexOf('"', start);
@@ -249,6 +156,23 @@ namespace XmlSearchReplaceConsoleLib
 
         }
 
-        
+        private string TrimDoubleQuotes(string input)
+        {
+            if (input.Length == 0) return input;
+
+            if (!SurroundedByQuotes(input)) return input;
+
+            return input.Substring(1, input.Length - 2);
+        }
+
+        private bool SurroundedByQuotes(string input)
+        {
+            return input[0] == '"' && input[input.Length - 1] == '"';
+        }      
+  
+        public CommandLineParameterValueCollection GetParamsAndValues()
+        {
+            return this._Params;
+        }
     }
 }

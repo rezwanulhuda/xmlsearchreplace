@@ -39,29 +39,7 @@ namespace XmlSnRTest
             {
                 testContextInstance = value;
             }
-        }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
+        }       
 
         string _TmpFolder;
         string _SrcFile;
@@ -100,7 +78,7 @@ namespace XmlSnRTest
 
         private void TestAndAssertExpectationsAreMet(string xmlExpected, string commandLine)
         {
-            SearchReplaceConsoleMain srMain = new SearchReplaceConsoleMain(commandLine.Split(" ".ToCharArray()));
+            SearchReplaceConsoleMain srMain = new SearchReplaceConsoleMain(ArgumentParserTest.GetParameters(commandLine));
             srMain.ProcessAll();
 
             string xmlActual = File.ReadAllText(_SrcFile);
@@ -161,7 +139,7 @@ namespace XmlSnRTest
             string commandLine = String.Format(@"/F={0} /O=en,ev,av,an /S=""Book"" /R=""LibraryBook"" /I /W /C", _SrcFile);
             File.SetAttributes(_SrcFile, FileAttributes.ReadOnly);
 
-            SearchReplaceConsoleMain main = new SearchReplaceConsoleMain(commandLine);
+            SearchReplaceConsoleMain main = new SearchReplaceConsoleMain(ArgumentParserTest.GetParameters(commandLine));
             main.ProcessAll();
             
             Assert.IsTrue(File.Exists(Utility.GetBackupFileName(_SrcFile)));
@@ -178,7 +156,7 @@ namespace XmlSnRTest
 
             File.WriteAllText(_SrcFile, String.Empty);
 
-            SearchReplaceConsoleMain main = new SearchReplaceConsoleMain(commandLine);
+            SearchReplaceConsoleMain main = new SearchReplaceConsoleMain(ArgumentParserTest.GetParameters(commandLine));
             try
             {
                 main.ProcessAll();

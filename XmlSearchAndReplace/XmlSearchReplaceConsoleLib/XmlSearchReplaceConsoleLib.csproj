@@ -61,6 +61,7 @@
     <Compile Include="InvalidArgumentOptionException.cs" />
     <Compile Include="RequiredParameterMissingException.cs" />
     <Compile Include="SearchReplaceConsoleMain.cs" />
+    <Compile Include="SearchReplaceParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XmlSearchReplaceLib\XmlSearchReplaceLib.csproj">

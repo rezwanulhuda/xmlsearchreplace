@@ -8,29 +8,24 @@ namespace XmlSearchReplaceConsoleLib
     public class SearchReplaceConsoleMain
     {
 
-        ArgumentParser _Parser = null;
+        SearchReplaceParameter _Parameters = null;
         XmlSearchReplace _Replacer = null;
         XmlDocument _Document = null;
 
-        public SearchReplaceConsoleMain(string args)
-        {
-            _Parser = new ArgumentParser(args);
+        public SearchReplaceConsoleMain(SearchReplaceParameter _Parser)
+        {            
             _Replacer = new XmlSearchReplace(
                 _Parser.GetLocationOptions()
                 , _Parser.GetOperationOptions()
                 , _Parser.GetSearchString()
                 , _Parser.GetReplaceString());
+            this._Parameters = _Parser;
             _Document = new XmlDocument();
-        }
-
-        public SearchReplaceConsoleMain(string[] args)
-            : this(String.Join(" ", args))
-        {            
         }
 
         public void ProcessAll()
         {
-            foreach (string file in Utility.GetApplicableFilesInDir(_Parser.GetFileName()))
+            foreach (string file in Utility.GetApplicableFilesInDir(_Parameters.GetFileName()))
             {
                 ProcessFile(file);
             }
@@ -47,7 +42,7 @@ namespace XmlSearchReplaceConsoleLib
             }            
             catch
             {                
-                if (!_Parser.ContinueOnError)
+                if (!_Parameters.ContinueOnError)
                     throw;
                 error = true;
             }
