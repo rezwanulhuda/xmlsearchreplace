@@ -21,14 +21,14 @@ namespace XmlSearchReplaceConsoleLib
             return missingRequiredParams;
         }        
 
-        public string GetStringValue(string key)
+        public string GetStringValue(string paramName)
         {
-            return this.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), key, true) == 0; }).GetValue();
+            return this.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), paramName, true) == 0; }).GetValue();
         }
 
-        public bool GetBoolValue(string key)
+        public bool GetBoolValue(string paramName)
         {
-            CommandLineParameterValue value = this.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), key, true) == 0; });
+            CommandLineParameterValue value = this.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
             if (value == null)
                 return false;
             return true;
