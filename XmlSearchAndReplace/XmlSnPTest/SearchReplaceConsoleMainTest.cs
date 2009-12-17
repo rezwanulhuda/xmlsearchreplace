@@ -78,7 +78,7 @@ namespace XmlSnRTest
 
         private void TestAndAssertExpectationsAreMet(string xmlExpected, string commandLine)
         {
-            SearchReplaceConsoleMain srMain = new SearchReplaceConsoleMain(ArgumentParserTest.GetParameters(commandLine));
+            SearchReplaceFileReplacer srMain = new SearchReplaceFileReplacer(ArgumentParserTest.GetParameters(commandLine));
             srMain.ProcessAll();
 
             string xmlActual = File.ReadAllText(_SrcFile);
@@ -139,7 +139,7 @@ namespace XmlSnRTest
             string commandLine = String.Format(@"/F={0} /O=en,ev,av,an /S=""Book"" /R=""LibraryBook"" /I /W /C", _SrcFile);
             File.SetAttributes(_SrcFile, FileAttributes.ReadOnly);
 
-            SearchReplaceConsoleMain main = new SearchReplaceConsoleMain(ArgumentParserTest.GetParameters(commandLine));
+            SearchReplaceFileReplacer main = new SearchReplaceFileReplacer(ArgumentParserTest.GetParameters(commandLine));
             main.ProcessAll();
             
             Assert.IsTrue(File.Exists(Utility.GetBackupFileName(_SrcFile)));
@@ -156,7 +156,7 @@ namespace XmlSnRTest
 
             File.WriteAllText(_SrcFile, String.Empty);
 
-            SearchReplaceConsoleMain main = new SearchReplaceConsoleMain(ArgumentParserTest.GetParameters(commandLine));
+            SearchReplaceFileReplacer main = new SearchReplaceFileReplacer(ArgumentParserTest.GetParameters(commandLine));
             try
             {
                 main.ProcessAll();
@@ -177,7 +177,7 @@ namespace XmlSnRTest
             string expectedUsage = "tt.exe " + CommandLineParameterCollection.GetUsage() + Environment.NewLine;
             expectedUsage += CommandLineParameterCollection.GetHelpText();
 
-            Assert.AreEqual(expectedUsage, SearchReplaceConsoleMain.GetUsage("tt.exe"));
+            Assert.AreEqual(expectedUsage, SearchReplaceFileReplacer.GetUsage("tt.exe"));
         }
 
         

@@ -7,7 +7,7 @@ namespace XmlSearchReplaceConsole
 {
     class Program
     {
-        private static SearchReplaceConsoleMain _Main;
+        private static SearchReplaceFileReplacer _Main;
         static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -22,7 +22,7 @@ namespace XmlSearchReplaceConsole
             {
                 ArgumentParser parser = new ArgumentParser(args);
                 SearchReplaceParameter param = new SearchReplaceParameter(parser.GetParamsAndValues());
-                _Main = new SearchReplaceConsoleMain(param);
+                _Main = new SearchReplaceFileReplacer(param);
                 _Main.ProcessAll();
             }
             catch (InvalidArgumentOptionException ex)
@@ -46,7 +46,7 @@ namespace XmlSearchReplaceConsole
 
         private static void ShowUsage()
         {
-            Console.WriteLine(SearchReplaceConsoleMain.GetUsage(Assembly.GetEntryAssembly().GetName().Name + ".exe"));            
+            Console.WriteLine(SearchReplaceFileReplacer.GetUsage(Assembly.GetEntryAssembly().GetName().Name + ".exe"));            
         }
     }
 }

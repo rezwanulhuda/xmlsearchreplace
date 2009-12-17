@@ -61,8 +61,7 @@ namespace XmlSearchReplaceConsoleLib
 
 
         public string GetFileName()
-        {
-            //return TrimDoubleQuotes(_Params.GetStringValue("F"));
+        {            
             return _ParamsWithValues.GetStringValue("F");
         }
 

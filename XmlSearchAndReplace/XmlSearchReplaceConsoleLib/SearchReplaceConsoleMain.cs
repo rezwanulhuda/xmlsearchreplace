@@ -5,21 +5,21 @@ using System.IO;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class SearchReplaceConsoleMain
+    public class SearchReplaceFileReplacer
     {
 
         SearchReplaceParameter _Parameters = null;
         XmlSearchReplace _Replacer = null;
         XmlDocument _Document = null;
 
-        public SearchReplaceConsoleMain(SearchReplaceParameter _Parser)
+        public SearchReplaceFileReplacer(SearchReplaceParameter parameters)
         {            
             _Replacer = new XmlSearchReplace(
-                _Parser.GetLocationOptions()
-                , _Parser.GetOperationOptions()
-                , _Parser.GetSearchString()
-                , _Parser.GetReplaceString());
-            this._Parameters = _Parser;
+                parameters.GetLocationOptions()
+                , parameters.GetOperationOptions()
+                , parameters.GetSearchString()
+                , parameters.GetReplaceString());
+            this._Parameters = parameters;
             _Document = new XmlDocument();
         }
 
