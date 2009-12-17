@@ -44,9 +44,5 @@ namespace XmlSearchReplaceLib
             }
         }
 
-        //void ReplaceValueOfAttribute(XmlAttribute attribute, string searchString, string replaceString)
-        //{
-        //    attribute.Value = attribute.Value.Replace(searchString, replaceString);
-        //}
     }
 }

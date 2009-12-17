@@ -28,12 +28,7 @@ namespace XmlSearchReplaceConsoleLib
                 return _SupportedParams;
             }
         }
-
-        public bool IsParameterSupported(string param)
-        {
-            return this.Exists(p => String.Compare(p.GetName(), param, true) == 0);
-        }
-
+        
         public static string GetUsage()
         {
             string usage = String.Empty;

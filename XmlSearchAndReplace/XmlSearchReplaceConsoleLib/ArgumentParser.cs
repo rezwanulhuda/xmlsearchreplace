@@ -153,10 +153,7 @@ namespace XmlSearchReplaceConsoleLib
 
             if (!SurroundedByQuotes(input)) return input;
 
-            string trimmed = input.Substring(1);
-            trimmed = trimmed.Substring(0, trimmed.Length - 1);
-            return trimmed;                            
-            
+            return input.Substring(1, input.Length - 2);           
         }
 
         private bool SurroundedByQuotes(string input)
@@ -206,7 +203,7 @@ namespace XmlSearchReplaceConsoleLib
                     if (commandLine[iEqual + 1] == '"')
                     {
 
-                        int iDblQuote = findClosingDblQuote(commandLine, iEqual + 2);                         
+                        int iDblQuote = FindClosingDblQuote(commandLine, iEqual + 2);                         
                         if (iDblQuote < 0)
                             throw new Exception("invalid commandline");
                         else
@@ -232,7 +229,7 @@ namespace XmlSearchReplaceConsoleLib
             return argsWithValues;
         }
 
-        private static int findClosingDblQuote(string commandLine, int start)
+        private static int FindClosingDblQuote(string commandLine, int start)
         {
             
             while (true)
