@@ -20,9 +20,10 @@ namespace XmlSearchReplaceConsole
 
             try
             {
+                
                 ArgumentParser parser = new ArgumentParser(args);
-                SearchReplaceParameter param = new SearchReplaceParameter(parser.GetParamsAndValues());
-                _Main = new SearchReplaceFileReplacer(param);
+                
+                _Main = new SearchReplaceFileReplacer(parser.GetParamsAndValues());
                 _Main.ProcessAll();
             }
             catch (InvalidArgumentOptionException ex)

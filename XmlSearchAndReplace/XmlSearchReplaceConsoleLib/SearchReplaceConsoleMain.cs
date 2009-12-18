@@ -8,11 +8,11 @@ namespace XmlSearchReplaceConsoleLib
     public class SearchReplaceFileReplacer
     {
 
-        SearchReplaceParameter _Parameters = null;
+        ISearchReplaceParameter _Parameters = null;
         XmlSearchReplace _Replacer = null;
         XmlDocument _Document = null;
 
-        public SearchReplaceFileReplacer(SearchReplaceParameter parameters)
+        public SearchReplaceFileReplacer(ISearchReplaceParameter parameters)
         {            
             _Replacer = new XmlSearchReplace(
                 parameters.GetLocationOptions()

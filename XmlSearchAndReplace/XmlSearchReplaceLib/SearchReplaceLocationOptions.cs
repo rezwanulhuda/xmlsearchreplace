@@ -17,8 +17,6 @@ namespace XmlSearchReplaceLib
         , ReplaceElementValue = 0x1
         , ReplaceAttributeValue = 0x2
         , ReplaceElementName = 0x4
-        , ReplaceAttributeName = 0x8       
-        
-        
+        , ReplaceAttributeName = 0x8
     }    
 }
