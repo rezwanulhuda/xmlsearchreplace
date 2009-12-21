@@ -23,6 +23,7 @@ namespace XmlSearchReplaceConsoleLib
                     _SupportedParams.Add(new CommandLineParameter("C", String.Empty, HelpText.ContinueOnError, false));
                     _SupportedParams.Add(new CommandLineParameter("I", String.Empty, HelpText.IgnoreCase, false));
                     _SupportedParams.Add(new CommandLineParameter("W", String.Empty, HelpText.WholeWordOnly, false));
+                    _SupportedParams.Add(new CommandLineParameter("D", String.Empty, HelpText.RecurseSubDir, false));
                 }
                 
                 return _SupportedParams;

@@ -135,7 +135,7 @@ namespace XmlSnRTest
         }
 
         [TestMethod]
-        public void CheckWildCardsFetchAllFiles()
+        public void CheckRecurseSubDirWithWildCardFetchAllFiles()
         {
 
             string dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
@@ -154,7 +154,7 @@ namespace XmlSnRTest
 
             string fileName = Path.Combine(dir, "*.csproj");
 
-            string[] files = Utility.GetApplicableFilesInDir(fileName);
+            string[] files = Utility.GetApplicableFilesInDir(fileName, true);
 
             Assert.AreEqual(3, files.Length);
             Assert.AreEqual(file1, files[0]);
@@ -165,7 +165,7 @@ namespace XmlSnRTest
         }
 
         [TestMethod]
-        public void CheckNoWildCardsFetchSingleFile()
+        public void CheckNoRecurseSubDirWithoutWildCardFetchSingleFile()
         {
             string dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             Directory.CreateDirectory(dir);
@@ -183,13 +183,64 @@ namespace XmlSnRTest
 
             string fileName = Path.Combine(dir, "file1.csproj");
 
-            string[] files = Utility.GetApplicableFilesInDir(fileName);
+            string[] files = Utility.GetApplicableFilesInDir(fileName, false);
 
             Assert.AreEqual(1, files.Length);
             Assert.AreEqual(file1, files[0]);
 
             Directory.Delete(dir, true);
 
+        }
+
+        [TestMethod]
+        public void CheckNoRecurseSubDirWithWildCardFetchAllFileInDir()
+        {
+            string dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            Directory.CreateDirectory(dir);
+            
+            string file1 = Path.Combine(dir, "file1.csproj");
+            string file2 = Path.Combine(dir, "file2.csproj");            
+
+            File.WriteAllText(file1, String.Empty);
+            File.WriteAllText(file2, String.Empty);            
+            string fileName = Path.Combine(dir, "file*.csproj");
+
+            string[] files = Utility.GetApplicableFilesInDir(fileName, false);
+
+            Assert.AreEqual(2, files.Length);
+            Assert.AreEqual(file1, files[0]);
+            Assert.AreEqual(file2, files[1]);
+
+            Directory.Delete(dir, true);
+
+        }
+
+        [TestMethod]
+        public void CheckRecurseSubDirWithNameFetchAllFilesInAllSubDirs()
+        {
+            string dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            Directory.CreateDirectory(dir);
+            string dir2 = Path.Combine(dir, "test");
+            Directory.CreateDirectory(dir2);
+            string file1 = Path.Combine(dir, "file1.csproj");
+            string file2 = Path.Combine(dir, "file2.xml");
+            string file3 = Path.Combine(dir2, "file3.xml");
+            string file4 = Path.Combine(dir2, "file1.csproj");
+
+            File.WriteAllText(file1, String.Empty);
+            File.WriteAllText(file2, String.Empty);
+            File.WriteAllText(file3, String.Empty);
+            File.WriteAllText(file4, String.Empty);
+
+            string fileName = Path.Combine(dir, "file1.csproj");
+
+            string[] files = Utility.GetApplicableFilesInDir(fileName, true);
+
+            Assert.AreEqual(2, files.Length);
+            Assert.AreEqual(file1, files[0]);
+            Assert.AreEqual(file4, files[1]);
+
+            Directory.Delete(dir, true);
         }
     }
 }

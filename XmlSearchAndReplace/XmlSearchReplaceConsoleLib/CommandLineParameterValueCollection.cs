@@ -103,7 +103,15 @@ namespace XmlSearchReplaceConsoleLib
                 return this.GetBoolValue("C");
 
             }
-        }        
+        }
+
+        public bool RecurseSubDir
+        {
+            get
+            {
+                return this.GetBoolValue("D");
+            }
+        }
 
     }
 }

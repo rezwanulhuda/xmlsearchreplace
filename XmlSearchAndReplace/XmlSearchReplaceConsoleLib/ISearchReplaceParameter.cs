@@ -9,6 +9,7 @@ namespace XmlSearchReplaceConsoleLib
     public interface ISearchReplaceParameter
     {
         bool ContinueOnError { get; }
+        bool RecurseSubDir { get; }
         string GetReplaceString();
         string GetSearchString();
         string GetFileName();

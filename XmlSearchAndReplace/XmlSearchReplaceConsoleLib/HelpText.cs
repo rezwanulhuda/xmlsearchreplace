@@ -14,6 +14,7 @@ namespace XmlSearchReplaceConsoleLib
         public const string IgnoreCase = "Ignore case. Default is case sensitive search.";
         public const string FileName = "File name to perform search and replace on. Must be a valid xml file. Supports common windows wild cards * and ?. If wild cards are specified, searches all sub directories.";
         public const string ContinueOnError = "Continue on error when processing multiple files.";
+        public const string RecurseSubDir = "Recurse sub directories.";
         public const string MoreInfo = "For more information - please visit the project page at CodePlex (http://xmlsearchreplace.codeplex.com/documentation)";
 
 

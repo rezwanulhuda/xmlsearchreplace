@@ -13,12 +13,9 @@ namespace XmlSearchReplaceLib
             return Path.Combine(Path.GetDirectoryName(fileName), Path.GetFileName(fileName) + ".bak"); 
         }
 
-        public static string[] GetApplicableFilesInDir(string fileName)
+        public static string[] GetApplicableFilesInDir(string fileName, bool recurseSubDir)
         {
-            if (Path.GetFileName(fileName).IndexOfAny("*?".ToCharArray()) >= 0)
-                return Directory.GetFiles(Path.GetDirectoryName(fileName), Path.GetFileName(fileName), SearchOption.AllDirectories);
-            else
-                return Directory.GetFiles(Path.GetDirectoryName(fileName), Path.GetFileName(fileName), SearchOption.TopDirectoryOnly);
+            return Directory.GetFiles(Path.GetDirectoryName(fileName), Path.GetFileName(fileName), recurseSubDir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
         }
 
         public static void CreateBackupOf(string fileName)

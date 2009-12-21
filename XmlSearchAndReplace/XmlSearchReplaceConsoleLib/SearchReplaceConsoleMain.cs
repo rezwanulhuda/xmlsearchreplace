@@ -25,7 +25,7 @@ namespace XmlSearchReplaceConsoleLib
 
         public void ProcessAll()
         {
-            foreach (string file in Utility.GetApplicableFilesInDir(_Parameters.GetFileName()))
+            foreach (string file in Utility.GetApplicableFilesInDir(_Parameters.GetFileName(), _Parameters.RecurseSubDir))
             {
                 ProcessFile(file);
             }
