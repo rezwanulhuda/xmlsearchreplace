@@ -53,29 +53,27 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="AttributeNameReplacer.cs" />
-    <Compile Include="AttributeValueReplacer.cs" />
-    <Compile Include="CaseInsensitiveValidator.cs" />
-    <Compile Include="CaseSensitiveValidator.cs" />
-    <Compile Include="ElementNameReplacer.cs" />
-    <Compile Include="ElementValueReplacer.cs" />
+    <Compile Include="ReplacerEngineType.cs" />
+    <Compile Include="Replacer\AttributeNameReplacer.cs" />
+    <Compile Include="Replacer\AttributeValueReplacer.cs" />
+    <Compile Include="Validator\CaseInsensitiveValidator.cs" />
+    <Compile Include="Validator\CaseSensitiveValidator.cs" />
+    <Compile Include="Replacer\ElementNameReplacer.cs" />
+    <Compile Include="Replacer\ElementValueReplacer.cs" />
     <Compile Include="Exception\BackupFailedException.cs" />
     <Compile Include="Exception\BaseException.cs" />
     <Compile Include="Exception\SaveFailedException.cs" />
-    <Compile Include="IReplacementOptionValidator.cs" />
-    <Compile Include="IXmlSearchAndReplacer.cs" />
-    <Compile Include="PartialWordValidator.cs" />
-    <Compile Include="ReplacementOptionValidatorList.cs" />
-    <Compile Include="ReplacerEngine.cs" />
+    <Compile Include="Validator\IReplacementOptionValidator.cs" />
+    <Compile Include="Replacer\IXmlSearchAndReplacer.cs" />
+    <Compile Include="Validator\PartialWordValidator.cs" />
+    <Compile Include="Validator\ReplacementOptionValidatorList.cs" />
+    <Compile Include="Engine\StringReplacerEngine.cs" />
     <Compile Include="SearchReplaceLocationOptions.cs" />
     <Compile Include="SearchReplaceOperationOptions.cs" />
-    <Compile Include="IReplacerEngine.cs" />
+    <Compile Include="Engine\IReplacerEngine.cs" />
     <Compile Include="Utility.cs" />
-    <Compile Include="WholeWordValidator.cs" />
+    <Compile Include="Validator\WholeWordValidator.cs" />
     <Compile Include="XmlSearchReplace.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,7 +19,7 @@ namespace XmlSearchReplaceLib
             ReplaceAttributes(node, replacedAttributes);
         }
 
-        private static void ReplaceAttributes(XmlNode node, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
+        private void ReplaceAttributes(XmlNode node, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
         {
             foreach (KeyValuePair<XmlAttribute, XmlAttribute> attributes in replacedAttributes)
             {
@@ -28,7 +28,7 @@ namespace XmlSearchReplaceLib
             }
         }
 
-        private static void FindReplacableAttributes(XmlNode node, string searchString, string replaceString, IReplacerEngine engine, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
+        private void FindReplacableAttributes(XmlNode node, string searchString, string replaceString, IReplacerEngine engine, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
         {
             foreach (XmlAttribute attribute in node.Attributes)
             {

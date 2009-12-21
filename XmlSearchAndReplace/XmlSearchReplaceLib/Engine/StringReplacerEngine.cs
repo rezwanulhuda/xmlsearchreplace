@@ -5,10 +5,10 @@ using System.Text;
 
 namespace XmlSearchReplaceLib
 {
-    public class ReplacerEngine : IReplacerEngine
+    public class StringReplacerEngine : IReplacerEngine
     {
         protected ReplacementOptionValidatorList _Validators;
-        public ReplacerEngine(ReplacementOptionValidatorList validators)
+        public StringReplacerEngine(ReplacementOptionValidatorList validators)
         {
             _Validators = validators;
         }

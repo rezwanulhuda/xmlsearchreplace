@@ -42,7 +42,7 @@ namespace XmlSearchReplaceLib
             else
                 validators.Add(new PartialWordValidator());
 
-            _Engine = new ReplacerEngine(validators);
+            _Engine = new StringReplacerEngine(validators);
         }
 
         public XmlDocument Replace(XmlDocument doc)
@@ -63,7 +63,7 @@ namespace XmlSearchReplaceLib
             {
                 _Processors.Add(new AttributeValueReplacer());
             }
-
+            
             if (HasLocationOption(_LocationOptions, SearchReplaceLocationOptions.ReplaceElementValue))
             {
                 _Processors.Add(new ElementValueReplacer());
@@ -81,7 +81,7 @@ namespace XmlSearchReplaceLib
         }
 
         bool HasLocationOption(SearchReplaceLocationOptions availableOptions, SearchReplaceLocationOptions checkOption)
-        {
+        {            
             return ((availableOptions & checkOption) == checkOption);
         }
 

@@ -11,13 +11,7 @@ namespace XmlSearchReplaceLib
         public void Replace(XmlNode node, string searchString, string replaceString, IReplacerEngine engine)
         {
             if (node.NodeType != XmlNodeType.Text) return;
-
-            //IReplacerEngine engine;
-            //if (wholeWordOnly)
-            //    engine = new WholeWordOnlyReplacerEngine();
-            //else
-            //    engine = new PartialWordReplacerEngine();
-
+            
             node.InnerText = engine.Replace(node.InnerText, searchString, replaceString);
         }
     }
