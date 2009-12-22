@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XmlSearchReplaceLib
 {
-    public class WholeWordValidator : IReplacementOptionValidator
+    public class StringWholeWordValidator : IReplacementOptionValidator
     {
         public bool IsValidForReplacement(string actualString, string searchString, string replaceString)
         {

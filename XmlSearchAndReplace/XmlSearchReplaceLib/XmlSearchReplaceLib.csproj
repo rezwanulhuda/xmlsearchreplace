@@ -53,11 +53,12 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Engine\ReplacerEngine.cs" />
     <Compile Include="ReplacerEngineType.cs" />
     <Compile Include="Replacer\AttributeNameReplacer.cs" />
     <Compile Include="Replacer\AttributeValueReplacer.cs" />
-    <Compile Include="Validator\CaseInsensitiveValidator.cs" />
-    <Compile Include="Validator\CaseSensitiveValidator.cs" />
+    <Compile Include="Validator\StringCaseInsensitiveValidator.cs" />
+    <Compile Include="Validator\StringCaseSensitiveValidator.cs" />
     <Compile Include="Replacer\ElementNameReplacer.cs" />
     <Compile Include="Replacer\ElementValueReplacer.cs" />
     <Compile Include="Exception\BackupFailedException.cs" />
@@ -65,14 +66,14 @@
     <Compile Include="Exception\SaveFailedException.cs" />
     <Compile Include="Validator\IReplacementOptionValidator.cs" />
     <Compile Include="Replacer\IXmlSearchAndReplacer.cs" />
-    <Compile Include="Validator\PartialWordValidator.cs" />
+    <Compile Include="Validator\StringPartialWordValidator.cs" />
     <Compile Include="Validator\ReplacementOptionValidatorList.cs" />
     <Compile Include="Engine\StringReplacerEngine.cs" />
     <Compile Include="SearchReplaceLocationOptions.cs" />
     <Compile Include="SearchReplaceOperationOptions.cs" />
     <Compile Include="Engine\IReplacerEngine.cs" />
     <Compile Include="Utility.cs" />
-    <Compile Include="Validator\WholeWordValidator.cs" />
+    <Compile Include="Validator\StringWholeWordValidator.cs" />
     <Compile Include="XmlSearchReplace.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

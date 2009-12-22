@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using XmlSearchReplaceLib.Engine;
 
 namespace XmlSearchReplaceLib
 {
@@ -30,31 +31,7 @@ namespace XmlSearchReplaceLib
 
         private void PrepareReplacerEngine()
         {
-            ReplacementOptionValidatorList validators = new ReplacementOptionValidatorList();
-
-            if (HasOperationOption(_OperationOptions, SearchReplaceOperationOptions.CaseInsensitive))
-                validators.Add(new CaseInsensitiveValidator());
-            else
-                validators.Add(new CaseSensitiveValidator());
-
-            if (HasOperationOption(_OperationOptions, SearchReplaceOperationOptions.WholeWordOnly))
-                validators.Add(new WholeWordValidator());
-            else
-                validators.Add(new PartialWordValidator());
-
-            _Engine = new StringReplacerEngine(validators);
-        }
-
-        public XmlDocument Replace(XmlDocument doc)
-        {
-            _Document = doc.Clone() as XmlDocument;            
-
-            foreach (IXmlSearchAndReplacer replacer in _Processors)
-            {
-                ReplaceElements(_Document, replacer);
-            }
-            
-            return _Document;
+            _Engine = ReplacerEngine.CreateEngine(ReplacerEngineType.StringEngine, _OperationOptions);
         }
 
         private void SetupReplacerFilters()
@@ -63,7 +40,7 @@ namespace XmlSearchReplaceLib
             {
                 _Processors.Add(new AttributeValueReplacer());
             }
-            
+
             if (HasLocationOption(_LocationOptions, SearchReplaceLocationOptions.ReplaceElementValue))
             {
                 _Processors.Add(new ElementValueReplacer());
@@ -80,23 +57,30 @@ namespace XmlSearchReplaceLib
             }
         }
 
-        bool HasLocationOption(SearchReplaceLocationOptions availableOptions, SearchReplaceLocationOptions checkOption)
-        {            
-            return ((availableOptions & checkOption) == checkOption);
-        }
-
-        bool HasOperationOption(SearchReplaceOperationOptions availableOptions, SearchReplaceOperationOptions checkOption)
+        private bool HasLocationOption(SearchReplaceLocationOptions availableOptions, SearchReplaceLocationOptions checkOption)
         {
             return ((availableOptions & checkOption) == checkOption);
         }
 
+        public XmlDocument Replace(XmlDocument doc)
+        {
+            _Document = doc.Clone() as XmlDocument;            
+
+            foreach (IXmlSearchAndReplacer replacer in _Processors)
+            {
+                ReplaceElements(_Document, replacer);
+            }
+            
+            return _Document;
+        }
+
         private void ReplaceElements(XmlNode node, IXmlSearchAndReplacer replacer)
-        {            
+        {
             for (int x = 0; x < node.ChildNodes.Count; ++x)
             {
                 replacer.Replace(node.ChildNodes[x], _SearchString, _ReplaceString, _Engine);
                 ReplaceElements(node.ChildNodes[x], replacer);
-            }            
+            }
         }        
     }
 }

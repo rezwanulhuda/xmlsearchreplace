@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XmlSearchReplaceLib
 {
-    public class CaseInsensitiveValidator : IReplacementOptionValidator
+    public class StringPartialWordValidator : IReplacementOptionValidator
     {
         public bool IsValidForReplacement(string actualString, string searchString, string replaceString)
         {

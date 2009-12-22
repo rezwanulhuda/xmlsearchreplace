@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XmlSearchReplaceLib.Engine;
 
 namespace XmlSearchReplaceLib
 {
-    public class StringReplacerEngine : IReplacerEngine
+    public class StringReplacerEngine : ReplacerEngine
     {
-        protected ReplacementOptionValidatorList _Validators;
-        public StringReplacerEngine(ReplacementOptionValidatorList validators)
-        {
-            _Validators = validators;
-        }
+        public StringReplacerEngine(SearchReplaceOperationOptions options)
+        {            
 
-        public string Replace(string actualString, string searchString, string replaceString)
-        {
-            if (_Validators.IsValidForReplacement(actualString, searchString, replaceString))
-                return ReplaceString(actualString, searchString, replaceString);
+            if (HasOperationOption(options, SearchReplaceOperationOptions.CaseInsensitive))
+                _Validators.Add(new StringCaseInsensitiveValidator());
             else
-                return actualString;
-        }
+                _Validators.Add(new StringCaseSensitiveValidator());
 
-        private string ReplaceString(string actualString, string searchString, string replaceString)
+            if (HasOperationOption(options, SearchReplaceOperationOptions.WholeWordOnly))
+                _Validators.Add(new StringWholeWordValidator());
+            else
+                _Validators.Add(new StringPartialWordValidator());
+
+        }        
+
+        protected override string ReplaceString(string actualString, string searchString, string replaceString)
         {
             string replaced;
             int start = actualString.ToLower().IndexOf(searchString.ToLower());
@@ -29,5 +31,7 @@ namespace XmlSearchReplaceLib
             replaced = replaced.Insert(start, replaceString);
             return replaced;
         }
+
+        
     }
 }

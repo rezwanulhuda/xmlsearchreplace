@@ -5,11 +5,11 @@ using System.Text;
 
 namespace XmlSearchReplaceLib
 {
-    public class CaseSensitiveValidator : IReplacementOptionValidator
+    public class StringCaseInsensitiveValidator : IReplacementOptionValidator
     {
         public bool IsValidForReplacement(string actualString, string searchString, string replaceString)
         {
-            return actualString.Contains(searchString);
+            return actualString.ToLower().Contains(searchString.ToLower());
         }
     }
 }
