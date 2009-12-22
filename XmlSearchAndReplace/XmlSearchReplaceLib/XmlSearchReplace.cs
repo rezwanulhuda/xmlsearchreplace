@@ -36,31 +36,35 @@ namespace XmlSearchReplaceLib
 
         private void SetupReplacerFilters()
         {
-            if (HasLocationOption(_LocationOptions, SearchReplaceLocationOptions.ReplaceAttributeValue))
+            
+            if (_LocationOptions.IsSet(SearchReplaceLocationOptions.ReplaceAttributeValue))
             {
                 _Processors.Add(new AttributeValueReplacer());
             }
 
-            if (HasLocationOption(_LocationOptions, SearchReplaceLocationOptions.ReplaceElementValue))
+            if (_LocationOptions.IsSet(SearchReplaceLocationOptions.ReplaceElementValue))
             {
                 _Processors.Add(new ElementValueReplacer());
             }
 
-            if (HasLocationOption(_LocationOptions, SearchReplaceLocationOptions.ReplaceElementName))
+            if (_LocationOptions.IsSet(SearchReplaceLocationOptions.ReplaceElementName))
             {
                 _Processors.Add(new ElementNameReplacer());
             }
 
-            if (HasLocationOption(_LocationOptions, SearchReplaceLocationOptions.ReplaceAttributeName))
+            if (_LocationOptions.IsSet(SearchReplaceLocationOptions.ReplaceAttributeName))
             {
                 _Processors.Add(new AttributeNameReplacer());
             }
         }
 
-        private bool HasLocationOption(SearchReplaceLocationOptions availableOptions, SearchReplaceLocationOptions checkOption)
+/*        private bool HasLocationOption(SearchReplaceLocationOptions availableOptions, SearchReplaceLocationOptions checkOption)
         {
-            return ((availableOptions & checkOption) == checkOption);
-        }
+
+            return availableOptions.IsSet(checkOption);
+            //return ((availableOptions & checkOption) == checkOption);
+            //return Enum.IsDefined(typeof(SearchReplaceLocationOptions), checkOption);
+        }*/
 
         public XmlDocument Replace(XmlDocument doc)
         {

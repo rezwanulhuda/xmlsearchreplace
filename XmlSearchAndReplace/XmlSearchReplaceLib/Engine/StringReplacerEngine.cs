@@ -11,12 +11,12 @@ namespace XmlSearchReplaceLib
         public StringReplacerEngine(SearchReplaceOperationOptions options)
         {            
 
-            if (HasOperationOption(options, SearchReplaceOperationOptions.CaseInsensitive))
+            if (options.IsSet(SearchReplaceOperationOptions.CaseInsensitive))
                 _Validators.Add(new StringCaseInsensitiveValidator());
             else
                 _Validators.Add(new StringCaseSensitiveValidator());
 
-            if (HasOperationOption(options, SearchReplaceOperationOptions.WholeWordOnly))
+            if (options.IsSet(SearchReplaceOperationOptions.WholeWordOnly))
                 _Validators.Add(new StringWholeWordValidator());
             else
                 _Validators.Add(new StringPartialWordValidator());
