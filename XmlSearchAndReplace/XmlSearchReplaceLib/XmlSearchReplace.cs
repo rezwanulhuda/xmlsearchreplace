@@ -58,14 +58,6 @@ namespace XmlSearchReplaceLib
             }
         }
 
-/*        private bool HasLocationOption(SearchReplaceLocationOptions availableOptions, SearchReplaceLocationOptions checkOption)
-        {
-
-            return availableOptions.IsSet(checkOption);
-            //return ((availableOptions & checkOption) == checkOption);
-            //return Enum.IsDefined(typeof(SearchReplaceLocationOptions), checkOption);
-        }*/
-
         public XmlDocument Replace(XmlDocument doc)
         {
             _Document = doc.Clone() as XmlDocument;            
@@ -80,9 +72,18 @@ namespace XmlSearchReplaceLib
 
         private void ReplaceElements(XmlNode node, IXmlSearchAndReplacer replacer)
         {
-            for (int x = 0; x < node.ChildNodes.Count; ++x)
+            if (node == null) return;
+            int totalCount = node.ChildNodes.Count;
+            for (int x = 0; x < totalCount; ++x)
             {
+                
                 replacer.Replace(node.ChildNodes[x], _SearchString, _ReplaceString, _Engine);
+                if (node.ChildNodes.Count < totalCount)
+                {                    
+                    totalCount = node.ChildNodes.Count;
+                    --x;
+                    continue;
+                }
                 ReplaceElements(node.ChildNodes[x], replacer);
             }
         }        

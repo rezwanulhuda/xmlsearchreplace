@@ -22,8 +22,9 @@ namespace XmlSearchReplaceLib
         private void ReplaceAttributes(XmlNode node, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
         {
             foreach (KeyValuePair<XmlAttribute, XmlAttribute> attributes in replacedAttributes)
-            {
-                node.Attributes.InsertAfter(attributes.Value, attributes.Key);
+            {                
+                if (attributes.Value != null)
+                    node.Attributes.InsertAfter(attributes.Value, attributes.Key);
                 node.Attributes.Remove(attributes.Key);
             }
         }
@@ -37,9 +38,16 @@ namespace XmlSearchReplaceLib
 
                 if (String.Compare(newAttributeName, attribute.Name) != 0)
                 {
-                    XmlAttribute newAttribute = node.OwnerDocument.CreateAttribute(newAttributeName);
-                    newAttribute.Value = attribute.Value;
-                    replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, newAttribute));
+                    if (!String.IsNullOrEmpty(newAttributeName))
+                    {
+                        XmlAttribute newAttribute = node.OwnerDocument.CreateAttribute(newAttributeName);
+                        newAttribute.Value = attribute.Value;
+                        replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, newAttribute));
+                    }
+                    else
+                    {
+                        replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, null));
+                    }
                 }
             }
         }

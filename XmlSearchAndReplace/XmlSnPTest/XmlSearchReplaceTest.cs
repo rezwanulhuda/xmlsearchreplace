@@ -106,6 +106,16 @@ namespace XmlSnPTest
             
         }
 
+        private void AssertAttributeCount(XmlDocument document, string attributeName, int expectedCount)
+        {
+            string xPath = @"//@" + attributeName;
+
+            XmlNodeList nodes = document.SelectNodes(xPath);
+            
+            Assert.AreEqual(expectedCount, nodes.Count);
+
+        }
+
         private void AssertAttributeValueInFirstNamedElement(XmlDocument actualDoc, string elementName, string attributeName, string expectedValue)
         {
             XmlNode node = actualDoc.SelectSingleNode("//" + elementName + "/@" + attributeName);
@@ -500,5 +510,93 @@ namespace XmlSnPTest
             AssertFirstElementValue(actualDoc, "Hello", 1, "test");
         }
 
+        [TestMethod]
+        public void Replace_ElementNameWithEmptyReplaceString_WillRemoveElement()
+        {
+            InitializeReplacer(@"
+<document>Pages
+    <Books BookId=""ThisIsWhole"">TestOptions<Book BookIdInPage=""ThisIsWholeWord"">test</Book>
+    </Books>
+</document>"
+                , SearchReplaceLocationOptions.ReplaceElementName, "Book", String.Empty, false, true);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+
+            AssertFirstElementValue(actualDoc, "Book", 0, String.Empty);
+            //AssertFirstElementValue(actualDoc, "Hello", 1, "test");
+        }
+
+        [TestMethod]
+        public void Replace_ElementNameWithEmptyReplaceStringWithMultipleNodes_WillRemoveAllOfThem()
+        {
+            InitializeReplacer(@"
+<document>Pages
+    <Books BookId=""ThisIsWhole"">TestOptions<Book BookIdInPage=""ThisIsWholeWord"">test</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">blah blah</Book>
+    </Books>
+</document>"
+                , SearchReplaceLocationOptions.ReplaceElementName, "Book", String.Empty, false, true);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+
+            AssertFirstElementValue(actualDoc, "Book", 0, String.Empty);
+            //AssertFirstElementValue(actualDoc, "Hello", 1, "test");
+        }
+
+        [TestMethod]
+        public void Replace_ElementNameWithEmptyReplaceStringWith3Nodes_WillRemoveAllOfThem()
+        {
+            InitializeReplacer(@"
+<document>Pages
+    <Books BookId=""ThisIsWhole"">TestOptions<Book BookIdInPage=""ThisIsWholeWord"">test</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">blah blah</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">ahem</Book>
+    </Books>
+</document>"
+                , SearchReplaceLocationOptions.ReplaceElementName, "Book", String.Empty, false, true);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+
+            AssertFirstElementValue(actualDoc, "Book", 0, String.Empty);
+            //AssertFirstElementValue(actualDoc, "Hello", 1, "test");
+        }
+
+        [TestMethod]
+        public void Replace_ElementNameWithEmptyReplaceStringAtMultipleElements_WillRemoveAllOfThem()
+        {
+            InitializeReplacer(@"
+<document>Pages
+    <Books BookId=""ThisIsWhole"">TestOptions<Book BookIdInPage=""ThisIsWholeWord"">test</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">blah blah</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">ahem</Book>
+    </Books>
+    <Catalogues>
+    <Book BookIdInPage=""ThisIsWholeWord"">test</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">blah blah</Book>
+    <Book BookIdInPage=""ThisIsWholeWord"">ahem</Book>
+    <Book BookIdInPage=""ThisIsWholeWord""><Book BookIdInPage=""ThisIsWholeWord"">ahem<Book BookIdInPage=""ThisIsWholeWord"">ahem</Book></Book></Book>
+    
+    </Catalogues>
+</document>"
+                , SearchReplaceLocationOptions.ReplaceElementName, "Book", String.Empty, false, true);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+
+            AssertFirstElementValue(actualDoc, "Book", 0, String.Empty);            
+        }
+
+        [TestMethod]
+        public void Replace_AttributeNameInOneElement_WillRemoveElement()
+        {
+            InitializeReplacer(@"
+<document>
+    <Book id=""1"" />
+</document>"
+                , SearchReplaceLocationOptions.ReplaceAttributeName, "id", String.Empty, true, true);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+
+            AssertAttributeCount(actualDoc, "id", 0);
+        }  
     }
 }

@@ -22,8 +22,29 @@ namespace XmlSearchReplaceLib
 
         private void ReplaceNode(XmlNode oldNode, string newNodeName)
         {
+            
+            
             XmlDocument document = oldNode.OwnerDocument;
 
+            if (String.IsNullOrEmpty(newNodeName))
+            {
+                if (oldNode.ParentNode != null)
+                {
+                    oldNode.ParentNode.RemoveChild(oldNode);
+                }
+                else
+                {
+                    document.RemoveChild(oldNode);
+                }
+            }
+            else
+            {
+                CreateSubstitueNodeWithNewValue(oldNode, newNodeName, document);
+            }
+        }
+
+        private void CreateSubstitueNodeWithNewValue(XmlNode oldNode, string newNodeName, XmlDocument document)
+        {
             XmlNode newNode = document.CreateElement(newNodeName);
             newNode.InnerXml = oldNode.InnerXml;
             CopyAttributes(newNode, oldNode);
