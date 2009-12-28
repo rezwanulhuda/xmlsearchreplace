@@ -12,10 +12,7 @@ namespace XmlSearchReplaceLib
         {
             if (node.Attributes == null) return;
 
-            List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes = new List<KeyValuePair<XmlAttribute, XmlAttribute>>();
-
-            FindReplacableAttributes(node, searchString, replaceString, engine, replacedAttributes);
-
+            List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes = GetReplacedAttributes(node, searchString, replaceString, engine);
             ReplaceAttributes(node, replacedAttributes);
         }
 
@@ -29,8 +26,9 @@ namespace XmlSearchReplaceLib
             }
         }
 
-        private void FindReplacableAttributes(XmlNode node, string searchString, string replaceString, IReplacerEngine engine, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
+        private List<KeyValuePair<XmlAttribute, XmlAttribute>> GetReplacedAttributes(XmlNode node, string searchString, string replaceString, IReplacerEngine engine)
         {
+            List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes = new List<KeyValuePair<XmlAttribute,XmlAttribute>>();
             foreach (XmlAttribute attribute in node.Attributes)
             {
                 string newAttributeName = engine.Replace(attribute.Name, searchString, replaceString);
@@ -38,18 +36,18 @@ namespace XmlSearchReplaceLib
 
                 if (String.Compare(newAttributeName, attribute.Name) != 0)
                 {
+                    XmlAttribute newAttribute = null;
+
                     if (!String.IsNullOrEmpty(newAttributeName))
                     {
-                        XmlAttribute newAttribute = node.OwnerDocument.CreateAttribute(newAttributeName);
-                        newAttribute.Value = attribute.Value;
-                        replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, newAttribute));
+                        newAttribute = node.OwnerDocument.CreateAttribute(newAttributeName);
+                        newAttribute.Value = attribute.Value;                        
                     }
-                    else
-                    {
-                        replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, null));
-                    }
+
+                    replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, newAttribute));
                 }
             }
+            return replacedAttributes;
         }
 
     }
