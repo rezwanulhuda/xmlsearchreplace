@@ -7,7 +7,7 @@ using System.Xml;
 using XmlSearchReplaceLib;
 using System.IO;
 
-namespace XmlSnPTest
+namespace XmlSnRTest
 {
     /// <summary>
     /// Summary description for UnitTest1
