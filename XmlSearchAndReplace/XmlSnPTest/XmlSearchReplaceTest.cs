@@ -597,6 +597,6 @@ namespace XmlSnRTest
             XmlDocument actualDoc = _Replacer.Replace(_Document);
 
             AssertAttributeCount(actualDoc, "id", 0);
-        }  
+        }        
     }
 }

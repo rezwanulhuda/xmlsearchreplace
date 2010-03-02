@@ -16,7 +16,7 @@ namespace XmlSearchReplaceConsoleLib
         public const string ContinueOnError = "Continue on error when processing multiple files.";
         public const string RecurseSubDir = "Recurse sub directories.";
         public const string MoreInfo = "For more information - please visit the project page at CodePlex (http://xmlsearchreplace.codeplex.com/documentation)";
-
+        public const string ReplaceSearchStringByLowerCase = "Replace the search string by a lower case version of the search string.";
 
 
     }

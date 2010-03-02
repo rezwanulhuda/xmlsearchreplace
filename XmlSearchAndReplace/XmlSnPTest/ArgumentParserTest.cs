@@ -326,9 +326,9 @@ namespace XmlSnRTest
         [TestMethod]
         public void GetArgumentsFromString_CombinationOfAll()
         {
-            string commandLine = @"/S=""hello ""world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj"" /W /C /""I"" /O=""en,ev,an,av""";
+            string commandLine = @"/S=""hello ""world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj"" /W /C /""I"" /O=""en,ev,an,av"" /L";
 
-            Assert.AreEqual(8, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(9, ArgumentParser.GetArgumentsFromString(commandLine).Count);
             Assert.AreEqual(@"S=""hello """, ArgumentParser.GetArgumentsFromString(commandLine)[0]);
             Assert.AreEqual(@"world""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
             Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
@@ -337,6 +337,7 @@ namespace XmlSnRTest
             Assert.AreEqual(@"C", ArgumentParser.GetArgumentsFromString(commandLine)[5]);
             Assert.AreEqual(@"""I""", ArgumentParser.GetArgumentsFromString(commandLine)[6]);
             Assert.AreEqual(@"O=""en,ev,an,av""", ArgumentParser.GetArgumentsFromString(commandLine)[7]);
+            Assert.AreEqual(@"L", ArgumentParser.GetArgumentsFromString(commandLine)[8]);
         }
 
         [TestMethod]
@@ -405,6 +406,28 @@ namespace XmlSnRTest
 
             Assert.Fail();
         }
+        
+        [TestMethod]
+        public void GetArgumentsFromString_WithoutRButContainingL_ShouldNotListRAsAMandatoryParam()
+        {
+            string commandLine = @"/S=""hello \""world"" /L";
+
+            try
+            {
+                ArgumentParser parser = new ArgumentParser(commandLine);                
+            }
+            catch (RequiredParameterMissingException ex)
+            {
+                Assert.AreEqual(2, ex.GetMissginParameters().Count);
+                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
+                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));                                
+                return;
+            }
+
+            Assert.Fail();
+        }
+
+
         
     }
 }

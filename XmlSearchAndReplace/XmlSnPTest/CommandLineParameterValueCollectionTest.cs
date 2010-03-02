@@ -43,5 +43,22 @@ namespace XmlSnRTest
             Assert.AreEqual("A", values.GetMissingMandatoryParams(mandatoryParams)[0].GetName());
 
         }
+
+        [TestMethod]
+        public void GetReplaceString_WithLParam_WillReturnSearchStringInLowerCase()
+        {
+            CommandLineParameterCollection mandatoryParams = new CommandLineParameterCollection();
+            mandatoryParams.Add(new CommandLineParameter("S", String.Empty, String.Empty, true));
+
+
+            CommandLineParameterValueCollection values = new CommandLineParameterValueCollection();
+            values.Add(new CommandLineParameterValue(mandatoryParams[0], "HelloWorld"));
+            values.Add(new CommandLineParameterValue(new CommandLineParameter("L", String.Empty, String.Empty, false), string.Empty));
+
+
+
+            Assert.AreEqual(values.GetSearchString(), "HelloWorld");
+            Assert.AreEqual(values.GetReplaceString(), "helloworld");
+        }
     }
 }

@@ -35,11 +35,6 @@ namespace XmlSearchReplaceLib.Engine
                 return actualString;
         }
 
-        protected bool HasOperationOption(SearchReplaceOperationOptions availableOptions, SearchReplaceOperationOptions checkOption)
-        {
-            return ((availableOptions & checkOption) == checkOption);
-        }
-
         protected abstract string ReplaceString(string actualString, string searchString, string replaceString);
     }
 }

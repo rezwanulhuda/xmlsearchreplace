@@ -93,7 +93,10 @@ namespace XmlSearchReplaceConsoleLib
 
         public string GetReplaceString()
         {
-            return this.GetStringValue("R");
+            if (this.GetBoolValue("L"))
+                return this.GetSearchString().ToLower();
+            else
+                return this.GetStringValue("R");
         }
 
         public bool ContinueOnError
