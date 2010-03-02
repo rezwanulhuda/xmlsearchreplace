@@ -58,7 +58,7 @@ namespace XmlSnRTest
       <Author>Author 1</Author>
     </Book>
     <Book id=""2"" category=""Category2"">
-      <Title>Title 2 - book</Title>
+      <Title Title=""Title"">Title 2 - book</Title>
       <Author>Author 2 - Book</Author>
     </Book>
   </Books>  
@@ -99,7 +99,7 @@ namespace XmlSnRTest
       <Author>Author 1</Author>
     </LibraryBook>
     <LibraryBook id=""2"" category=""Category2"">
-      <Title>Title 2 - book</Title>
+      <Title Title=""Title"">Title 2 - book</Title>
       <Author>Author 2 - Book</Author>
     </LibraryBook>
   </Books>
@@ -122,7 +122,7 @@ namespace XmlSnRTest
       <Author>Author 1</Author>
     </LibraryBook>
     <LibraryBook id=""2"" category=""Category2"">
-      <Title>Title 2 - book</Title>
+      <Title Title=""Title"">Title 2 - book</Title>
       <Author>Author 2 - LibraryBook</Author>
     </LibraryBook>
   </LibraryBooks>
@@ -178,6 +178,52 @@ namespace XmlSnRTest
             expectedUsage += CommandLineParameterCollection.GetHelpText();
 
             Assert.AreEqual(expectedUsage, SearchReplaceFileReplacer.GetUsage("tt.exe"));
+        }
+
+        [TestMethod]
+        public void ProcessAll_EnEv_CaseInSensitive_ConvertToLower()
+        {
+            string xmlExpected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Library>
+  <books>
+    <book id=""1"" category=""Category1"">
+      <Title>Title 1</Title>
+      <Author>Author 1</Author>
+    </book>
+    <book id=""2"" category=""Category2"">
+      <Title Title=""Title"">Title 2 - book</Title>
+      <Author>Author 2 - book</Author>
+    </book>
+  </books>
+</Library>";
+
+
+            string commandLine = String.Format(@"/F={0} /O=en,ev /S=""Book"" /L /I", _SrcFile);
+            TestAndAssertExpectationsAreMet(xmlExpected, commandLine);
+            
+        }
+
+        [TestMethod]
+        public void ProcessAll_AnAv_CaseInSensitive_ConvertToLower()
+        {
+            string xmlExpected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Library>
+  <Books>
+    <Book id=""1"" category=""Category1"">
+      <Title>Title 1</Title>
+      <Author>Author 1</Author>
+    </Book>
+    <Book id=""2"" category=""Category2"">
+      <Title title=""title"">Title 2 - book</Title>
+      <Author>Author 2 - Book</Author>
+    </Book>
+  </Books>
+</Library>";
+
+
+            string commandLine = String.Format(@"/F={0} /O=an,av /S=""Title"" /L /I", _SrcFile);
+            TestAndAssertExpectationsAreMet(xmlExpected, commandLine);
+
         }
 
         
