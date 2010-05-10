@@ -76,8 +76,8 @@ namespace XmlSnRTest
             ISearchReplaceParameter param = GetParameters(args);
             Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, param.GetLocationOptions());
             Assert.AreEqual("c:\\documents and settings\\desktop\\file.xml", param.GetFileName());
-            Assert.AreEqual("search", param.GetSearchString());
-            Assert.AreEqual("replace", param.GetReplaceString());
+            Assert.AreEqual("search", param.GetSearchString()[0]);
+            Assert.AreEqual("replace", param.GetReplaceString()[0]);
             Assert.AreEqual(SearchReplaceOperationOptions.CaseInsensitive | SearchReplaceOperationOptions.WholeWordOnly, param.GetOperationOptions());
             Assert.AreEqual(true, param.ContinueOnError);
         }
@@ -90,8 +90,8 @@ namespace XmlSnRTest
             ISearchReplaceParameter parameters = GetParameters(args);
             Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, parameters.GetLocationOptions());
             Assert.AreEqual("c:\\documents and settings\\desktop\\file.xml", parameters.GetFileName());
-            Assert.AreEqual("Equals", parameters.GetSearchString());
-            Assert.AreEqual("=", parameters.GetReplaceString());
+            Assert.AreEqual("Equals", parameters.GetSearchString()[0]);
+            Assert.AreEqual("=", parameters.GetReplaceString()[0]);
             Assert.AreEqual(SearchReplaceOperationOptions.CaseInsensitive | SearchReplaceOperationOptions.WholeWordOnly, parameters.GetOperationOptions());
             Assert.AreEqual(true, parameters.ContinueOnError);
         }
@@ -125,8 +125,8 @@ namespace XmlSnRTest
             ISearchReplaceParameter argParser = GetParameters(args);
             Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, argParser.GetLocationOptions() | SearchReplaceLocationOptions.ReplaceAttributeName);
             Assert.AreEqual("c:\\documents and settings\\desktop\\file.xml", argParser.GetFileName());
-            Assert.AreEqual("\\\\server04\\spfiles", argParser.GetSearchString());
-            Assert.AreEqual("L:", argParser.GetReplaceString());
+            Assert.AreEqual("\\\\server04\\spfiles", argParser.GetSearchString()[0]);
+            Assert.AreEqual("L:", argParser.GetReplaceString()[0]);
         }
 
         [TestMethod]
@@ -135,9 +135,9 @@ namespace XmlSnRTest
             string argument = "/S= hello world /R= how are you /F=  c:\\documents and settings\\blah blah.html  /O=av";
 
             ISearchReplaceParameter argParser = GetParameters(argument);
-            
-            Assert.AreEqual("hello world", argParser.GetSearchString());
-            Assert.AreEqual("how are you", argParser.GetReplaceString());
+
+            Assert.AreEqual("hello world", argParser.GetSearchString()[0]);
+            Assert.AreEqual("how are you", argParser.GetReplaceString()[0]);
             Assert.AreEqual("c:\\documents and settings\\blah blah.html", argParser.GetFileName());
         }
 
@@ -148,8 +148,8 @@ namespace XmlSnRTest
 
             ISearchReplaceParameter argParser = GetParameters(argument);
 
-            Assert.AreEqual("hello world", argParser.GetSearchString());
-            Assert.AreEqual("how are you", argParser.GetReplaceString());
+            Assert.AreEqual("hello world", argParser.GetSearchString()[0]);
+            Assert.AreEqual("how are you", argParser.GetReplaceString()[0]);
             Assert.AreEqual("c:\\documents and settings\\blah blah.html", argParser.GetFileName());
         }
 
@@ -160,8 +160,8 @@ namespace XmlSnRTest
 
             ISearchReplaceParameter argParser = GetParameters(argument);
 
-            Assert.AreEqual("hello world", argParser.GetSearchString());
-            Assert.AreEqual("how are you", argParser.GetReplaceString());
+            Assert.AreEqual("hello world", argParser.GetSearchString()[0]);
+            Assert.AreEqual("how are you", argParser.GetReplaceString()[0]);
             Assert.AreEqual("c:\\documents and settings\\blah blah.html", argParser.GetFileName());
         }
 
@@ -172,8 +172,8 @@ namespace XmlSnRTest
 
             ISearchReplaceParameter argParser = GetParameters(argument);
 
-            Assert.AreEqual(" hello world ", argParser.GetSearchString());
-            Assert.AreEqual(" how are you ", argParser.GetReplaceString());
+            Assert.AreEqual(" hello world ", argParser.GetSearchString()[0]);
+            Assert.AreEqual(" how are you ", argParser.GetReplaceString()[0]);
             Assert.AreEqual(" c:\\documents and settings\\blah blah.html ", argParser.GetFileName());
         }
 
@@ -202,8 +202,8 @@ namespace XmlSnRTest
 
             ISearchReplaceParameter argParser = GetParameters(argument);
 
-            Assert.AreEqual(@"hello""world""how are you", argParser.GetSearchString());
-            Assert.AreEqual(@"hello world "" how are you?""", argParser.GetReplaceString());
+            Assert.AreEqual(@"hello""world""how are you", argParser.GetSearchString()[0]);
+            Assert.AreEqual(@"hello world "" how are you?""", argParser.GetReplaceString()[0]);
         }
 
         [TestMethod]
@@ -213,8 +213,8 @@ namespace XmlSnRTest
 
             ISearchReplaceParameter argParser = GetParameters(argument);
 
-            Assert.AreEqual(@"hello=world how are you", argParser.GetSearchString());
-            Assert.AreEqual(@"hello world = "" how are you? """, argParser.GetReplaceString());
+            Assert.AreEqual(@"hello=world how are you", argParser.GetSearchString()[0]);
+            Assert.AreEqual(@"hello world = "" how are you? """, argParser.GetReplaceString()[0]);
         }
 
         [TestMethod]

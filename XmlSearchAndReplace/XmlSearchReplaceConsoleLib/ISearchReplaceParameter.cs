@@ -10,8 +10,8 @@ namespace XmlSearchReplaceConsoleLib
     {
         bool ContinueOnError { get; }
         bool RecurseSubDir { get; }
-        string GetReplaceString();
-        string GetSearchString();
+        List<string> GetReplaceString();
+        List<string> GetSearchString();
         string GetFileName();
         SearchReplaceOperationOptions GetOperationOptions();
         SearchReplaceLocationOptions GetLocationOptions();

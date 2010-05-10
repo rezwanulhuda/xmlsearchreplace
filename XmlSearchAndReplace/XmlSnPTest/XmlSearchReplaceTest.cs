@@ -81,7 +81,7 @@ namespace XmlSnRTest
                 opOptions |= SearchReplaceOperationOptions.WholeWordOnly;
             if (caseInsensitive)
                 opOptions |= SearchReplaceOperationOptions.CaseInsensitive;
-            _Replacer = new XmlSearchReplace(options, opOptions, searchString, replaceString);
+            _Replacer = new XmlSearchReplace(options, opOptions, new List<string>() { searchString} , new List<string>() {replaceString});
         }
 
         private void AssertFirstElementValue(XmlDocument doc, string elementName, int expectedCount, string expectedFirstvalue)
@@ -597,6 +597,34 @@ namespace XmlSnRTest
             XmlDocument actualDoc = _Replacer.Replace(_Document);
 
             AssertAttributeCount(actualDoc, "id", 0);
-        }        
+        }
+
+        [TestMethod]
+        public void Replace_MultipleSearchStrings_WillReplaceAll()
+        {
+
+            List<string> searchStrings = new List<string>() { "a", "b" };
+            List<string> replaceStrings = new List<string>() { "abra", "babra" };
+
+            string xml = @"<Library>
+    <Book>a</Book>
+    <Book>b</Book>
+</Library>";
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xml);
+
+            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceElementValue, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
+
+            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
+
+            XmlNodeList nodes = actualDoc.GetElementsByTagName("Book");
+
+            Assert.AreEqual(2, nodes.Count);
+            Assert.AreEqual("abra", nodes[0].InnerText);
+            Assert.AreEqual("babra", nodes[1].InnerText);
+
+
+            //AssertAttributeCount(actualDoc, "id", 0);
+        }
     }
 }

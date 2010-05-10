@@ -86,17 +86,17 @@ namespace XmlSearchReplaceConsoleLib
             return this.GetStringValue("F");
         }
 
-        public string GetSearchString()
+        public List<string> GetSearchString()
         {
-            return this.GetStringValue("S");
+            return new List<string>() { this.GetStringValue("S") };
         }
 
-        public string GetReplaceString()
+        public List<string> GetReplaceString()
         {
             if (this.GetBoolValue("L"))
-                return this.GetSearchString().ToLower();
+                return new List<string>() { this.GetSearchString()[0].ToLower()};
             else
-                return this.GetStringValue("R");
+                return new List<string>() { this.GetStringValue("R")};
         }
 
         public bool ContinueOnError

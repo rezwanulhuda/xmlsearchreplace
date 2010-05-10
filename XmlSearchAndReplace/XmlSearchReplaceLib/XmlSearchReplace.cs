@@ -13,11 +13,11 @@ namespace XmlSearchReplaceLib
         List<IXmlSearchAndReplacer> _Processors;
         SearchReplaceLocationOptions _LocationOptions;
         SearchReplaceOperationOptions _OperationOptions;
-        string _SearchString;
-        string _ReplaceString;        
+        List<string> _SearchString;
+        List<string> _ReplaceString;        
         IReplacerEngine _Engine;
 
-        public XmlSearchReplace(SearchReplaceLocationOptions locOptions, SearchReplaceOperationOptions opOptions, string searchString, string replaceString)
+        public XmlSearchReplace(SearchReplaceLocationOptions locOptions, SearchReplaceOperationOptions opOptions, List<string> searchString, List<string> replaceString)
         {            
             _Processors = new List<IXmlSearchAndReplacer>();
             _LocationOptions = locOptions;
@@ -60,31 +60,36 @@ namespace XmlSearchReplaceLib
 
         public XmlDocument Replace(XmlDocument doc)
         {
-            _Document = doc.Clone() as XmlDocument;            
+            _Document = doc.Clone() as XmlDocument;
 
-            foreach (IXmlSearchAndReplacer replacer in _Processors)
+            for (int x = 0; x < _SearchString.Count; ++x)
             {
-                ReplaceElements(_Document, replacer);
+                foreach (IXmlSearchAndReplacer replacer in _Processors)
+                {
+                    ReplaceElements(_Document, replacer, _SearchString[x], _ReplaceString[x]);
+                }
             }
+            
+            
             
             return _Document;
         }
 
-        private void ReplaceElements(XmlNode node, IXmlSearchAndReplacer replacer)
+        private void ReplaceElements(XmlNode node, IXmlSearchAndReplacer replacer, string searchString, string replaceString)
         {
             if (node == null) return;
             int totalCount = node.ChildNodes.Count;
             for (int x = 0; x < totalCount; ++x)
             {
-                
-                replacer.Replace(node.ChildNodes[x], _SearchString, _ReplaceString, _Engine);
+
+                replacer.Replace(node.ChildNodes[x], searchString, replaceString, _Engine);
                 if (node.ChildNodes.Count < totalCount)
                 {                    
                     totalCount = node.ChildNodes.Count;
                     --x;
                     continue;
                 }
-                ReplaceElements(node.ChildNodes[x], replacer);
+                ReplaceElements(node.ChildNodes[x], replacer, searchString, replaceString);
             }
         }        
     }

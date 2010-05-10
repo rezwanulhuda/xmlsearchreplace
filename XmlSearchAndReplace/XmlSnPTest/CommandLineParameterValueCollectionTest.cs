@@ -57,8 +57,8 @@ namespace XmlSnRTest
 
 
 
-            Assert.AreEqual(values.GetSearchString(), "HelloWorld");
-            Assert.AreEqual(values.GetReplaceString(), "helloworld");
+            Assert.AreEqual("HelloWorld", values.GetSearchString()[0]);
+            Assert.AreEqual("helloworld", values.GetReplaceString()[0]);
         }
     }
 }
