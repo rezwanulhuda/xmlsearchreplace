@@ -21,7 +21,7 @@ namespace XmlSearchReplaceConsole
             try
             {
                 
-                ArgumentParser parser = new ArgumentParser(args);
+                CommandlineParser parser = new CommandlineParser(args);
                 
                 _Main = new SearchReplaceFileReplacer(parser.GetParamsAndValues());
                 _Main.ProcessAll();

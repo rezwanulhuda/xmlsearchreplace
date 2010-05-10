@@ -5,12 +5,12 @@ using System.Text;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class CommandLineParameterValue
+    public class ApplicationParameterWithValue
     {
-        protected CommandLineParameter _Parameter;
+        protected ApplicationParameter _Parameter;
         protected string _Value;
 
-        public CommandLineParameterValue(CommandLineParameter parameter, string value)
+        public ApplicationParameterWithValue(ApplicationParameter parameter, string value)
         {
             this._Parameter = parameter;
             this._Value = value;

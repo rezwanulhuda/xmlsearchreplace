@@ -6,12 +6,12 @@ using XmlSearchReplaceLib;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class CommandLineParameterValueCollection : List<CommandLineParameterValue>, ISearchReplaceParameter
+    public class ApplicationParameterWithValueCollection : List<ApplicationParameterWithValue>, ISearchReplaceParameter
     {
-        public CommandLineParameterCollection GetMissingMandatoryParams(CommandLineParameterCollection mandatoryParams)
+        public ApplicationParameterCollection GetMissingMandatoryParams(ApplicationParameterCollection mandatoryParams)
         {
-            CommandLineParameterCollection missingRequiredParams = new CommandLineParameterCollection();
-            foreach (CommandLineParameter param in mandatoryParams)
+            ApplicationParameterCollection missingRequiredParams = new ApplicationParameterCollection();
+            foreach (ApplicationParameter param in mandatoryParams)
             {
                 if (param.IsMandatory && this.Find(p => String.Compare(p.GetName(), param.GetName(), true) == 0) == null)
                 {
@@ -24,12 +24,12 @@ namespace XmlSearchReplaceConsoleLib
 
         private string GetStringValue(string paramName)
         {
-            return this.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), paramName, true) == 0; }).GetValue();
+            return this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; }).GetValue();
         }
 
         private bool GetBoolValue(string paramName)
         {
-            CommandLineParameterValue value = this.Find(delegate(CommandLineParameterValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
+            ApplicationParameterWithValue value = this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
             if (value == null)
                 return false;
             return true;

@@ -8,22 +8,22 @@ using XmlSearchReplaceConsoleLib;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class ArgumentParser
+    public class CommandlineParser
     {
-        CommandLineParameterValueCollection _Params;
+        ApplicationParameterWithValueCollection _Params;
         const string _ArgsKeyValueSeparatorCharacter = "=";
 
-        public ArgumentParser(string[] commandLineArgs)
+        public CommandlineParser(string[] commandLineArgs)
             : this(String.Join(" ", commandLineArgs))
         {
         }
 
-        public ArgumentParser(string commandLine)
+        public CommandlineParser(string commandLine)
         {
-            _Params = new CommandLineParameterValueCollection();
+            _Params = new ApplicationParameterWithValueCollection();
             CreateKeys(GetAppArgsFromCommandLine(commandLine));
             
-            CommandLineParameterCollection missingParams = _Params.GetMissingMandatoryParams(CommandLineParameterCollection.SupporedParams);
+            ApplicationParameterCollection missingParams = _Params.GetMissingMandatoryParams(ApplicationParameterCollection.SupporedParams);
             if (missingParams.Count > 0)
             {
                 throw new RequiredParameterMissingException("Required parameter missing", missingParams);
@@ -47,13 +47,13 @@ namespace XmlSearchReplaceConsoleLib
                 string arg = GetArgumentFromWholeParam(param);
                 string val = GetValueFromWholeParam(param);
 
-                CommandLineParameter commandLineParam = CommandLineParameterCollection.SupporedParams.Find(p => String.Compare(p.GetName(), arg, true) == 0);
+                ApplicationParameter commandLineParam = ApplicationParameterCollection.SupporedParams.Find(p => String.Compare(p.GetName(), arg, true) == 0);
 
 
                 if (commandLineParam == null)
                     throw new ArgumentException(String.Format("Parameter '{0}' (/{1}) is not supported", arg, param));
 
-                _Params.Add(new CommandLineParameterValue(commandLineParam, val));
+                _Params.Add(new ApplicationParameterWithValue(commandLineParam, val));
             }
         }
 
@@ -170,7 +170,7 @@ namespace XmlSearchReplaceConsoleLib
             return input[0] == '"' && input[input.Length - 1] == '"';
         }      
   
-        public CommandLineParameterValueCollection GetParamsAndValues()
+        public ApplicationParameterWithValueCollection GetParamsAndValues()
         {
             return this._Params;
         }

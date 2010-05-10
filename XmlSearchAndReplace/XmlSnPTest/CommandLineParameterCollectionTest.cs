@@ -35,7 +35,7 @@ namespace XmlSnRTest
         public void GetUsage_WillReturnValidUsage()
         {
             string expectedCommandLine = @"/S=""search"" [/R]=""replace"" /O=en,ev,an,av /F=""C:\Files\*.xml"" [/C] [/I] [/W] [/D] [/L]";
-            Assert.AreEqual(expectedCommandLine, CommandLineParameterCollection.GetUsage());
+            Assert.AreEqual(expectedCommandLine, ApplicationParameterCollection.GetUsage());
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace XmlSnRTest
             expectedHelpText += "L - " + HelpText.ReplaceSearchStringByLowerCase + " (optional)" + Environment.NewLine;
             expectedHelpText += HelpText.MoreInfo;
 
-            Assert.AreEqual(expectedHelpText, CommandLineParameterCollection.GetHelpText());
+            Assert.AreEqual(expectedHelpText, ApplicationParameterCollection.GetHelpText());
         }
     }
 }

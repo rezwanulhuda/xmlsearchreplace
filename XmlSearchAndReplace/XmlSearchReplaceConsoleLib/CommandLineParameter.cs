@@ -5,14 +5,14 @@ using System.Text;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class CommandLineParameter
+    public class ApplicationParameter
     {        
         string _Name;
         string _Usage;
         string _HelpText;
         bool _IsMandatory;
 
-        public CommandLineParameter(string name, string usage, string helpText, bool isMandatory)
+        public ApplicationParameter(string name, string usage, string helpText, bool isMandatory)
         {        
             this._Name = name;
             this._Usage = usage;

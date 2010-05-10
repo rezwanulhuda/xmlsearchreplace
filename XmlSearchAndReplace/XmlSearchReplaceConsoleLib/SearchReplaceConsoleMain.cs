@@ -65,8 +65,8 @@ namespace XmlSearchReplaceConsoleLib
 
         public static string GetUsage(string hostExecutableName)
         {
-            string usage = String.Format("{0} {1}", hostExecutableName, CommandLineParameterCollection.GetUsage()) + Environment.NewLine;
-            usage += CommandLineParameterCollection.GetHelpText();
+            string usage = String.Format("{0} {1}", hostExecutableName, ApplicationParameterCollection.GetUsage()) + Environment.NewLine;
+            usage += ApplicationParameterCollection.GetHelpText();
             return usage;
 
         }

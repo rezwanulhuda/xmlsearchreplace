@@ -64,7 +64,7 @@ namespace XmlSnRTest
         }
         public static ISearchReplaceParameter GetParameters(string commandLine)
         {
-            ArgumentParser parser = new ArgumentParser(commandLine);
+            CommandlineParser parser = new CommandlineParser(commandLine);
             return parser.GetParamsAndValues();
         }
 
@@ -106,7 +106,7 @@ namespace XmlSnRTest
 
             try
             {
-                ArgumentParser argParser = new ArgumentParser(args);
+                CommandlineParser argParser = new CommandlineParser(args);
             }
             catch (ArgumentException ex)
             {
@@ -184,7 +184,7 @@ namespace XmlSnRTest
 
             try
             {
-                ArgumentParser argParser = new ArgumentParser(argument);
+                CommandlineParser argParser = new CommandlineParser(argument);
             }
             catch(ArgumentException ex)
             {
@@ -222,7 +222,7 @@ namespace XmlSnRTest
         {
             string commandLine = String.Empty;
 
-            Assert.AreEqual(0, ArgumentParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(0, CommandlineParser.GetArgumentsFromString(commandLine).Count);
         }
 
         [TestMethod]
@@ -230,8 +230,8 @@ namespace XmlSnRTest
         {
             string commandLine = "/W";
 
-            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual("W", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(1, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("W", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
         }
 
 
@@ -241,9 +241,9 @@ namespace XmlSnRTest
         {
             string commandLine = "/W /Q";
 
-            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual("W", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual("Q", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(2, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("W", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("Q", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
         }
 
         [TestMethod]
@@ -251,9 +251,9 @@ namespace XmlSnRTest
         {
             string commandLine = "/W/Q";
 
-            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual("W", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual("Q", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(2, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("W", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("Q", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
         }
 
         [TestMethod]
@@ -261,8 +261,8 @@ namespace XmlSnRTest
         {
             string commandLine = "/S=helloworld";
 
-            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual("S=helloworld", ArgumentParser.GetArgumentsFromString(commandLine)[0]);            
+            Assert.AreEqual(1, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("S=helloworld", CommandlineParser.GetArgumentsFromString(commandLine)[0]);            
         }
 
         [TestMethod]
@@ -270,9 +270,9 @@ namespace XmlSnRTest
         {
             string commandLine = "/S=helloworld /R=howareyou";
 
-            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual("S=helloworld", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual("R=howareyou", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(2, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("S=helloworld", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("R=howareyou", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
         }
 
         [TestMethod]
@@ -280,9 +280,9 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=hello/world";
 
-            Assert.AreEqual(2, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual("S=hello", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual("world", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(2, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual("S=hello", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual("world", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
         }
 
         [TestMethod]
@@ -290,8 +290,8 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello/world""";
 
-            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello/world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(1, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello/world""", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
         }
 
         [TestMethod]
@@ -299,8 +299,8 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello\""/world""";
 
-            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello""/world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(1, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello""/world""", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
         }
 
         [TestMethod]
@@ -308,8 +308,8 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=hello\world";
 
-            Assert.AreEqual(1, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=hello\world", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(1, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=hello\world", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
         }
 
         [TestMethod]
@@ -317,10 +317,10 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj""";
 
-            Assert.AreEqual(3, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
-            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(3, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello world""", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"R=How are u doing", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", CommandlineParser.GetArgumentsFromString(commandLine)[2]);
         }        
 
         [TestMethod]
@@ -328,16 +328,16 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello ""world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj"" /W /C /""I"" /O=""en,ev,an,av"" /L";
 
-            Assert.AreEqual(9, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello """, ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual(@"world""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
-            Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
-            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
-            Assert.AreEqual(@"W", ArgumentParser.GetArgumentsFromString(commandLine)[4]);
-            Assert.AreEqual(@"C", ArgumentParser.GetArgumentsFromString(commandLine)[5]);
-            Assert.AreEqual(@"""I""", ArgumentParser.GetArgumentsFromString(commandLine)[6]);
-            Assert.AreEqual(@"O=""en,ev,an,av""", ArgumentParser.GetArgumentsFromString(commandLine)[7]);
-            Assert.AreEqual(@"L", ArgumentParser.GetArgumentsFromString(commandLine)[8]);
+            Assert.AreEqual(9, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello """, CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"world""", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"R=How are u doing", CommandlineParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", CommandlineParser.GetArgumentsFromString(commandLine)[3]);
+            Assert.AreEqual(@"W", CommandlineParser.GetArgumentsFromString(commandLine)[4]);
+            Assert.AreEqual(@"C", CommandlineParser.GetArgumentsFromString(commandLine)[5]);
+            Assert.AreEqual(@"""I""", CommandlineParser.GetArgumentsFromString(commandLine)[6]);
+            Assert.AreEqual(@"O=""en,ev,an,av""", CommandlineParser.GetArgumentsFromString(commandLine)[7]);
+            Assert.AreEqual(@"L", CommandlineParser.GetArgumentsFromString(commandLine)[8]);
         }
 
         [TestMethod]
@@ -345,11 +345,11 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello ""world"" /R=How are u doing /F=""c:\dellshare.com\*.csproj""";
 
-            Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello """, ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual(@"world""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
-            Assert.AreEqual(@"R=How are u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
-            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+            Assert.AreEqual(4, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello """, CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"world""", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"R=How are u doing", CommandlineParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", CommandlineParser.GetArgumentsFromString(commandLine)[3]);
         }
 
         [TestMethod]
@@ -357,11 +357,11 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello \""world"" /R=How are /u doing /F=""c:\dellshare.com\*.csproj""";
 
-            Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);            
-            Assert.AreEqual(@"R=How are", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
-            Assert.AreEqual(@"u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
-            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+            Assert.AreEqual(4, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello ""world""", CommandlineParser.GetArgumentsFromString(commandLine)[0]);            
+            Assert.AreEqual(@"R=How are", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"u doing", CommandlineParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj""", CommandlineParser.GetArgumentsFromString(commandLine)[3]);
         }
 
         [TestMethod]
@@ -369,11 +369,11 @@ namespace XmlSnRTest
         {
             string commandLine = @"/S=""hello \""world"" /R=How are /u doing /F=""c:\dellshare.com\*.csproj";
 
-            Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual(@"R=How are", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
-            Assert.AreEqual(@"u doing", ArgumentParser.GetArgumentsFromString(commandLine)[2]);
-            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj", ArgumentParser.GetArgumentsFromString(commandLine)[3]);
+            Assert.AreEqual(4, CommandlineParser.GetArgumentsFromString(commandLine).Count);
+            Assert.AreEqual(@"S=""hello ""world""", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"R=How are", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"u doing", CommandlineParser.GetArgumentsFromString(commandLine)[2]);
+            Assert.AreEqual(@"F=""c:\dellshare.com\*.csproj", CommandlineParser.GetArgumentsFromString(commandLine)[3]);
         }
 
         [TestMethod]
@@ -382,9 +382,9 @@ namespace XmlSnRTest
             string commandLine = @"/S=""hello \""world"" /R=""How are u doing /F=""c:\dellshare.com\*.csproj";
 
             //Assert.AreEqual(4, ArgumentParser.GetArgumentsFromString(commandLine).Count);
-            Assert.AreEqual(@"S=""hello ""world""", ArgumentParser.GetArgumentsFromString(commandLine)[0]);
-            Assert.AreEqual(@"R=""How are u doing /F=""", ArgumentParser.GetArgumentsFromString(commandLine)[1]);
-            Assert.AreEqual(@"c:\dellshare.com\*.csproj", ArgumentParser.GetArgumentsFromString(commandLine)[2]);            
+            Assert.AreEqual(@"S=""hello ""world""", CommandlineParser.GetArgumentsFromString(commandLine)[0]);
+            Assert.AreEqual(@"R=""How are u doing /F=""", CommandlineParser.GetArgumentsFromString(commandLine)[1]);
+            Assert.AreEqual(@"c:\dellshare.com\*.csproj", CommandlineParser.GetArgumentsFromString(commandLine)[2]);            
         }
 
         [TestMethod]
@@ -394,7 +394,7 @@ namespace XmlSnRTest
 
             try
             {
-                ArgumentParser parser = new ArgumentParser(commandLine);
+                CommandlineParser parser = new CommandlineParser(commandLine);
             }
             catch (RequiredParameterMissingException ex)
             {
@@ -414,7 +414,7 @@ namespace XmlSnRTest
 
             try
             {
-                ArgumentParser parser = new ArgumentParser(commandLine);                
+                CommandlineParser parser = new CommandlineParser(commandLine);                
             }
             catch (RequiredParameterMissingException ex)
             {

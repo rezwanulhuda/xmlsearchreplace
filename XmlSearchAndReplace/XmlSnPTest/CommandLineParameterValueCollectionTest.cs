@@ -32,12 +32,12 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckMissingParamsAreDetected()
         {
-            CommandLineParameterCollection mandatoryParams = new CommandLineParameterCollection();
-            mandatoryParams.Add(new CommandLineParameter("A", String.Empty, String.Empty, true));
-            mandatoryParams.Add(new CommandLineParameter("B", String.Empty, String.Empty, false));
+            ApplicationParameterCollection mandatoryParams = new ApplicationParameterCollection();
+            mandatoryParams.Add(new ApplicationParameter("A", String.Empty, String.Empty, true));
+            mandatoryParams.Add(new ApplicationParameter("B", String.Empty, String.Empty, false));
 
-            CommandLineParameterValueCollection values = new CommandLineParameterValueCollection();
-            values.Add(new CommandLineParameterValue(mandatoryParams[1], String.Empty));
+            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
+            values.Add(new ApplicationParameterWithValue(mandatoryParams[1], String.Empty));
 
             Assert.AreEqual(1, values.GetMissingMandatoryParams(mandatoryParams).Count);
             Assert.AreEqual("A", values.GetMissingMandatoryParams(mandatoryParams)[0].GetName());
@@ -47,13 +47,13 @@ namespace XmlSnRTest
         [TestMethod]
         public void GetReplaceString_WithLParam_WillReturnSearchStringInLowerCase()
         {
-            CommandLineParameterCollection mandatoryParams = new CommandLineParameterCollection();
-            mandatoryParams.Add(new CommandLineParameter("S", String.Empty, String.Empty, true));
+            ApplicationParameterCollection mandatoryParams = new ApplicationParameterCollection();
+            mandatoryParams.Add(new ApplicationParameter("S", String.Empty, String.Empty, true));
 
 
-            CommandLineParameterValueCollection values = new CommandLineParameterValueCollection();
-            values.Add(new CommandLineParameterValue(mandatoryParams[0], "HelloWorld"));
-            values.Add(new CommandLineParameterValue(new CommandLineParameter("L", String.Empty, String.Empty, false), string.Empty));
+            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
+            values.Add(new ApplicationParameterWithValue(mandatoryParams[0], "HelloWorld"));
+            values.Add(new ApplicationParameterWithValue(new ApplicationParameter("L", String.Empty, String.Empty, false), string.Empty));
 
 
 

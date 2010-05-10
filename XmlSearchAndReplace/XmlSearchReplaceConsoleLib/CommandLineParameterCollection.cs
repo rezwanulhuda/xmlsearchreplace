@@ -5,26 +5,26 @@ using System.Text;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class CommandLineParameterCollection : List<CommandLineParameter>
+    public class ApplicationParameterCollection : List<ApplicationParameter>
     {
 
-        private static CommandLineParameterCollection _SupportedParams;
-        public static CommandLineParameterCollection SupporedParams
+        private static ApplicationParameterCollection _SupportedParams;
+        public static ApplicationParameterCollection SupporedParams
         {
             get
             {
                 if (_SupportedParams == null)
                 {
-                    _SupportedParams = new CommandLineParameterCollection();
-                    _SupportedParams.Add(new CommandLineParameter("S", @"""search""", HelpText.SearchString, true));
-                    _SupportedParams.Add(new CommandLineParameter("R", @"""replace""", HelpText.ReplaceString, false));
-                    _SupportedParams.Add(new CommandLineParameter("O", @"en,ev,an,av", HelpText.Option, true));
-                    _SupportedParams.Add(new CommandLineParameter("F", @"""C:\Files\*.xml""", HelpText.FileName, true));
-                    _SupportedParams.Add(new CommandLineParameter("C", String.Empty, HelpText.ContinueOnError, false));
-                    _SupportedParams.Add(new CommandLineParameter("I", String.Empty, HelpText.IgnoreCase, false));
-                    _SupportedParams.Add(new CommandLineParameter("W", String.Empty, HelpText.WholeWordOnly, false));
-                    _SupportedParams.Add(new CommandLineParameter("D", String.Empty, HelpText.RecurseSubDir, false));
-                    _SupportedParams.Add(new CommandLineParameter("L", String.Empty, HelpText.ReplaceSearchStringByLowerCase, false));
+                    _SupportedParams = new ApplicationParameterCollection();
+                    _SupportedParams.Add(new ApplicationParameter("S", @"""search""", HelpText.SearchString, true));
+                    _SupportedParams.Add(new ApplicationParameter("R", @"""replace""", HelpText.ReplaceString, false));
+                    _SupportedParams.Add(new ApplicationParameter("O", @"en,ev,an,av", HelpText.Option, true));
+                    _SupportedParams.Add(new ApplicationParameter("F", @"""C:\Files\*.xml""", HelpText.FileName, true));
+                    _SupportedParams.Add(new ApplicationParameter("C", String.Empty, HelpText.ContinueOnError, false));
+                    _SupportedParams.Add(new ApplicationParameter("I", String.Empty, HelpText.IgnoreCase, false));
+                    _SupportedParams.Add(new ApplicationParameter("W", String.Empty, HelpText.WholeWordOnly, false));
+                    _SupportedParams.Add(new ApplicationParameter("D", String.Empty, HelpText.RecurseSubDir, false));
+                    _SupportedParams.Add(new ApplicationParameter("L", String.Empty, HelpText.ReplaceSearchStringByLowerCase, false));
                 }
                 
                 return _SupportedParams;
@@ -35,7 +35,7 @@ namespace XmlSearchReplaceConsoleLib
         {
             string usage = String.Empty;
 
-            foreach (CommandLineParameter param in SupporedParams)
+            foreach (ApplicationParameter param in SupporedParams)
             {
                 string paramName = param.GetName();
                 paramName = GetUsageName(param, paramName);
@@ -47,7 +47,7 @@ namespace XmlSearchReplaceConsoleLib
             return usage.Trim();
         }
 
-        private static string GetUsageName(CommandLineParameter param, string paramName)
+        private static string GetUsageName(ApplicationParameter param, string paramName)
         {
             if (!param.IsMandatory)
                 paramName = "[/" + paramName + "]";
@@ -60,7 +60,7 @@ namespace XmlSearchReplaceConsoleLib
         {
             string helpText = String.Empty;
 
-            foreach (CommandLineParameter param in SupporedParams)
+            foreach (ApplicationParameter param in SupporedParams)
             {                
                 string paramHelp = param.GetHelpText();
                 helpText += String.Format("{0} - {1}{2}{3}", param.GetName(), paramHelp, param.IsMandatory ? String.Empty : " (optional)", Environment.NewLine);
