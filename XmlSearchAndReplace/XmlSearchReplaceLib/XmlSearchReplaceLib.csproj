@@ -53,8 +53,8 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Engine\ReplacerEngine.cs" />
-    <Compile Include="EnumExtensionMethod.cs" />
+    <Compile Include="Engine\AbstractReplacerEngine.cs" />
+    <Compile Include="EnumExtensionMethods.cs" />
     <Compile Include="ReplacerEngineType.cs" />
     <Compile Include="Replacer\AttributeNameReplacer.cs" />
     <Compile Include="Replacer\AttributeValueReplacer.cs" />

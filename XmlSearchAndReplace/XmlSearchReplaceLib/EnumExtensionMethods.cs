@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XmlSearchReplaceLib
 {
-    public static class EnumExtensionMethod
+    public static class EnumExtensionMethods
     {
         public static bool IsSet(this SearchReplaceLocationOptions options, SearchReplaceLocationOptions option)
         {            

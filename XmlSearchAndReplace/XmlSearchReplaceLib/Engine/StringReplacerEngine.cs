@@ -6,7 +6,7 @@ using XmlSearchReplaceLib.Engine;
 
 namespace XmlSearchReplaceLib
 {
-    public class StringReplacerEngine : ReplacerEngine
+    public class StringReplacerEngine : AbstractReplacerEngine
     {
         public StringReplacerEngine(SearchReplaceOperationOptions options)
         {            

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XmlSearchReplaceLib.Engine
 {
-    public abstract class ReplacerEngine : IReplacerEngine
+    public abstract class AbstractReplacerEngine : IReplacerEngine
     {
 
         public static IReplacerEngine CreateEngine(ReplacerEngineType type, SearchReplaceOperationOptions options)
@@ -21,7 +21,7 @@ namespace XmlSearchReplaceLib.Engine
         
         protected ReplacementOptionValidatorList _Validators;
 
-        public ReplacerEngine ()
+        public AbstractReplacerEngine ()
 	    {
             _Validators = new ReplacementOptionValidatorList();
 

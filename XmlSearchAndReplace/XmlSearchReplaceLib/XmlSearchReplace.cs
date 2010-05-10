@@ -31,7 +31,7 @@ namespace XmlSearchReplaceLib
 
         private void PrepareReplacerEngine()
         {
-            _Engine = ReplacerEngine.CreateEngine(ReplacerEngineType.StringEngine, _OperationOptions);
+            _Engine = AbstractReplacerEngine.CreateEngine(ReplacerEngineType.StringEngine, _OperationOptions);
         }
 
         private void SetupReplacerFilters()
