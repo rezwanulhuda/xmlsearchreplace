@@ -60,5 +60,10 @@ namespace XmlSnRTest
             Assert.AreEqual("HelloWorld", values.GetSearchString()[0]);
             Assert.AreEqual("helloworld", values.GetReplaceString()[0]);
         }
+
+        [TestMethod, Ignore]
+        public void GetSearchString_WithPParam_ReturnListOfSearchStringsFromFileSpecified()
+        {            
+        }
     }
 }
