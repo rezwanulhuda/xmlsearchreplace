@@ -38,16 +38,16 @@ namespace XmlSearchReplaceConsoleLib
             foreach (ApplicationParameter param in SupporedParams)
             {
                 string paramName = param.GetName();
-                paramName = GetUsageName(param, paramName);
+                paramName = GetDisplayName(param, paramName);
 
-                string paramUsage = param.GetUsage();
-                usage += String.Format("{0}{1} ", paramName, String.IsNullOrEmpty(paramUsage) ? String.Empty : "=" + paramUsage);
+                string sampleValue = param.GetSampleValue();
+                usage += String.Format("{0}{1} ", paramName, String.IsNullOrEmpty(sampleValue) ? String.Empty : "=" + sampleValue);
             }
 
             return usage.Trim();
         }
 
-        private static string GetUsageName(ApplicationParameter param, string paramName)
+        private static string GetDisplayName(ApplicationParameter param, string paramName)
         {
             if (!param.IsMandatory)
                 paramName = "[/" + paramName + "]";

@@ -8,22 +8,22 @@ namespace XmlSearchReplaceConsoleLib
     public class ApplicationParameter
     {        
         string _Name;
-        string _Usage;
+        string _SampleValue;
         string _HelpText;
         bool _IsMandatory;
 
-        public ApplicationParameter(string name, string usage, string helpText, bool isMandatory)
+        public ApplicationParameter(string name, string sampleValue, string helpText, bool isMandatory)
         {        
             this._Name = name;
-            this._Usage = usage;
+            this._SampleValue = sampleValue;
             this._HelpText = helpText;
             this._IsMandatory = isMandatory;
         }     
         public string GetName() { return _Name; }
 
-        public string GetUsage()
+        public string GetSampleValue()
         {
-            return _Usage;
+            return _SampleValue;
         }
 
         public string GetHelpText()
