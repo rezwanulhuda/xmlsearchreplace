@@ -43,6 +43,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -50,11 +51,13 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="ArgumentParserTest.cs" />
-    <Compile Include="CommandLineParameterCollectionTest.cs" />
-    <Compile Include="CommandLineParameterValueCollectionTest.cs" />
+    <Compile Include="ApplicationParameterCollectionTest.cs" />
+    <Compile Include="ApplicationParameterWithValueCollectionTest.cs" />
+    <Compile Include="FileParamReaderTest.cs" />
     <Compile Include="SearchReplaceConsoleMainTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TestHelper.cs" />
     <Compile Include="UtilityTest.cs" />
     <Compile Include="XmlSearchReplaceTest.cs" />
   </ItemGroup>

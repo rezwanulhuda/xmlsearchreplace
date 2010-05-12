@@ -387,45 +387,45 @@ namespace XmlSnRTest
             Assert.AreEqual(@"c:\dellshare.com\*.csproj", CommandlineParser.GetArgumentsFromString(commandLine)[2]);            
         }
 
-        [TestMethod]
-        public void GetArgumentsFromString_CheckMandatoryParameters()
-        {
-            string commandLine = @"/S=""hello \""world"" /R=""How are u doing""";
+        //[TestMethod]
+        //public void GetArgumentsFromString_CheckMandatoryParameters()
+        //{
+        //    string commandLine = @"/S=""hello \""world"" /R=""How are u doing""";
 
-            try
-            {
-                CommandlineParser parser = new CommandlineParser(commandLine);
-            }
-            catch (RequiredParameterMissingException ex)
-            {
-                Assert.AreEqual(2, ex.GetMissginParameters().Count);
-                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
-                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));
-                return;
-            }
+        //    try
+        //    {
+        //        CommandlineParser parser = new CommandlineParser(commandLine);
+        //    }
+        //    catch (RequiredParameterMissingException ex)
+        //    {
+        //        Assert.AreEqual(2, ex.GetMissginParameters().Count);
+        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
+        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));
+        //        return;
+        //    }
 
-            Assert.Fail();
-        }
+        //    Assert.Fail();
+        //}
         
-        [TestMethod]
-        public void GetArgumentsFromString_WithoutRButContainingL_ShouldNotListRAsAMandatoryParam()
-        {
-            string commandLine = @"/S=""hello \""world"" /L";
+        //[TestMethod]
+        //public void GetArgumentsFromString_WithoutRButContainingL_ShouldNotListRAsAMandatoryParam()
+        //{
+        //    string commandLine = @"/S=""hello \""world"" /L";
 
-            try
-            {
-                CommandlineParser parser = new CommandlineParser(commandLine);                
-            }
-            catch (RequiredParameterMissingException ex)
-            {
-                Assert.AreEqual(2, ex.GetMissginParameters().Count);
-                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
-                Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));                                
-                return;
-            }
+        //    try
+        //    {
+        //        CommandlineParser parser = new CommandlineParser(commandLine);                
+        //    }
+        //    catch (RequiredParameterMissingException ex)
+        //    {
+        //        Assert.AreEqual(2, ex.GetMissginParameters().Count);
+        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
+        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));                                
+        //        return;
+        //    }
 
-            Assert.Fail();
-        }
+        //    Assert.Fail();
+        //}
 
 
         

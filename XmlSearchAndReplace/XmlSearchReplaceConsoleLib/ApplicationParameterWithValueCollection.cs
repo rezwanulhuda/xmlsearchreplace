@@ -3,28 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using XmlSearchReplaceLib;
+using System.IO;
 
 namespace XmlSearchReplaceConsoleLib
 {
     public class ApplicationParameterWithValueCollection : List<ApplicationParameterWithValue>, ISearchReplaceParameter
-    {
-        public ApplicationParameterCollection GetMissingMandatoryParams(ApplicationParameterCollection mandatoryParams)
-        {
-            ApplicationParameterCollection missingRequiredParams = new ApplicationParameterCollection();
-            foreach (ApplicationParameter param in mandatoryParams)
-            {
-                if (param.IsMandatory && this.Find(p => String.Compare(p.GetName(), param.GetName(), true) == 0) == null)
-                {
-                    missingRequiredParams.Add(param);
-                }
-            }
-
-            return missingRequiredParams;
-        }        
-
+    {                        
         private string GetStringValue(string paramName)
         {
-            return this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; }).GetValue();
+            ApplicationParameterWithValue found = this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
+            return found != null ? found.GetValue() : String.Empty;
         }
 
         private bool GetBoolValue(string paramName)
@@ -88,15 +76,64 @@ namespace XmlSearchReplaceConsoleLib
 
         public List<string> GetSearchString()
         {
-            return new List<string>() { this.GetStringValue("S") };
+            LoadValuesFromParamFileIfPresent();
+            string paramFile = GetStringValue("P");
+
+            if (!String.IsNullOrEmpty(paramFile))
+            {
+                FileParamReader reader = new FileParamReader(paramFile);
+                return reader.GetAllSearchStrings();
+            }
+        
+
+            return new List<string>() { GetStringValue("S") };
+        }
+
+        FileParamReader _Reader = null;
+
+        private void LoadValuesFromParamFileIfPresent()
+        {
+            if (!HasParamFile()) return;
+            if (_Reader != null) return;
+            
+            _Reader = new FileParamReader(GetStringValue("P"));
+        }
+
+        private bool HasParamFile()
+        {
+            return !String.IsNullOrEmpty(GetStringValue("P"));
         }
 
         public List<string> GetReplaceString()
         {
-            if (this.GetBoolValue("L"))
-                return new List<string>() { this.GetSearchString()[0].ToLower()};
+            LoadValuesFromParamFileIfPresent();
+            List<string> replaceStrings = null;
+
+            if (HasParamFile())
+            {
+                if (GetBoolValue("L"))
+                {
+                    replaceStrings = ToLowerArray(_Reader.GetAllSearchStrings());
+                }
+                else
+                {
+                    replaceStrings = _Reader.GetAllReplaceStrings();
+                }
+            }            
             else
-                return new List<string>() { this.GetStringValue("R")};
+            {
+                if (this.GetBoolValue("L"))
+                {
+                    replaceStrings = ToLowerArray(new List<string>() { this.GetStringValue("S")});
+                }
+                else
+                {
+                    replaceStrings = new List<string>() { this.GetStringValue("R") };
+                }
+            }
+
+
+            return replaceStrings;
         }
 
         public bool ContinueOnError
@@ -116,5 +153,18 @@ namespace XmlSearchReplaceConsoleLib
             }
         }
 
+        private List<string> ToLowerArray(List<string> values)
+        {
+            List<string> lowered = new List<string>();
+            foreach (string value in values)
+            {
+                lowered.Add(value.ToLower());
+                
+            }
+            return lowered;
+            
+        }
+
     }
+    
 }

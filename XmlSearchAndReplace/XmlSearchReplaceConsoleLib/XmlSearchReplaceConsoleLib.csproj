@@ -52,11 +52,13 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationParameterValidator.cs" />
     <Compile Include="CommandlineParser.cs" />
     <Compile Include="ApplicationParameter.cs" />
     <Compile Include="ApplicationParameterCollection.cs" />
     <Compile Include="ApplicationParameterWithValue.cs" />
     <Compile Include="ApplicationParameterWithValueCollection.cs" />
+    <Compile Include="FileParamReader.cs" />
     <Compile Include="HelpText.cs" />
     <Compile Include="InvalidArgumentOptionException.cs" />
     <Compile Include="RequiredParameterMissingException.cs" />
