@@ -12,40 +12,9 @@ namespace XmlSnRTest
     /// Summary description for CommandLineParameterValueCollectionTest
     /// </summary>
     [TestClass]
-    public class ApplicationParameterWithValueCollectionTest
+    public class CommandLineParameterWithValueCollectionTest
     {        
-
-        private TestContext testContextInstance;
-
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
         
-
-        [TestMethod]
-        public void CheckMissingParamsAreDetected()
-        {
-            CommandLineParameterCollection mandatoryParams = new CommandLineParameterCollection();
-            mandatoryParams.Add(new CommandLineParameter("A", String.Empty, String.Empty, true));
-            mandatoryParams.Add(new CommandLineParameter("B", String.Empty, String.Empty, false));
-
-            CommandLineParameterWithValueCollection values = new CommandLineParameterWithValueCollection();
-            values.Add(new CommandLineParameterWithValue(mandatoryParams[1], String.Empty));
-
-
-
-            Assert.AreEqual(1, ApplicationParameterValidator.GetMissingMandatoryParams(mandatoryParams, values).Count);
-            Assert.AreEqual("A", ApplicationParameterValidator.GetMissingMandatoryParams(mandatoryParams, values)[0].GetName());
-
-        }
 
         [TestMethod]
         public void GetReplaceString_WithLParam_WillReturnSearchStringInLowerCase()

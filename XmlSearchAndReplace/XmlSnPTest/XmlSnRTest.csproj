@@ -50,9 +50,10 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ArgumentParserTest.cs" />
-    <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterCollectionTest.cs" />
-    <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterWithValueCollectionTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\CommandLineParameterCollectionTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\CommandLineParameterWithValueCollectionTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\FileParamReaderTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\SearchReplaceConsoleMainTest.cs">
       <SubType>Code</SubType>

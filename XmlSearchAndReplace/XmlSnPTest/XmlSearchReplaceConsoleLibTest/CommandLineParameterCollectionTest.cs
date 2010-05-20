@@ -11,9 +11,9 @@ namespace XmlSnRTest
     /// Summary description for CommandLineParameterCollectionTest
     /// </summary>
     [TestClass]
-    public class ApplicationParameterCollectionTest
+    public class CommandLineParameterCollectionTest
     {
-        public ApplicationParameterCollectionTest()
+        public CommandLineParameterCollectionTest()
         {            
         }
 
