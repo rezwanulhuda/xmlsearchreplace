@@ -16,31 +16,6 @@ namespace XmlSnRTest
     [TestClass]
     public class SearchReplaceConsoleMainTest
     {
-        public SearchReplaceConsoleMainTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }       
-
         string _TmpFolder;
         string _SrcFile;
 
@@ -225,6 +200,62 @@ namespace XmlSnRTest
             TestAndAssertExpectationsAreMet(xmlExpected, commandLine);
 
         }
+
+        [TestMethod]
+        public void ProcessAll_EnAv_CaseInSensitive_ParamsFile()
+        {
+            string xmlExpected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Library>
+  <LibraryBooks>
+    <Book id=""1"" category=""BookCategory1"">
+      <Title>Title 1</Title>
+      <Author>Author 1</Author>
+    </Book>
+    <Book id=""2"" category=""BookCategory2"">
+      <Title Title=""Title"">Title 2 - book</Title>
+      <Author>Author 2 - Book</Author>
+    </Book>
+  </LibraryBooks>
+</Library>";            
+
+            string paramFile = TestHelper.CreateParameterFile(new String[] { "/S=Books /R=LibraryBooks", "/S=Category /R=BookCategory" });
+
+            string commandLine = String.Format(@"/F={0} /O=en,av /I /P={1}", _SrcFile, paramFile);
+
+            TestAndAssertExpectationsAreMet(xmlExpected, commandLine);
+
+            TestHelper.DeleteLastParameterFile();
+
+        }
+
+
+        [TestMethod]
+        public void ProcessAll_EnAvL_CaseInSensitive_ParamsFile()
+        {
+            string xmlExpected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Library>
+  <books>
+    <Book id=""1"" category=""category1"">
+      <Title>Title 1</Title>
+      <Author>Author 1</Author>
+    </Book>
+    <Book id=""2"" category=""category2"">
+      <Title Title=""Title"">Title 2 - book</Title>
+      <Author>Author 2 - Book</Author>
+    </Book>
+  </books>
+</Library>";
+
+            string paramFile = TestHelper.CreateParameterFile(new String[] { "/S=Books", "/S=Category" });
+
+            string commandLine = String.Format(@"/F={0} /O=en,av /I /P={1} /L", _SrcFile, paramFile);
+
+            TestAndAssertExpectationsAreMet(xmlExpected, commandLine);
+
+            TestHelper.DeleteLastParameterFile();
+
+        }
+
 
         
     }
