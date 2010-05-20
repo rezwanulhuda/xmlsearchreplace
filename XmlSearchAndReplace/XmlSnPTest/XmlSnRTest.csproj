@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -50,16 +50,16 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="ArgumentParserTest.cs" />
-    <Compile Include="ApplicationParameterCollectionTest.cs" />
-    <Compile Include="ApplicationParameterWithValueCollectionTest.cs" />
-    <Compile Include="FileParamReaderTest.cs" />
-    <Compile Include="SearchReplaceConsoleMainTest.cs">
+    <Compile Include="XmlSearchReplaceConsoleLibTest\ArgumentParserTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterCollectionTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterWithValueCollectionTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\FileParamReaderTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\SearchReplaceConsoleMainTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TestHelper.cs" />
-    <Compile Include="UtilityTest.cs" />
-    <Compile Include="XmlSearchReplaceTest.cs" />
+    <Compile Include="TestLibrary\TestHelper.cs" />
+    <Compile Include="XmlSearchReplaceLibTest\UtilityTest.cs" />
+    <Compile Include="XmlSearchReplaceLibTest\XmlSearchReplaceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
