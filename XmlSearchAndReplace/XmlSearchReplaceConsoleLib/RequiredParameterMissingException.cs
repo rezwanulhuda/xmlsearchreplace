@@ -7,8 +7,8 @@ namespace XmlSearchReplaceConsoleLib
 {
     public class RequiredParameterMissingException : Exception
     {
-        ApplicationParameterCollection _MissingParams;
-        public RequiredParameterMissingException(string message, ApplicationParameterCollection missingParameters)
+        CommandLineParameterCollection _MissingParams;
+        public RequiredParameterMissingException(string message, CommandLineParameterCollection missingParameters)
             : base(message)
         {
             _MissingParams = missingParameters;
@@ -20,14 +20,14 @@ namespace XmlSearchReplaceConsoleLib
 
             sb.AppendLine(this.Message);
             sb.AppendLine("The following parameters are missing:");
-            foreach (ApplicationParameter param in _MissingParams)
+            foreach (CommandLineParameter param in _MissingParams)
             {
                 sb.AppendLine(param.GetName());
             }
             return sb.ToString();
         }
 
-        public ApplicationParameterCollection GetMissginParameters()
+        public CommandLineParameterCollection GetMissginParameters()
         {
             return _MissingParams;
         }

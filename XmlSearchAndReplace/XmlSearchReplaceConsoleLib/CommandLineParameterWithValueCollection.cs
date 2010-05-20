@@ -7,11 +7,11 @@ using System.IO;
 
 namespace XmlSearchReplaceConsoleLib
 {
-    public class ApplicationParameterWithValueCollection : List<ApplicationParameterWithValue>, ISearchReplaceParameter
+    public class CommandLineParameterWithValueCollection : List<CommandLineParameterWithValue>, ISearchReplaceParameter
     {                        
         private string GetStringValue(string paramName)
         {
-            ApplicationParameterWithValue found = this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
+            CommandLineParameterWithValue found = this.Find(delegate(CommandLineParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
 
             if (found != null) return found.GetValue();
 
@@ -21,7 +21,7 @@ namespace XmlSearchReplaceConsoleLib
 
         private bool GetBoolValue(string paramName)
         {
-            ApplicationParameterWithValue value = this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
+            CommandLineParameterWithValue value = this.Find(delegate(CommandLineParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
             if (value == null)
                 return false;
             return true;

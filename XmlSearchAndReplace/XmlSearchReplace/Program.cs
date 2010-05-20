@@ -23,7 +23,7 @@ namespace XmlSearchReplaceConsole
                 
                 CommandlineParser parser = new CommandlineParser(args);
 
-                ApplicationParameterCollection missingParams = ApplicationParameterValidator.GetMissingMandatoryParams(ApplicationParameterCollection.SupporedParams, parser.GetParamsAndValues());
+                CommandLineParameterCollection missingParams = ApplicationParameterValidator.GetMissingMandatoryParams(CommandLineParameterCollection.SupporedParams, parser.GetParamsAndValues());
                 if (missingParams.Count > 0)
                 {
                     throw new RequiredParameterMissingException("Required parameter missing", missingParams);

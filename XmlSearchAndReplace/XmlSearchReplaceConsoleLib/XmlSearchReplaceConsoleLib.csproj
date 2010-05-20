@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C52D1F27-37A7-41A7-86B8-2A991EB6A373}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -54,10 +54,10 @@
     </Compile>
     <Compile Include="ApplicationParameterValidator.cs" />
     <Compile Include="CommandlineParser.cs" />
-    <Compile Include="ApplicationParameter.cs" />
-    <Compile Include="ApplicationParameterCollection.cs" />
-    <Compile Include="ApplicationParameterWithValue.cs" />
-    <Compile Include="ApplicationParameterWithValueCollection.cs" />
+    <Compile Include="CommandLineParameter.cs" />
+    <Compile Include="CommandLineParameterCollection.cs" />
+    <Compile Include="CommandLineParameterWithValue.cs" />
+    <Compile Include="CommandLineParameterWithValueCollection.cs" />
     <Compile Include="FileParamReader.cs" />
     <Compile Include="HelpText.cs" />
     <Compile Include="InvalidArgumentOptionException.cs" />

@@ -9,10 +9,10 @@ namespace XmlSearchReplaceConsoleLib
     {
         
         
-        public static ApplicationParameterCollection GetMissingMandatoryParams(ApplicationParameterCollection mandatoryParams, ApplicationParameterWithValueCollection currentAppParams)
+        public static CommandLineParameterCollection GetMissingMandatoryParams(CommandLineParameterCollection mandatoryParams, CommandLineParameterWithValueCollection currentAppParams)
         {
-            ApplicationParameterCollection missingRequiredParams = new ApplicationParameterCollection();
-            foreach (ApplicationParameter param in mandatoryParams)
+            CommandLineParameterCollection missingRequiredParams = new CommandLineParameterCollection();
+            foreach (CommandLineParameter param in mandatoryParams)
             {
                 if (param.IsMandatory && currentAppParams.Find(p => String.Compare(p.GetName(), param.GetName(), true) == 0) == null)
                 {

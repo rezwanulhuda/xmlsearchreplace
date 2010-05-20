@@ -10,7 +10,7 @@ namespace XmlSearchReplaceConsoleLib
 {
     public class CommandlineParser
     {
-        ApplicationParameterWithValueCollection _Params;
+        CommandLineParameterWithValueCollection _Params;
         const string _ArgsKeyValueSeparatorCharacter = "=";
 
         public CommandlineParser(string[] commandLineArgs)
@@ -20,7 +20,7 @@ namespace XmlSearchReplaceConsoleLib
 
         public CommandlineParser(string commandLine)
         {
-            _Params = new ApplicationParameterWithValueCollection();
+            _Params = new CommandLineParameterWithValueCollection();
             CreateKeys(GetAppArgsFromCommandLine(commandLine));                        
         }
 
@@ -41,13 +41,13 @@ namespace XmlSearchReplaceConsoleLib
                 string arg = GetArgumentFromWholeParam(param);
                 string val = GetValueFromWholeParam(param);
 
-                ApplicationParameter commandLineParam = ApplicationParameterCollection.SupporedParams.Find(p => String.Compare(p.GetName(), arg, true) == 0);
+                CommandLineParameter commandLineParam = CommandLineParameterCollection.SupporedParams.Find(p => String.Compare(p.GetName(), arg, true) == 0);
 
 
                 if (commandLineParam == null)
                     throw new ArgumentException(String.Format("Parameter '{0}' (/{1}) is not supported", arg, param));
 
-                _Params.Add(new ApplicationParameterWithValue(commandLineParam, val));
+                _Params.Add(new CommandLineParameterWithValue(commandLineParam, val));
             }
         }
 
@@ -164,7 +164,7 @@ namespace XmlSearchReplaceConsoleLib
             return input[0] == '"' && input[input.Length - 1] == '"';
         }      
   
-        public ApplicationParameterWithValueCollection GetParamsAndValues()
+        public CommandLineParameterWithValueCollection GetParamsAndValues()
         {
             return this._Params;
         }

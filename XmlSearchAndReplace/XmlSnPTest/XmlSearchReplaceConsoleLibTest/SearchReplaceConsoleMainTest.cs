@@ -149,8 +149,8 @@ namespace XmlSnRTest
         public void GetUsageTest()
         {
 
-            string expectedUsage = "tt.exe " + ApplicationParameterCollection.GetUsage() + Environment.NewLine;
-            expectedUsage += ApplicationParameterCollection.GetHelpText();
+            string expectedUsage = "tt.exe " + CommandLineParameterCollection.GetUsage() + Environment.NewLine;
+            expectedUsage += CommandLineParameterCollection.GetHelpText();
 
             Assert.AreEqual(expectedUsage, SearchReplaceFileReplacer.GetUsage("tt.exe"));
         }

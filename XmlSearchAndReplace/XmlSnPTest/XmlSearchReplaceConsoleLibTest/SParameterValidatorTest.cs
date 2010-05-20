@@ -13,7 +13,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenPMissing_ShouldNotValidate()
         {
-            ApplicationParameterWithValueCollection coll = TestHelper.GetParameters("") as ApplicationParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("") as CommandLineParameterWithValueCollection;
 
             Assert.IsFalse(SParamValidator.Validate(coll));
         }
@@ -21,7 +21,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenPNotMissing_ShouldValidate()
         {
-            ApplicationParameterWithValueCollection coll = TestHelper.GetParameters("/P=abc") as ApplicationParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("/P=abc") as CommandLineParameterWithValueCollection;
 
             Assert.IsTrue(SParamValidator.Validate(coll));
         }
@@ -29,7 +29,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
 
     public class SParamValidator
     {
-        public static bool Validate(ApplicationParameterWithValueCollection parameters)
+        public static bool Validate(CommandLineParameterWithValueCollection parameters)
         {
             return parameters.Where(p => String.Compare(p.GetName(), "P", true) == 0).Count() > 0;
 
@@ -42,7 +42,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenPandRMissing_ValidateReturnsFalse()
         {
-            ApplicationParameterWithValueCollection coll = TestHelper.GetParameters("") as ApplicationParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("") as CommandLineParameterWithValueCollection;
 
             Assert.IsFalse(RParamValidator.Validate(coll));
         }
@@ -58,7 +58,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenRMissingAndLNotMissing_ValidateReturnsTrue()
         {
-            ApplicationParameterWithValueCollection coll = TestHelper.GetParameters("/L=abc") as ApplicationParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("/L=abc") as CommandLineParameterWithValueCollection;
 
             Assert.IsTrue(RParamValidator.Validate(coll));
         }
@@ -67,7 +67,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileDoesNotContain_R_ValidateReturnsFalse()
         {
             string paramFile = TestHelper.CreateParameterFile(new String[] { "", ""});
-            ApplicationParameterWithValueCollection coll = TestHelper.GetParameters(String.Format("/P={0}", paramFile)) as ApplicationParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters(String.Format("/P={0}", paramFile)) as CommandLineParameterWithValueCollection;
             Assert.IsFalse(RParamValidator.Validate(coll));
             TestHelper.DeleteLastParameterFile();
         }
@@ -76,7 +76,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileContains_R_ValidateReturnsFalse()
         {
             string paramFile = TestHelper.CreateParameterFile(new String[] { "/R=abc", "" });
-            ApplicationParameterWithValueCollection coll = TestHelper.GetParameters(String.Format("/P={0}", paramFile)) as ApplicationParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters(String.Format("/P={0}", paramFile)) as CommandLineParameterWithValueCollection;
             Assert.IsTrue(RParamValidator.Validate(coll));
             TestHelper.DeleteLastParameterFile();
         }
@@ -84,9 +84,9 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
 
     public class RParamValidator
     {
-        public static bool Validate(ApplicationParameterWithValueCollection parameters)
+        public static bool Validate(CommandLineParameterWithValueCollection parameters)
         {
-            List<ApplicationParameterWithValue> values = parameters.FindAll(p => String.Compare(p.GetName(), "P", true) == 0);
+            List<CommandLineParameterWithValue> values = parameters.FindAll(p => String.Compare(p.GetName(), "P", true) == 0);
 
             if (values.Count > 0)
             {

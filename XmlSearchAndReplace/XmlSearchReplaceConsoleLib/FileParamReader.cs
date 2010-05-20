@@ -37,7 +37,7 @@ namespace XmlSearchReplaceConsoleLib
             foreach (string line in lines)
             {
                 CommandlineParser parser = new CommandlineParser(line);
-                ApplicationParameterWithValueCollection values = parser.GetParamsAndValues();
+                CommandLineParameterWithValueCollection values = parser.GetParamsAndValues();
 
                 try
                 {

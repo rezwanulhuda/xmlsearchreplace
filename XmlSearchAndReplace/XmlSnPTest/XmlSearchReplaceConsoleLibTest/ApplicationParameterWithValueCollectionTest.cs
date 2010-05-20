@@ -33,12 +33,12 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckMissingParamsAreDetected()
         {
-            ApplicationParameterCollection mandatoryParams = new ApplicationParameterCollection();
-            mandatoryParams.Add(new ApplicationParameter("A", String.Empty, String.Empty, true));
-            mandatoryParams.Add(new ApplicationParameter("B", String.Empty, String.Empty, false));
+            CommandLineParameterCollection mandatoryParams = new CommandLineParameterCollection();
+            mandatoryParams.Add(new CommandLineParameter("A", String.Empty, String.Empty, true));
+            mandatoryParams.Add(new CommandLineParameter("B", String.Empty, String.Empty, false));
 
-            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
-            values.Add(new ApplicationParameterWithValue(mandatoryParams[1], String.Empty));
+            CommandLineParameterWithValueCollection values = new CommandLineParameterWithValueCollection();
+            values.Add(new CommandLineParameterWithValue(mandatoryParams[1], String.Empty));
 
 
 
@@ -50,13 +50,13 @@ namespace XmlSnRTest
         [TestMethod]
         public void GetReplaceString_WithLParam_WillReturnSearchStringInLowerCase()
         {
-            ApplicationParameterCollection mandatoryParams = new ApplicationParameterCollection();
-            mandatoryParams.Add(new ApplicationParameter("S", String.Empty, String.Empty, true));
+            CommandLineParameterCollection mandatoryParams = new CommandLineParameterCollection();
+            mandatoryParams.Add(new CommandLineParameter("S", String.Empty, String.Empty, true));
 
 
-            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
-            values.Add(new ApplicationParameterWithValue(mandatoryParams[0], "HelloWorld"));
-            values.Add(new ApplicationParameterWithValue(new ApplicationParameter("L", String.Empty, String.Empty, false), string.Empty));
+            CommandLineParameterWithValueCollection values = new CommandLineParameterWithValueCollection();
+            values.Add(new CommandLineParameterWithValue(mandatoryParams[0], "HelloWorld"));
+            values.Add(new CommandLineParameterWithValue(new CommandLineParameter("L", String.Empty, String.Empty, false), string.Empty));
 
 
 
@@ -72,8 +72,8 @@ namespace XmlSnRTest
 
             
 
-            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
-            values.Add(new ApplicationParameterWithValue(new ApplicationParameter("P", String.Empty, String.Empty, false), paramFile));
+            CommandLineParameterWithValueCollection values = new CommandLineParameterWithValueCollection();
+            values.Add(new CommandLineParameterWithValue(new CommandLineParameter("P", String.Empty, String.Empty, false), paramFile));
 
             Assert.AreEqual(1, values.GetSearchString().Count);
             Assert.AreEqual("Book", values.GetSearchString()[0]);
@@ -89,8 +89,8 @@ namespace XmlSnRTest
 
 
 
-            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
-            values.Add(new ApplicationParameterWithValue(new ApplicationParameter("P", String.Empty, String.Empty, false), paramFile));
+            CommandLineParameterWithValueCollection values = new CommandLineParameterWithValueCollection();
+            values.Add(new CommandLineParameterWithValue(new CommandLineParameter("P", String.Empty, String.Empty, false), paramFile));
             
             Assert.AreEqual(2, values.GetReplaceString().Count);
             Assert.AreEqual("SmallBook", values.GetReplaceString()[0]);
@@ -107,9 +107,9 @@ namespace XmlSnRTest
 
 
 
-            ApplicationParameterWithValueCollection values = new ApplicationParameterWithValueCollection();
-            values.Add(new ApplicationParameterWithValue(new ApplicationParameter("P", String.Empty, String.Empty, false), paramFile));
-            values.Add(new ApplicationParameterWithValue(new ApplicationParameter("L", String.Empty, String.Empty, false), String.Empty));            
+            CommandLineParameterWithValueCollection values = new CommandLineParameterWithValueCollection();
+            values.Add(new CommandLineParameterWithValue(new CommandLineParameter("P", String.Empty, String.Empty, false), paramFile));
+            values.Add(new CommandLineParameterWithValue(new CommandLineParameter("L", String.Empty, String.Empty, false), String.Empty));            
 
             Assert.AreEqual(2, values.GetReplaceString().Count);
             Assert.AreEqual("book", values.GetReplaceString()[0]);
