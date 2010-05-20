@@ -65,6 +65,7 @@
     <Compile Include="RequiredParameterMissingException.cs" />
     <Compile Include="SearchReplaceConsoleMain.cs" />
     <Compile Include="ISearchReplaceParameter.cs" />
+    <Compile Include="Validator\CheckSupportedParametersValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XmlSearchReplaceLib\XmlSearchReplaceLib.csproj">

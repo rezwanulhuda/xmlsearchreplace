@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ArgumentParserTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\CheckSupportedParametersValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\CommandLineParameterCollectionTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\CommandLineParameterWithValueCollectionTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\FileParamReaderTest.cs" />

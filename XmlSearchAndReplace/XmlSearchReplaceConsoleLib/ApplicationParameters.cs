@@ -64,10 +64,6 @@ namespace XmlSearchReplaceConsoleLib
             return replaceStrings;
         }
 
-
-
-
-
         private List<string> ToLowerArray(List<string> values)
         {
             List<string> lowered = new List<string>();

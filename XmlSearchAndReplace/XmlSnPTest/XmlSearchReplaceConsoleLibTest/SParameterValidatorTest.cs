@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XmlSearchReplaceConsoleLib;
+using System.IO;
 
 namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
 {    
@@ -39,21 +40,19 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
     [TestClass]
     public class RParameterValidatorTest
     {
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            TestHelper.DeleteLastParameterFile();
+        }
+
         [TestMethod]
         public void Validate_WhenPandRMissing_ValidateReturnsFalse()
         {
             CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters("");
 
             Assert.IsFalse(RParamValidator.Validate(coll));
-        }
-
-        //[TestMethod]
-        //public void Validate_When_R_MissingAnd_P_NotMissing_ValidateReturnsTrue()
-        //{
-        //    ApplicationParameterWithValueCollection coll = TestHelper.GetParameters("/P=abc") as ApplicationParameterWithValueCollection;
-
-        //    Assert.IsTrue(RParamValidator.Validate(coll));
-        //}
+        }        
 
         [TestMethod]
         public void Validate_WhenRMissingAndLNotMissing_ValidateReturnsTrue()
@@ -68,17 +67,26 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         {
             string paramFile = TestHelper.CreateParameterFile(new String[] { "", ""});
             CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters(String.Format("/P={0}", paramFile));
-            Assert.IsFalse(RParamValidator.Validate(coll));
-            TestHelper.DeleteLastParameterFile();
+            Assert.IsFalse(RParamValidator.Validate(coll));            
         }
 
-        [TestMethod]
+        [TestMethod]        
         public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileContains_R_ValidateReturnsFalse()
         {
             string paramFile = TestHelper.CreateParameterFile(new String[] { "/R=abc", "" });
             CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters(String.Format("/P={0}", paramFile));
             Assert.IsTrue(RParamValidator.Validate(coll));
-            TestHelper.DeleteLastParameterFile();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidArgumentOptionException), "Only /R & /S parameters are supported in parameter file")]
+        public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileContains_RP_ValidateThrowsException()
+        {
+            string paramFile = Path.GetTempFileName();
+            File.WriteAllText(paramFile, String.Format(@"/R=abc /P={0}", paramFile));                                    
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters(String.Format("/P={0}", paramFile));
+            Assert.IsFalse(RParamValidator.Validate(coll));
+            
         }
     }
 
@@ -99,6 +107,14 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
             return parameters.FindAll(p => String.Compare(p.GetName(), "L", true) == 0).Count() > 0;
         }
     }
+
+
+    
+
+    
+
+
+    
 
     
 }

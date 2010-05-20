@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using XmlSearchReplaceConsoleLib.Validator;
 
 namespace XmlSearchReplaceConsoleLib
 {
@@ -37,7 +38,18 @@ namespace XmlSearchReplaceConsoleLib
             foreach (string line in lines)
             {
                 CommandlineParser parser = new CommandlineParser(line);
+                CheckSupportedParametersValidator validator = new CheckSupportedParametersValidator(new CommandLineParameterCollection() { new CommandLineParameter("S", String.Empty, String.Empty, false)
+                , new CommandLineParameter("R", String.Empty, String.Empty, false)});
+
+                if (!validator.Validate(parser.GetParamsAndValues()))
+                {
+                    throw new InvalidArgumentOptionException("Only /R & /S parameters are supported in parameter file");
+                }
                 ApplicationParameters values = new ApplicationParameters(parser.GetParamsAndValues());
+
+                
+
+                
 
                 try
                 {
