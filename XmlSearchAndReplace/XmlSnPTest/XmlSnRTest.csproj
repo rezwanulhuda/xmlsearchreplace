@@ -58,6 +58,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TestLibrary\TestHelper.cs" />
+    <Compile Include="XmlSearchReplaceLibTest\AbstractReplacerEngineTest.cs" />
     <Compile Include="XmlSearchReplaceLibTest\UtilityTest.cs" />
     <Compile Include="XmlSearchReplaceLibTest\XmlSearchReplaceTest.cs" />
   </ItemGroup>
