@@ -52,6 +52,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationParameters.cs" />
     <Compile Include="ApplicationParameterValidator.cs" />
     <Compile Include="CommandlineParser.cs" />
     <Compile Include="CommandLineParameter.cs" />

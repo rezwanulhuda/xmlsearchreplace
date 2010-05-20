@@ -53,7 +53,7 @@ namespace XmlSnRTest
 
         private void TestAndAssertExpectationsAreMet(string xmlExpected, string commandLine)
         {
-            SearchReplaceFileReplacer srMain = new SearchReplaceFileReplacer(TestHelper.GetParameters(commandLine));
+            SearchReplaceFileReplacer srMain = new SearchReplaceFileReplacer(TestHelper.GetApplicationParameters(commandLine));
             srMain.ProcessAll();
 
             string xmlActual = File.ReadAllText(_SrcFile);
@@ -114,7 +114,7 @@ namespace XmlSnRTest
             string commandLine = String.Format(@"/F={0} /O=en,ev,av,an /S=""Book"" /R=""LibraryBook"" /I /W /C", _SrcFile);
             File.SetAttributes(_SrcFile, FileAttributes.ReadOnly);
 
-            SearchReplaceFileReplacer main = new SearchReplaceFileReplacer(TestHelper.GetParameters(commandLine));
+            SearchReplaceFileReplacer main = new SearchReplaceFileReplacer(TestHelper.GetApplicationParameters(commandLine));
             main.ProcessAll();
             
             Assert.IsTrue(File.Exists(Utility.GetBackupFileName(_SrcFile)));
@@ -131,7 +131,7 @@ namespace XmlSnRTest
 
             File.WriteAllText(_SrcFile, String.Empty);
 
-            SearchReplaceFileReplacer main = new SearchReplaceFileReplacer(TestHelper.GetParameters(commandLine));
+            SearchReplaceFileReplacer main = new SearchReplaceFileReplacer(TestHelper.GetApplicationParameters(commandLine));
             try
             {
                 main.ProcessAll();

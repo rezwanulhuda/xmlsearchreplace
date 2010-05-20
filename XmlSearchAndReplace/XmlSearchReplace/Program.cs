@@ -29,7 +29,7 @@ namespace XmlSearchReplaceConsole
                     throw new RequiredParameterMissingException("Required parameter missing", missingParams);
                 }
                 
-                _Main = new SearchReplaceFileReplacer(parser.GetParamsAndValues());
+                _Main = new SearchReplaceFileReplacer(new ApplicationParameters(parser.GetParamsAndValues()));
                 _Main.ProcessAll();
             }
             catch (InvalidArgumentOptionException ex)

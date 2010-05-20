@@ -25,12 +25,20 @@ namespace XmlSnRTest
 
         public static ISearchReplaceParameter GetParameters(string[] commandLine)
         {
-            return GetParameters(String.Join(" ", commandLine));
+            return GetApplicationParameters(String.Join(" ", commandLine));
         }
-        public static ISearchReplaceParameter GetParameters(string commandLine)
+        public static ISearchReplaceParameter GetApplicationParameters(string commandLine)
+        {            
+
+            return new ApplicationParameters(GetCommandLineParameters(commandLine));
+            //return parser.GetParamsAndValues();
+        }
+
+        public static CommandLineParameterWithValueCollection GetCommandLineParameters(string commandLine)
         {
             CommandlineParser parser = new CommandlineParser(commandLine);
-            return parser.GetParamsAndValues();
+
+            return parser.GetParamsAndValues();            
         }
     }
 }

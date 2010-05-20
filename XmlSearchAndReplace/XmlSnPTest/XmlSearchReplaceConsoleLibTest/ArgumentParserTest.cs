@@ -77,7 +77,7 @@ namespace XmlSnRTest
         {
             string argument = "/S= hello world /R= how are you /F=  c:\\documents and settings\\blah blah.html  /O=av";
 
-            ISearchReplaceParameter argParser = TestHelper.GetParameters(argument);
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
 
             Assert.AreEqual("hello world", argParser.GetSearchString()[0]);
             Assert.AreEqual("how are you", argParser.GetReplaceString()[0]);
@@ -89,7 +89,7 @@ namespace XmlSnRTest
         {
             string argument = @"/S=""hello world"" /R=""how are you"" /F=""c:\documents and settings\blah blah.html"" /O=av";
 
-            ISearchReplaceParameter argParser = TestHelper.GetParameters(argument);
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
 
             Assert.AreEqual("hello world", argParser.GetSearchString()[0]);
             Assert.AreEqual("how are you", argParser.GetReplaceString()[0]);
@@ -101,7 +101,7 @@ namespace XmlSnRTest
         {
             string argument = @"/S=  ""hello world""   /R=   ""how are you""   /F=   ""c:\documents and settings\blah blah.html""   /O=av";
 
-            ISearchReplaceParameter argParser = TestHelper.GetParameters(argument);
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
 
             Assert.AreEqual("hello world", argParser.GetSearchString()[0]);
             Assert.AreEqual("how are you", argParser.GetReplaceString()[0]);
@@ -113,7 +113,7 @@ namespace XmlSnRTest
         {
             string argument = @"/S=  "" hello world ""   /R=   "" how are you ""   /F=   "" c:\documents and settings\blah blah.html ""   /O=av";
 
-            ISearchReplaceParameter argParser = TestHelper.GetParameters(argument);
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
 
             Assert.AreEqual(" hello world ", argParser.GetSearchString()[0]);
             Assert.AreEqual(" how are you ", argParser.GetReplaceString()[0]);
@@ -143,7 +143,7 @@ namespace XmlSnRTest
         {
             string argument = @"/O=av/F=something/S=""hello\""world\""how are you""/R=""hello world "" how are you?""""";
 
-            ISearchReplaceParameter argParser = TestHelper.GetParameters(argument);
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
 
             Assert.AreEqual(@"hello""world""how are you", argParser.GetSearchString()[0]);
             Assert.AreEqual(@"hello world "" how are you?""", argParser.GetReplaceString()[0]);
@@ -154,7 +154,7 @@ namespace XmlSnRTest
         {
             string argument = @"/O=av/F=something/S=""hello=world how are you""/R=""hello world = "" how are you? """"";
 
-            ISearchReplaceParameter argParser = TestHelper.GetParameters(argument);
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
 
             Assert.AreEqual(@"hello=world how are you", argParser.GetSearchString()[0]);
             Assert.AreEqual(@"hello world = "" how are you? """, argParser.GetReplaceString()[0]);

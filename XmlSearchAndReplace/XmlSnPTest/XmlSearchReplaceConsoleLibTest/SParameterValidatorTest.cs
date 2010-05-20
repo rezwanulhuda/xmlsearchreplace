@@ -13,7 +13,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenPMissing_ShouldNotValidate()
         {
-            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("") as CommandLineParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters("");
 
             Assert.IsFalse(SParamValidator.Validate(coll));
         }
@@ -21,7 +21,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenPNotMissing_ShouldValidate()
         {
-            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("/P=abc") as CommandLineParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters("/P=abc");
 
             Assert.IsTrue(SParamValidator.Validate(coll));
         }
@@ -42,7 +42,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenPandRMissing_ValidateReturnsFalse()
         {
-            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("") as CommandLineParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters("");
 
             Assert.IsFalse(RParamValidator.Validate(coll));
         }
@@ -58,7 +58,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenRMissingAndLNotMissing_ValidateReturnsTrue()
         {
-            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters("/L=abc") as CommandLineParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters("/L=abc");
 
             Assert.IsTrue(RParamValidator.Validate(coll));
         }
@@ -67,7 +67,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileDoesNotContain_R_ValidateReturnsFalse()
         {
             string paramFile = TestHelper.CreateParameterFile(new String[] { "", ""});
-            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters(String.Format("/P={0}", paramFile)) as CommandLineParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters(String.Format("/P={0}", paramFile));
             Assert.IsFalse(RParamValidator.Validate(coll));
             TestHelper.DeleteLastParameterFile();
         }
@@ -76,7 +76,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileContains_R_ValidateReturnsFalse()
         {
             string paramFile = TestHelper.CreateParameterFile(new String[] { "/R=abc", "" });
-            CommandLineParameterWithValueCollection coll = TestHelper.GetParameters(String.Format("/P={0}", paramFile)) as CommandLineParameterWithValueCollection;
+            CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters(String.Format("/P={0}", paramFile));
             Assert.IsTrue(RParamValidator.Validate(coll));
             TestHelper.DeleteLastParameterFile();
         }
