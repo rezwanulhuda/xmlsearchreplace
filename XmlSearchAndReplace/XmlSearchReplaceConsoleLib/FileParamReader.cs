@@ -39,8 +39,21 @@ namespace XmlSearchReplaceConsoleLib
                 CommandlineParser parser = new CommandlineParser(line);
                 ApplicationParameterWithValueCollection values = parser.GetParamsAndValues();
 
-                _SearchStrings.Add(values.GetSearchString()[0]);
-                _ReplaceStrings.Add(values.GetReplaceString()[0]);
+                try
+                {
+                    _SearchStrings.Add(values.GetSearchString()[0]);
+                }
+                catch (ArgumentException)
+                {
+                }
+
+                try
+                {
+                    _ReplaceStrings.Add(values.GetReplaceString()[0]);
+                }
+                catch (ArgumentException)
+                {
+                }
             }
         }
 

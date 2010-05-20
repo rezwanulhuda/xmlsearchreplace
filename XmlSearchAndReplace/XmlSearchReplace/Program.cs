@@ -55,5 +55,5 @@ namespace XmlSearchReplaceConsole
         {
             Console.WriteLine(SearchReplaceFileReplacer.GetUsage(Assembly.GetEntryAssembly().GetName().Name + ".exe"));            
         }
-    }
+    }    
 }

@@ -12,7 +12,11 @@ namespace XmlSearchReplaceConsoleLib
         private string GetStringValue(string paramName)
         {
             ApplicationParameterWithValue found = this.Find(delegate(ApplicationParameterWithValue k) { return String.Compare(k.GetName(), paramName, true) == 0; });
-            return found != null ? found.GetValue() : String.Empty;
+
+            if (found != null) return found.GetValue();
+
+            throw new ArgumentException("Parameter {0} could not be found", paramName);
+            //return found != null ? found.GetValue() : String.Empty;
         }
 
         private bool GetBoolValue(string paramName)
@@ -67,8 +71,6 @@ namespace XmlSearchReplaceConsoleLib
             return opOptions;
         }
 
-
-
         public string GetFileName()
         {
             return this.GetStringValue("F");
@@ -77,7 +79,7 @@ namespace XmlSearchReplaceConsoleLib
         public List<string> GetSearchString()
         {
             LoadValuesFromParamFileIfPresent();
-            string paramFile = GetStringValue("P");
+            string paramFile = GetParamFileName();
 
             if (!String.IsNullOrEmpty(paramFile))
             {
@@ -87,6 +89,12 @@ namespace XmlSearchReplaceConsoleLib
         
 
             return new List<string>() { GetStringValue("S") };
+        }
+
+        private string GetParamFileName()
+        {
+            if (HasParamFile()) return GetStringValue("P");
+            return String.Empty;
         }
 
         FileParamReader _Reader = null;
@@ -99,9 +107,23 @@ namespace XmlSearchReplaceConsoleLib
             _Reader = new FileParamReader(GetStringValue("P"));
         }
 
+        bool? _HasParamFile;
+
         private bool HasParamFile()
         {
-            return !String.IsNullOrEmpty(GetStringValue("P"));
+            //return !String.IsNullOrEmpty(GetStringValue("P"));
+            if (_HasParamFile.HasValue) return _HasParamFile.Value;
+            try
+            {
+                GetStringValue("P");
+                _HasParamFile = true;
+            }
+            catch (ArgumentException)
+            {
+                _HasParamFile = false;
+            }
+
+            return _HasParamFile.Value;
         }
 
         public List<string> GetReplaceString()
