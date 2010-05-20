@@ -16,7 +16,7 @@ namespace XmlSearchReplaceConsoleLib
                 if (_SupportedParams == null)
                 {
                     _SupportedParams = new ApplicationParameterCollection();
-                    _SupportedParams.Add(new ApplicationParameter("S", @"""search""", HelpText.SearchString, true));
+                    _SupportedParams.Add(new ApplicationParameter("S", @"""search""", HelpText.SearchString, false));
                     _SupportedParams.Add(new ApplicationParameter("R", @"""replace""", HelpText.ReplaceString, false));
                     _SupportedParams.Add(new ApplicationParameter("O", @"en,ev,an,av", HelpText.Option, true));
                     _SupportedParams.Add(new ApplicationParameter("F", @"""C:\Files\*.xml""", HelpText.FileName, true));
@@ -25,6 +25,7 @@ namespace XmlSearchReplaceConsoleLib
                     _SupportedParams.Add(new ApplicationParameter("W", String.Empty, HelpText.WholeWordOnly, false));
                     _SupportedParams.Add(new ApplicationParameter("D", String.Empty, HelpText.RecurseSubDir, false));
                     _SupportedParams.Add(new ApplicationParameter("L", String.Empty, HelpText.ReplaceSearchStringByLowerCase, false));
+                    _SupportedParams.Add(new ApplicationParameter("P", @"""C:\Files\params.txt""", HelpText.ParameterFile, false));
                 }
                 
                 return _SupportedParams;

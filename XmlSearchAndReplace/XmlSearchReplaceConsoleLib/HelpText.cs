@@ -17,7 +17,6 @@ namespace XmlSearchReplaceConsoleLib
         public const string RecurseSubDir = "Recurse sub directories.";
         public const string MoreInfo = "For more information - please visit the project page at CodePlex (http://xmlsearchreplace.codeplex.com/documentation)";
         public const string ReplaceSearchStringByLowerCase = "Replace the search string by a lower case version of the search string.";
-
-
+        public const string ParameterFile = "Specify file name containing multiple search and replace strings. Each line in file should contain a search and replace string. All other parameters in file are ignored except /S and /R. Syntax is same as command line.";
     }
 }
