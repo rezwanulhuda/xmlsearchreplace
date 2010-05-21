@@ -5,11 +5,11 @@ using System.Text;
 
 namespace XmlSearchReplaceConsoleLib.Validator
 {
-    public class SupportedParametersValidator : IApplicationParameterValidator
+    public class EnsureSupportedParametersOnlyValidator : IApplicationParameterValidator
     {
         CommandLineParameterCollection _SupportedParameters;
         string _Message;
-        public SupportedParametersValidator(CommandLineParameterCollection supportedParameters, string message)
+        public EnsureSupportedParametersOnlyValidator(CommandLineParameterCollection supportedParameters, string message)
         {
             this._SupportedParameters = supportedParameters;
             _Message = message;

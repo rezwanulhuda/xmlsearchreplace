@@ -9,7 +9,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
     {               
         public FileParameterReaderValidator()
         {
-            this.Add(new SupportedParametersValidator(
+            this.Add(new EnsureSupportedParametersOnlyValidator(
                     new CommandLineParameterCollection() { 
                         new CommandLineParameter("S")
                         , new CommandLineParameter("R")}
