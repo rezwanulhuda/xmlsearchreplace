@@ -2,6 +2,7 @@
 using System.Reflection;
 using XmlSearchReplaceConsoleLib;
 using XmlSearchReplaceLib;
+using XmlSearchReplaceConsoleLib.Validator;
 
 namespace XmlSearchReplaceConsole
 {
@@ -23,11 +24,14 @@ namespace XmlSearchReplaceConsole
 
                 CommandlineParser parser = new CommandlineParser(args);
 
-                CommandLineParameterCollection missingParams = ApplicationParameterValidator.GetMissingMandatoryParams(CommandLineParameterCollection.SupporedParams, parser.GetParamsAndValues());
-                if (missingParams.Count > 0)
-                {
-                    throw new RequiredParameterMissingException("Required parameter missing", missingParams);
-                }
+                DefaultParameterValidator validator = new DefaultParameterValidator();
+                validator.CheckParameters(parser.GetParamsAndValues());
+
+                //CommandLineParameterCollection missingParams = ApplicationParameterValidator.GetMissingMandatoryParams(CommandLineParameterCollection.SupporedParams, parser.GetParamsAndValues());
+                //if (missingParams.Count > 0)
+                //{
+                //    throw new RequiredParameterMissingException("Required parameter missing", missingParams);
+                //}
                 
                 _Main = new SearchReplaceFileReplacer(new ApplicationParameters(parser.GetParamsAndValues()));
                 _Main.ProcessAll();

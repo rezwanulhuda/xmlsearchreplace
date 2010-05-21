@@ -17,7 +17,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
                 FileParamReader reader = new FileParamReader(paramFile);
                 return (reader.GetAllSearchStrings().Count == File.ReadAllLines(paramFile).Length);
             }
-            return false;
+            return true;
         }
 
         public string GetValidationMessage()
