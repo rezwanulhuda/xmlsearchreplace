@@ -9,7 +9,7 @@ using XmlSearchReplaceConsoleLib.Validator;
 namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
 {   
     [TestClass]
-    public class CheckSupportedParametersValidatorTest
+    public class SupportedParametersValidatorTest
     {
         [TestMethod]
         public void Validate_WhenApplicationParameterContainsUnsupportedParameters_ReturnsFalse()

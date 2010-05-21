@@ -10,7 +10,8 @@ namespace XmlSearchReplaceConsoleLib.Validator
     public class DefaultParameterValidator : AbstractParameterValidator
     {
         public DefaultParameterValidator()
-        {            
+        {
+            this.Add(new EnsureEqualSearchReplaceStringValidator());
         }        
     }
 

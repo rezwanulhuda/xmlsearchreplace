@@ -15,7 +15,7 @@ namespace XmlSearchReplaceConsoleLib
 
             if (found != null) return found.GetValue();
 
-            throw new ArgumentException("Parameter {0} could not be found", paramName);
+            throw new ArgumentException(String.Format("Parameter {0} could not be found", paramName));
             //return found != null ? found.GetValue() : String.Empty;
         }
 
