@@ -40,7 +40,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
         [TestMethod]
         public void Validate_WhenApplicationParameterContainsMoreUnsupportedParameters_ReturnsTrue()
         {
-            SetupAndAssert(false, "/S /R", "S", "P");
+            SetupAndAssert(false, "/S /R", "P", "S");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
     /// Summary description for EnsureSearchParameterWithParamFileTest
     /// </summary>
     [TestClass]
-    public class EnsureSearchParameterWithParamFileTest
+    public class EnsureSearchParameterWithParamFileValidatorTest
     {
 
         [TestCleanup]
@@ -24,7 +24,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         {
             string paramFile = TestHelper.CreateParameterFile(paramFileContent);
             string commandLine = String.Format("/P={0}", paramFile);
-            EnsureSearchParameterWithParamFile validator = new EnsureSearchParameterWithParamFile();
+            EnsureSearchParameterWithParamFileValidator validator = new EnsureSearchParameterWithParamFileValidator();
             Assert.AreEqual(expectedResult, validator.IsValid(TestHelper.GetCommandLineParameters(commandLine)));            
         }
         
@@ -43,7 +43,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         [TestMethod]
         public void IsValid_Missing_P_ReturnsFalse()
         {
-            EnsureSearchParameterWithParamFile validator = new EnsureSearchParameterWithParamFile();
+            EnsureSearchParameterWithParamFileValidator validator = new EnsureSearchParameterWithParamFileValidator();
             Assert.AreEqual(false, validator.IsValid(TestHelper.GetCommandLineParameters(String.Empty)));
         }
     }

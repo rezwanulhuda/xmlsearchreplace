@@ -6,7 +6,7 @@ using System.IO;
 
 namespace XmlSearchReplaceConsoleLib.Validator
 {
-    public class EnsureSearchParameterWithParamFile : IApplicationParameterValidator
+    public class EnsureSearchParameterWithParamFileValidator : IApplicationParameterValidator
     {
         
         public bool IsValid(CommandLineParameterWithValueCollection parameters)

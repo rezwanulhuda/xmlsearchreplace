@@ -66,9 +66,10 @@
     <Compile Include="SearchReplaceConsoleMain.cs" />
     <Compile Include="ISearchReplaceParameter.cs" />
     <Compile Include="Validator\AbstractParameterValidator.cs" />
+    <Compile Include="Validator\EnsureAllMandatoryParametersArePresentValidator.cs" />
     <Compile Include="Validator\EnsureEqualSearchReplaceStringValidator.cs" />
     <Compile Include="Validator\EnsureSearchParameterValidator.cs" />
-    <Compile Include="Validator\EnsureSearchParameterWithParamFile.cs" />
+    <Compile Include="Validator\EnsureSearchParameterWithParamFileValidator.cs" />
     <Compile Include="Validator\FileParameterReaderValidator.cs" />
     <Compile Include="Validator\EnsureSupportedParametersOnlyValidator.cs" />
     <Compile Include="Validator\DefaultParameterValidator.cs" />

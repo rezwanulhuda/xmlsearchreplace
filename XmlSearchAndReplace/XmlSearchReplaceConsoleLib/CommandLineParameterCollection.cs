@@ -9,6 +9,23 @@ namespace XmlSearchReplaceConsoleLib
     {
 
         private static CommandLineParameterCollection _SupportedParams;
+
+        public CommandLineParameterCollection()
+            : this(null)
+        {
+
+        }
+
+        public CommandLineParameterCollection(List<CommandLineParameter> defaultLoad)
+        {
+            if (defaultLoad != null)
+            {
+                foreach (CommandLineParameter p in defaultLoad)
+                {
+                    this.Add(p);
+                }
+            }
+        }
         public static CommandLineParameterCollection SupporedParams
         {
             get
