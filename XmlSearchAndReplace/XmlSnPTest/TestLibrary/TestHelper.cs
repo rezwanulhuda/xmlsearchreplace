@@ -34,11 +34,16 @@ namespace XmlSnRTest
             //return parser.GetParamsAndValues();
         }
 
-        public static CommandLineParameterWithValueCollection GetCommandLineParameters(string commandLine)
+        public static CommandLineParameterWithValueCollection GetCommandLineParameters(string commandLine, CommandLineParameterCollection supportedParams)
         {
             CommandlineParser parser = new CommandlineParser(commandLine);
 
-            return parser.GetParamsAndValues();            
+            return parser.GetParamsAndValues();
+        }
+
+        public static CommandLineParameterWithValueCollection GetCommandLineParameters(string commandLine)
+        {
+            return GetCommandLineParameters(commandLine, CommandLineParameterCollection.SupporedParams);
         }
     }
 }

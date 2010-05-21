@@ -41,24 +41,24 @@ namespace XmlSnRTest
 
         
 
-        [TestMethod]        
-        public void CheckArguments_InvalidValueWithOptionEmpty()
-        {
-            string[] args = { "/=", "av,ev,en,an" };
+        //[TestMethod]        
+        //public void CheckArguments_InvalidValueWithOptionEmpty()
+        //{
+        //    string[] args = { "/=", "av,ev,en,an" };
 
 
-            try
-            {
-                CommandlineParser argParser = new CommandlineParser(args);
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("Parameter '' (/= av,ev,en,an) is not supported", ex.Message);
-                return;
-            }
+        //    try
+        //    {
+        //        CommandlineParser argParser = new CommandlineParser(args);
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        Assert.AreEqual("Parameter '' (/= av,ev,en,an) is not supported", ex.Message);
+        //        return;
+        //    }
 
-            Assert.Fail();
-        }
+        //    Assert.Fail();
+        //}
 
         [TestMethod]
         public void CheckArgumentsAreFineWithActualValue()
@@ -120,22 +120,22 @@ namespace XmlSnRTest
             Assert.AreEqual(" c:\\documents and settings\\blah blah.html ", argParser.GetFileName());
         }
 
-        [TestMethod]
-        public void CheckUnsupportedParametersAreReported()
-        {
-            string argument = @"/Q";
+        //[TestMethod]
+        //public void CheckUnsupportedParametersAreReported()
+        //{
+        //    string argument = @"/Q";
 
-            try
-            {
-                CommandlineParser argParser = new CommandlineParser(argument);
-            }
-            catch(ArgumentException ex)
-            {
-                Assert.AreEqual("Parameter 'Q' (/Q) is not supported", ex.Message);
-                return;
-            }
-            Assert.Fail();
-        }
+        //    try
+        //    {
+        //        CommandlineParser argParser = new CommandlineParser(argument);
+        //    }
+        //    catch(ArgumentException ex)
+        //    {
+        //        Assert.AreEqual("Parameter 'Q' (/Q) is not supported", ex.Message);
+        //        return;
+        //    }
+        //    Assert.Fail();
+        //}
 
 
         [TestMethod]

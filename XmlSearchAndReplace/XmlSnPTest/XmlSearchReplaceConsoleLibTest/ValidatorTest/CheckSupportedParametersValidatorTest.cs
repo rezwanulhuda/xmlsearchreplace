@@ -19,8 +19,8 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
             CommandLineParameterCollection supportedParams = new CommandLineParameterCollection();
             supportedParams.Add(new CommandLineParameter("P", String.Empty, String.Empty, false));
 
-            CheckSupportedParametersValidator validator = new CheckSupportedParametersValidator(supportedParams);
-            Assert.IsFalse(validator.Validate(paramsWithValues));
+            SupportedParametersValidator validator = new SupportedParametersValidator(supportedParams, String.Empty);
+            Assert.IsFalse(validator.IsValid(paramsWithValues));
 
 
         }
@@ -33,8 +33,8 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
             CommandLineParameterCollection supportedParams = new CommandLineParameterCollection();
             supportedParams.Add(new CommandLineParameter("S", String.Empty, String.Empty, false));
 
-            CheckSupportedParametersValidator validator = new CheckSupportedParametersValidator(supportedParams);
-            Assert.IsTrue(validator.Validate(paramsWithValues));
+            SupportedParametersValidator validator = new SupportedParametersValidator(supportedParams, String.Empty);
+            Assert.IsTrue(validator.IsValid(paramsWithValues));
 
 
         }

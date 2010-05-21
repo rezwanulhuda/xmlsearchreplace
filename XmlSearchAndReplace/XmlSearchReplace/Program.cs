@@ -20,7 +20,7 @@ namespace XmlSearchReplaceConsole
 
             try
             {
-                
+
                 CommandlineParser parser = new CommandlineParser(args);
 
                 CommandLineParameterCollection missingParams = ApplicationParameterValidator.GetMissingMandatoryParams(CommandLineParameterCollection.SupporedParams, parser.GetParamsAndValues());

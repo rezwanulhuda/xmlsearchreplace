@@ -12,6 +12,11 @@ namespace XmlSearchReplaceConsoleLib
         string _HelpText;
         bool _IsMandatory;
 
+        public CommandLineParameter(string name)
+            : this(name, String.Empty, String.Empty, false)
+        {
+
+        }
         public CommandLineParameter(string name, string sampleValue, string helpText, bool isMandatory)
         {        
             this._Name = name;

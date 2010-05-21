@@ -78,15 +78,28 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
             Assert.IsTrue(RParamValidator.Validate(coll));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidArgumentOptionException), "Only /R & /S parameters are supported in parameter file")]
+        [TestMethod]        
         public void Validate_When_RL_MissingAnd_P_NotMissingAndParamFileContains_RP_ValidateThrowsException()
         {
             string paramFile = Path.GetTempFileName();
-            File.WriteAllText(paramFile, String.Format(@"/R=abc /P={0}", paramFile));                                    
+            File.WriteAllText(paramFile, String.Format(@"/R=abc /P={0}", paramFile));
             CommandLineParameterWithValueCollection coll = TestHelper.GetCommandLineParameters(String.Format("/P={0}", paramFile));
-            Assert.IsFalse(RParamValidator.Validate(coll));
-            
+            try
+            {
+                Assert.IsFalse(RParamValidator.Validate(coll));
+            }
+            catch (InvalidArgumentOptionException e)
+            {
+                string eMsg = @"Parameter file only supports the following parameters:
+S
+R
+";
+                Assert.AreEqual(eMsg, e.Message);
+                return;
+            }
+
+            Assert.Fail("Did not raise proper InvalidArgumentOptionException");
+
         }
     }
 
