@@ -22,7 +22,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
 
         public string GetValidationMessage()
         {
-            throw new NotImplementedException();
+            return "Search string missing in param file";
         }
     }
 }
