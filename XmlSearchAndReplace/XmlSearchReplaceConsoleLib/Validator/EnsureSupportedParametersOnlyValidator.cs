@@ -23,13 +23,13 @@ namespace XmlSearchReplaceConsoleLib.Validator
         public string GetValidationMessage()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(_Message);
+            sb.Append(_Message);
             foreach (CommandLineParameter param in _SupportedParameters)
             {
-                sb.AppendLine(param.GetName());
+                sb.Append(" /" + param.GetName() + ",");
             }
 
-            return sb.ToString();
+            return sb.ToString().TrimEnd(new char[]{','});
             
         }        
     }

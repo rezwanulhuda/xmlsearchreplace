@@ -11,10 +11,13 @@ namespace XmlSearchReplaceConsoleLib.Validator
     {
         public DefaultParameterValidator()
         {
+            this.Add(new EnsureSupportedParametersOnlyValidator(CommandLineParameterCollection.SupporedParams
+                , "Application only supports the following parameters:"));
             this.Add(new EnsureAllMandatoryParametersArePresentValidator(
-                new CommandLineParameterCollection(CommandLineParameterCollection.SupporedParams.FindAll(p => p.IsMandatory)))                
+                new CommandLineParameterCollection(
+                    CommandLineParameterCollection.SupporedParams.FindAll(p => p.IsMandatory)))
                 );
-            this.Add(new EnsureSearchParameterWithoutParamFile());
+            this.Add(new EnsureSearchParameterWithoutParamFileValidator());
             this.Add(new EnsureSearchParameterWithParamFileValidator());
             this.Add(new EnsureEqualSearchReplaceStringValidator());
         }        

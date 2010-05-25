@@ -33,13 +33,19 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         [TestMethod]
         public void IsValid_WithAllMandatoryParamsPresent_ReturnsTrue()
         {
-            SetupAndAssert(true, "/P /Q /R", "P", "Q", "R");
+            SetupAndAssert(true, "/P=abc /Q=bbc /R=ddd", "P", "Q", "R");
         }
 
         [TestMethod]
         public void IsValid_WithSomeMandatoryParamsPresent_ReturnsFalse()
         {
             SetupAndAssert(false, "/P /Q", "P", "Q", "R");
+        }
+
+        [TestMethod]
+        public void IsValid_MandatoryParamsPresentButEmptyValue_ReturnsFalse()
+        {
+            SetupAndAssert(false, "/P", "P");
         }
     }
 }

@@ -63,12 +63,12 @@
     <Compile Include="HelpText.cs" />
     <Compile Include="InvalidArgumentOptionException.cs" />
     <Compile Include="RequiredParameterMissingException.cs" />
-    <Compile Include="SearchReplaceConsoleMain.cs" />
+    <Compile Include="SearchReplaceFileReplacer.cs" />
     <Compile Include="ISearchReplaceParameter.cs" />
     <Compile Include="Validator\AbstractParameterValidator.cs" />
     <Compile Include="Validator\EnsureAllMandatoryParametersArePresentValidator.cs" />
     <Compile Include="Validator\EnsureEqualSearchReplaceStringValidator.cs" />
-    <Compile Include="Validator\EnsureSearchParameterValidator.cs" />
+    <Compile Include="Validator\EnsureSearchParameterWithoutParamFileValidator.cs" />
     <Compile Include="Validator\EnsureSearchParameterWithParamFileValidator.cs" />
     <Compile Include="Validator\FileParameterReaderValidator.cs" />
     <Compile Include="Validator\EnsureSupportedParametersOnlyValidator.cs" />

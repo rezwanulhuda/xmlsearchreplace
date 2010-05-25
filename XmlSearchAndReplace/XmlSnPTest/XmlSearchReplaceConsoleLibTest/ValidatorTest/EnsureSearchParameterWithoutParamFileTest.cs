@@ -16,7 +16,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
 
         private void SetupAndAssert(bool expectedResult, string commandLine)
         {
-            EnsureSearchParameterWithoutParamFile validator = new EnsureSearchParameterWithoutParamFile();
+            EnsureSearchParameterWithoutParamFileValidator validator = new EnsureSearchParameterWithoutParamFileValidator();
             Assert.AreEqual(expectedResult, validator.IsValid(TestHelper.GetCommandLineParameters(commandLine)));
         }
 

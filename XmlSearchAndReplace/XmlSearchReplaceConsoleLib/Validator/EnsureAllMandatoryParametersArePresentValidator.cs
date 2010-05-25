@@ -15,12 +15,25 @@ namespace XmlSearchReplaceConsoleLib.Validator
         }
         public bool IsValid(CommandLineParameterWithValueCollection parameters)
         {
-            return _MandatoryParameters.FindAll(p => !parameters.Exists(q => String.Compare(q.GetName(), p.GetName(), true) == 0)).Count == 0;
+            foreach (CommandLineParameter mandatoryParam in _MandatoryParameters)
+            {
+                CommandLineParameterWithValue suppliedParam = parameters.Find(q => String.Compare(q.GetName(), mandatoryParam.GetName(), true) == 0);
+                if (suppliedParam == null) return false;
+                if (String.IsNullOrEmpty(suppliedParam.GetValue())) return false;
+            }
+            return true;
         }
 
         public string GetValidationMessage()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            
+            sb.Append("Following parameters are either missing or does not contain value:");
+            foreach (CommandLineParameter p in _MandatoryParameters)
+            {
+                sb.Append(" /" + p.GetName() + ",");
+            }            
+            return sb.ToString().TrimEnd(new char[] {','});
         }
     }
 }

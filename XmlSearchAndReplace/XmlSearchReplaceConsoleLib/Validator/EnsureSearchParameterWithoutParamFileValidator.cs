@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XmlSearchReplaceConsoleLib.Validator
 {
-    public class EnsureSearchParameterWithoutParamFile : IApplicationParameterValidator
+    public class EnsureSearchParameterWithoutParamFileValidator : IApplicationParameterValidator
     {
         public bool IsValid(CommandLineParameterWithValueCollection parameters)
         {

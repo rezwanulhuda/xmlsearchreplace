@@ -5,6 +5,7 @@
     <Regular>
       <CodeCoverageItem binaryFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.dll" pdbFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.pdb" instrumentInPlace="true" />
       <CodeCoverageItem binaryFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.dll" pdbFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.pdb" instrumentInPlace="true" />
+      <CodeCoverageItem binaryFile="XmlSearchReplace\bin\Debug\XmlSearchReplace.exe" pdbFile="XmlSearchReplace\bin\Debug\XmlSearchReplace.pdb" instrumentInPlace="true" />
     </Regular>
   </CodeCoverage>
   <TestTypeSpecific />

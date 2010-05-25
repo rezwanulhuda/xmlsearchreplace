@@ -41,10 +41,10 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         }
 
         [TestMethod]
-        public void IsValid_Missing_P_ReturnsFalse()
+        public void IsValid_Missing_P_ReturnsTrue()
         {
             EnsureSearchParameterWithParamFileValidator validator = new EnsureSearchParameterWithParamFileValidator();
-            Assert.AreEqual(false, validator.IsValid(TestHelper.GetCommandLineParameters(String.Empty)));
+            Assert.AreEqual(true, validator.IsValid(TestHelper.GetCommandLineParameters(String.Empty)));
         }
     }
 }

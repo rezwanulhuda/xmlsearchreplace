@@ -41,10 +41,7 @@ namespace XmlSearchReplaceConsoleLib
                 FileParameterReaderValidator validator = new FileParameterReaderValidator();
                 validator.CheckParameters(parser.GetParamsAndValues());
 
-                //if (!validator.(parser.GetParamsAndValues()))
-                //{
-                //    throw new InvalidArgumentOptionException();
-                //}
+                
                 ApplicationParameters values = new ApplicationParameters(parser.GetParamsAndValues());
 
                 try
