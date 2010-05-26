@@ -80,6 +80,22 @@
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
         }
+        "Package"
+        {
+        "DisplayName" = "8:Package"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:Package\\XmlSearchReplaceSetup.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+        }
         "Release"
         {
         "DisplayName" = "8:Release"
@@ -263,7 +279,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:XmlSearchReplace"
         "ProductCode" = "8:{CD59EF69-3503-4E24-8CEA-70953060F674}"
-        "PackageCode" = "8:{F9B62B38-CAC7-4BA4-A019-5183B0B05EEF}"
+        "PackageCode" = "8:{F346A784-E797-4330-87DC-DD970FEED978}"
         "UpgradeCode" = "8:{6315FC23-4120-468A-8900-0B73810B4CF9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -831,7 +847,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_38B63B478D594E2A858D7ED3FCD8171F"
             {
-            "SourcePath" = "8:..\\XmlSearchReplace\\obj\\Release\\XmlSearchReplace.exe"
+            "SourcePath" = "8:..\\XmlSearchReplace\\obj\\Package\\XmlSearchReplace.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"

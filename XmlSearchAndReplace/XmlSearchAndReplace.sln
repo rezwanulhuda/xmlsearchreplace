@@ -45,26 +45,37 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Package|Any CPU = Package|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}.Package|Any CPU.Build.0 = Package|Any CPU
 		{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B22E86C-3027-4A6F-8172-D5F500DFF476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B22E86C-3027-4A6F-8172-D5F500DFF476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B22E86C-3027-4A6F-8172-D5F500DFF476}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{6B22E86C-3027-4A6F-8172-D5F500DFF476}.Package|Any CPU.Build.0 = Package|Any CPU
 		{6B22E86C-3027-4A6F-8172-D5F500DFF476}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B22E86C-3027-4A6F-8172-D5F500DFF476}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75C646E2-F468-4F94-8D58-FC223C78B8DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75C646E2-F468-4F94-8D58-FC223C78B8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C646E2-F468-4F94-8D58-FC223C78B8DA}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{75C646E2-F468-4F94-8D58-FC223C78B8DA}.Package|Any CPU.Build.0 = Package|Any CPU
 		{75C646E2-F468-4F94-8D58-FC223C78B8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75C646E2-F468-4F94-8D58-FC223C78B8DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C52D1F27-37A7-41A7-86B8-2A991EB6A373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C52D1F27-37A7-41A7-86B8-2A991EB6A373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C52D1F27-37A7-41A7-86B8-2A991EB6A373}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{C52D1F27-37A7-41A7-86B8-2A991EB6A373}.Package|Any CPU.Build.0 = Package|Any CPU
 		{C52D1F27-37A7-41A7-86B8-2A991EB6A373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C52D1F27-37A7-41A7-86B8-2A991EB6A373}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B57286BC-8366-4490-AB3A-847EF9265E00}.Debug|Any CPU.ActiveCfg = Debug
+		{B57286BC-8366-4490-AB3A-847EF9265E00}.Package|Any CPU.ActiveCfg = Package
+		{B57286BC-8366-4490-AB3A-847EF9265E00}.Package|Any CPU.Build.0 = Package
 		{B57286BC-8366-4490-AB3A-847EF9265E00}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
