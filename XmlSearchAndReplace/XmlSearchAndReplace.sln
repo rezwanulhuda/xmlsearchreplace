@@ -1,14 +1,14 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSnRTest", "XmlSnPTest\XmlSnRTest.csproj", "{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90C5BFA5-2EAE-473F-A341-1485916CEE43}"
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		VersionInfo.cs = VersionInfo.cs
 		XmlSearchAndReplace.vsmdi = XmlSearchAndReplace.vsmdi
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSnRTest", "XmlSnPTest\XmlSnRTest.csproj", "{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSearchReplaceLib", "XmlSearchReplaceLib\XmlSearchReplaceLib.csproj", "{6B22E86C-3027-4A6F-8172-D5F500DFF476}"
 EndProject
