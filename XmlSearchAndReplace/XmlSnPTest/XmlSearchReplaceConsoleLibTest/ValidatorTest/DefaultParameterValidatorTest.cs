@@ -71,12 +71,24 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
             TestHelper.DeleteLastParameterFile();
         }
 
+        [TestMethod]        
+        public void CheckParameters_Contains_FORS_ButRContainsSpace_ThrowsInvalidArugmentOptionException()
+        {
+            SetupAndAssert("One or more replace string contains invalid element or attribute names. When replace location contains element/attribute name, replace strings must be valid names suitable for element/attribute names", "/F=abc /O=en,an /R=je lo /S=ok");
+        }
+
+        [TestMethod]
+        public void CheckParameters_Contains_FORS_ButODoesNotContain_ENEV_ReturnsOK()
+        {
+            DefaultParameterValidator validator = new DefaultParameterValidator();
+            validator.CheckParameters(TestHelper.GetCommandLineParameters("/F=abc /O=av,ev /R=je lo /S=ok"));
+        }
+
         [TestMethod]
         public void CheckParameters_Contains_SRPF_ValidatesOk()
         {
             DefaultParameterValidator validator = new DefaultParameterValidator();
             validator.CheckParameters(TestHelper.GetCommandLineParameters("/F=abc /O=abc /R=jelo /S=ok"));
-
         }
 
 

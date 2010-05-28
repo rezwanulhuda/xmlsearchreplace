@@ -7,8 +7,7 @@ using XmlSearchReplaceConsoleLib.Validator;
 namespace XmlSearchReplaceConsole
 {
     class Program
-    {
-        private static SearchReplaceFileReplacer _Main;
+    {        
         static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -21,22 +20,12 @@ namespace XmlSearchReplaceConsole
 
             try
             {
-
-                CommandlineParser parser = new CommandlineParser(args);
-
-                DefaultParameterValidator validator = new DefaultParameterValidator();
-                validator.CheckParameters(parser.GetParamsAndValues());                 
-                _Main = new SearchReplaceFileReplacer(new ApplicationParameters(parser.GetParamsAndValues()));
-                _Main.ProcessAll();
+                SearchReplaceConsoleMain main = new SearchReplaceConsoleMain();
+                main.Start(args);
             }
             catch (InvalidArgumentOptionException ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            catch (RequiredParameterMissingException ex)
-            {
-                Console.WriteLine(ex.ToString());
-                ShowUsage();
             }
             catch (BaseException ex)
             {

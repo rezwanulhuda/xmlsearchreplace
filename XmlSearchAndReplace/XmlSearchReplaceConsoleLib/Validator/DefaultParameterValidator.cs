@@ -7,7 +7,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
 {
     
 
-    public class DefaultParameterValidator : AbstractParameterValidator
+    public class DefaultParameterValidator : AbstractParameterValidatorGroup
     {
         public DefaultParameterValidator()
         {
@@ -20,6 +20,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
             this.Add(new EnsureSearchParameterWithoutParamFileValidator());
             this.Add(new EnsureSearchParameterWithParamFileValidator());
             this.Add(new EnsureEqualSearchReplaceStringValidator());
+            this.Add(new EnsureReplaceStringContainsValidStringValidator());
         }        
     }
 

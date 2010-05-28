@@ -100,7 +100,7 @@
     <Compile Include="FileParamReader.cs" />
     <Compile Include="HelpText.cs" />
     <Compile Include="InvalidArgumentOptionException.cs" />
-    <Compile Include="RequiredParameterMissingException.cs" />
+    <Compile Include="SearchReplaceConsoleMain.cs" />
     <Compile Include="SearchReplaceFileReplacer.cs" />
     <Compile Include="ISearchReplaceParameter.cs" />
     <Compile Include="Validator\AbstractParameterValidator.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Validator\EnsureSupportedParametersOnlyValidator.cs" />
     <Compile Include="Validator\DefaultParameterValidator.cs" />
     <Compile Include="Validator\IApplicationParameterValidator.cs" />
+    <Compile Include="Validator\EnsureReplaceStringContainsValidStringValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XmlSearchReplaceLib\XmlSearchReplaceLib.csproj">

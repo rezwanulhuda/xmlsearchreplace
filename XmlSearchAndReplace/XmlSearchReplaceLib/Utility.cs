@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace XmlSearchReplaceLib
 {
@@ -38,6 +39,12 @@ namespace XmlSearchReplaceLib
                     , ex
                     );
             }
+        }
+
+        public static bool IsValidXmlName(string str)
+        {
+            Regex validXmlName = new Regex(@"^(?!(xml|[_\d\W]))[^ \s\W]+$");
+            return validXmlName.IsMatch(str);
         }
     }
 }

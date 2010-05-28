@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XmlSearchReplaceConsoleLib.Validator
 {
-    public class FileParameterReaderValidator : AbstractParameterValidator
+    public class FileParameterReaderValidator : AbstractParameterValidatorGroup
     {               
         public FileParameterReaderValidator()
         {

@@ -90,15 +90,17 @@
     </Compile>
     <Compile Include="XmlSearchReplaceConsoleLibTest\ApplicationParameterValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ArgumentParserTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\SearchReplaceConsoleMainTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\DefaultParameterValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\EnsureAllMandatoryParametersArePresentValidatorTest.cs" />
+    <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\EnsureReplaceStringContainsValidStringValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\EnsureSearchParameterWithoutParamFileTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\EnsureSearchParameterWithParamFileValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\ValidatorTest\EnsureSupportedParametersOnlyValidatorTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\CommandLineParameterCollectionTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\CommandLineParameterWithValueCollectionTest.cs" />
     <Compile Include="XmlSearchReplaceConsoleLibTest\FileParamReaderTest.cs" />
-    <Compile Include="XmlSearchReplaceConsoleLibTest\SearchReplaceConsoleMainTest.cs">
+    <Compile Include="XmlSearchReplaceConsoleLibTest\SearchReplaceFileReplacer.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TestLibrary\TestHelper.cs" />
