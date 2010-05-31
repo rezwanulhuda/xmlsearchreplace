@@ -20,7 +20,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
             this.Add(new EnsureSearchParameterWithoutParamFileValidator());
             this.Add(new EnsureSearchParameterWithParamFileValidator());
             this.Add(new EnsureEqualSearchReplaceStringValidator());
-            this.Add(new EnsureReplaceStringContainsValidStringValidator());
+            //this.Add(new EnsureReplaceStringContainsValidStringValidator());
         }        
     }
 

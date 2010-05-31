@@ -71,7 +71,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
             TestHelper.DeleteLastParameterFile();
         }
 
-        [TestMethod]        
+        [TestMethod, Ignore]        
         public void CheckParameters_Contains_FORS_ButRContainsSpace_ThrowsInvalidArugmentOptionException()
         {
             SetupAndAssert("One or more replace string contains invalid element or attribute names. When replace location contains element/attribute name, replace strings must be valid names suitable for element/attribute names", "/F=abc /O=en,an /R=je lo /S=ok");
