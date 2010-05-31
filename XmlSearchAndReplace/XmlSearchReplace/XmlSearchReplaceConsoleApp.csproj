@@ -105,10 +105,6 @@
       <Project>{6B22E86C-3027-4A6F-8172-D5F500DFF476}</Project>
       <Name>XmlSearchReplaceLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XmlSnPTest\XmlSnRTest.csproj">
-      <Project>{8CC941E8-671B-4DD8-AD6C-A46B3C7B0BA9}</Project>
-      <Name>XmlSnRTest</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
