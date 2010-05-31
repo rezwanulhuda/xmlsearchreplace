@@ -12,7 +12,8 @@ namespace XmlSearchReplaceConsoleLib.Validator
             this.Add(new EnsureSupportedParametersOnlyValidator(
                     new CommandLineParameterCollection() { 
                         new CommandLineParameter("S")
-                        , new CommandLineParameter("R")}
+                        , new CommandLineParameter("R")
+                        , new CommandLineParameter("L") }
                     , "Parameter file only supports the following parameters:"));
         }
     }

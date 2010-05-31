@@ -246,9 +246,9 @@ namespace XmlSnRTest
   </books>
 </Library>";
 
-            string paramFile = TestHelper.CreateParameterFile(new String[] { "/S=Books", "/S=Category" });
+            string paramFile = TestHelper.CreateParameterFile(new String[] { "/S=Books /L", "/S=Category /L" });
 
-            string commandLine = String.Format(@"/F={0} /O=en,av /I /P={1} /L", _SrcFile, paramFile);
+            string commandLine = String.Format(@"/F={0} /O=en,av /I /P={1}", _SrcFile, paramFile);
 
             TestAndAssertExpectationsAreMet(xmlExpected, commandLine);
 

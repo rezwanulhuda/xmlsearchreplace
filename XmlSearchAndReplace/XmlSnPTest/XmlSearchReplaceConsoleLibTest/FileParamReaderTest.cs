@@ -90,5 +90,18 @@ namespace XmlSnRTest
             Assert.AreEqual("world", replaceStrings[1]);
 
         }
+
+        [TestMethod]
+        public void GetAllReplaceStrings_2LineWithLParam_Returns2ReplaceString()
+        {
+            SetUpParameterFile(new string[] { @"/S=HELLO /L", @"/R=world" });
+            List<string> replaceStrings = _Fpr.GetAllReplaceStrings();
+            Assert.AreEqual(2, replaceStrings.Count);
+            Assert.AreEqual("hello", replaceStrings[0]);
+            Assert.AreEqual("world", replaceStrings[1]);
+
+        }
+
+
     }
 }

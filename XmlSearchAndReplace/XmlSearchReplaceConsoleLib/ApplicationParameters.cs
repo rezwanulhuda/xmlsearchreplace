@@ -39,14 +39,15 @@ namespace XmlSearchReplaceConsoleLib
 
             if (HasParamFile())
             {
-                if (_Parameters.GetBoolValue("L"))
-                {
-                    replaceStrings = ToLowerArray(_Reader.GetAllSearchStrings());
-                }
-                else
-                {
-                    replaceStrings = _Reader.GetAllReplaceStrings();
-                }
+                //if (_Parameters.GetBoolValue("L"))
+                //{
+                //    replaceStrings = ToLowerArray(_Reader.GetAllSearchStrings());
+                //}
+                //else
+                //{
+                    
+                //}
+                replaceStrings = _Reader.GetAllReplaceStrings();
             }
             else
             {

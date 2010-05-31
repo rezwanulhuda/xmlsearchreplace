@@ -5,9 +5,6 @@ using System;
 
 namespace XmlSnRTest
 {
-    /// <summary>
-    /// Summary description for ArgumentParserTest
-    /// </summary>
     [TestClass]
     public class ArgumentParserTest
     {        
@@ -38,27 +35,6 @@ namespace XmlSnRTest
             Assert.AreEqual(SearchReplaceOperationOptions.CaseInsensitive | SearchReplaceOperationOptions.WholeWordOnly, parameters.GetOperationOptions());
             Assert.AreEqual(true, parameters.ContinueOnError);
         }
-
-        
-
-        //[TestMethod]        
-        //public void CheckArguments_InvalidValueWithOptionEmpty()
-        //{
-        //    string[] args = { "/=", "av,ev,en,an" };
-
-
-        //    try
-        //    {
-        //        CommandlineParser argParser = new CommandlineParser(args);
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        Assert.AreEqual("Parameter '' (/= av,ev,en,an) is not supported", ex.Message);
-        //        return;
-        //    }
-
-        //    Assert.Fail();
-        //}
 
         [TestMethod]
         public void CheckArgumentsAreFineWithActualValue()
@@ -120,24 +96,6 @@ namespace XmlSnRTest
             Assert.AreEqual(" c:\\documents and settings\\blah blah.html ", argParser.GetFileName());
         }
 
-        //[TestMethod]
-        //public void CheckUnsupportedParametersAreReported()
-        //{
-        //    string argument = @"/Q";
-
-        //    try
-        //    {
-        //        CommandlineParser argParser = new CommandlineParser(argument);
-        //    }
-        //    catch(ArgumentException ex)
-        //    {
-        //        Assert.AreEqual("Parameter 'Q' (/Q) is not supported", ex.Message);
-        //        return;
-        //    }
-        //    Assert.Fail();
-        //}
-
-
         [TestMethod]
         public void DblQuoteInSearchString_WillReturnStringWithDblQuote()
         {
@@ -159,6 +117,25 @@ namespace XmlSnRTest
             Assert.AreEqual(@"hello=world how are you", argParser.GetSearchString()[0]);
             Assert.AreEqual(@"hello world = "" how are you? """, argParser.GetReplaceString()[0]);
         }
+
+        [TestMethod]
+        public void LParamInCommandWithParamFile_WillIgnoreLParamInCommandLine()
+        {
+
+            string paramFile = TestHelper.CreateParameterFile(new string[] { "/S=hello /R=world", "/S=Good /L" });
+            string argument = String.Format(@"/F=something /P=""{0}"" /L", paramFile);
+
+            ISearchReplaceParameter argParser = TestHelper.GetApplicationParameters(argument);
+
+            Assert.AreEqual(@"hello", argParser.GetSearchString()[0]);
+            Assert.AreEqual(@"world", argParser.GetReplaceString()[0]);
+            Assert.AreEqual(@"Good", argParser.GetSearchString()[1]);
+            Assert.AreEqual(@"good", argParser.GetReplaceString()[1]);
+
+            TestHelper.DeleteLastParameterFile();
+        }
+
+
 
         [TestMethod]
         public void GetArgumentsFromString_EmptyString_WillReturn0Args()
@@ -330,47 +307,7 @@ namespace XmlSnRTest
             Assert.AreEqual(@"c:\dellshare.com\*.csproj", CommandlineParser.GetArgumentsFromString(commandLine)[2]);            
         }
 
-        //[TestMethod]
-        //public void GetArgumentsFromString_CheckMandatoryParameters()
-        //{
-        //    string commandLine = @"/S=""hello \""world"" /R=""How are u doing""";
-
-        //    try
-        //    {
-        //        CommandlineParser parser = new CommandlineParser(commandLine);
-        //    }
-        //    catch (RequiredParameterMissingException ex)
-        //    {
-        //        Assert.AreEqual(2, ex.GetMissginParameters().Count);
-        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
-        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));
-        //        return;
-        //    }
-
-        //    Assert.Fail();
-        //}
-        
-        //[TestMethod]
-        //public void GetArgumentsFromString_WithoutRButContainingL_ShouldNotListRAsAMandatoryParam()
-        //{
-        //    string commandLine = @"/S=""hello \""world"" /L";
-
-        //    try
-        //    {
-        //        CommandlineParser parser = new CommandlineParser(commandLine);                
-        //    }
-        //    catch (RequiredParameterMissingException ex)
-        //    {
-        //        Assert.AreEqual(2, ex.GetMissginParameters().Count);
-        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "O", true) == 0));
-        //        Assert.IsTrue(ex.GetMissginParameters().Exists(p => String.Compare(p.GetName(), "F", true) == 0));                                
-        //        return;
-        //    }
-
-        //    Assert.Fail();
-        //}
 
 
-        
     }
 }

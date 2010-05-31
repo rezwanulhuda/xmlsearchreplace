@@ -71,7 +71,7 @@ namespace XmlSnRTest
         }
 
         [TestMethod]
-        public void GetReplaceString_WithPLParam_ReturnListOfReplaceStringsFromFileSpecifiedInLowerCase()
+        public void GetReplaceString_WithPLParamInCommandLine_IgnoresLInCommandLine()
         {
 
             string paramFile = TestHelper.CreateParameterFile(new string[] { @"/S=""Book"" /R=""SmallBook""", @"/S=""Library"" /R=""Oxford""" });
@@ -85,8 +85,8 @@ namespace XmlSnRTest
             ApplicationParameters appParams = new ApplicationParameters(values);
 
             Assert.AreEqual(2, appParams.GetReplaceString().Count);
-            Assert.AreEqual("book", appParams.GetReplaceString()[0]);
-            Assert.AreEqual("library", appParams.GetReplaceString()[1]);
+            Assert.AreEqual("SmallBook", appParams.GetReplaceString()[0]);
+            Assert.AreEqual("Oxford", appParams.GetReplaceString()[1]);
 
             TestHelper.DeleteLastParameterFile();
         }

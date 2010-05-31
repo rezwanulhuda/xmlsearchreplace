@@ -63,9 +63,17 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         }
 
         [TestMethod]
-        public void IsValid_PL_PresentWithAllReplaceStringMissing_RSL_Missing_ShouldReturnTrue()
+        public void IsValid_PL_PresentWithAllReplaceStringMissing_RSL_Missing_ShouldReturnFalse()
         {            
-            SetupAndAssert(true, "/L", new String[] { "/S=bbc", "/S=2" });
-        }    
+            SetupAndAssert(false, "/L", new String[] { "/S=bbc", "/S=2" });
+        }
+
+        [TestMethod]
+        public void IsValid_P_WithLInParamFile_ReturnTrue()
+        {
+            SetupAndAssert(true, "", new String[] { "/S=bbc /L", "/S=2 /L" });
+        }
+
+
     }
 }

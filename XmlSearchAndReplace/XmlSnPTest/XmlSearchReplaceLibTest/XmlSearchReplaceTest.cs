@@ -17,54 +17,6 @@ namespace XmlSnRTest
     {
         XmlSearchReplace _Replacer;
 
-        public XmlSearchReplaceTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
-
         XmlDocument _Document = new XmlDocument();
 
         private void InitializeReplacer(string xml, SearchReplaceLocationOptions options, string searchString, string replaceString)
@@ -84,10 +36,11 @@ namespace XmlSnRTest
             _Replacer = new XmlSearchReplace(options, opOptions, new List<string>() { searchString} , new List<string>() {replaceString});
         }
 
-        private void AssertFirstElementValue(XmlDocument doc, string elementName, int expectedCount, string expectedFirstvalue)
+        private void AssertFirstElementValue(XmlDocument doc, string elementName, int expectedCount, string expectedFirstvalue, XmlNamespaceManager nsmgr = null)
         {
             string xPath = @"//" + elementName;
-            XmlNodeList nodes = doc.SelectNodes(xPath);
+            
+            XmlNodeList nodes = doc.SelectNodes(xPath, nsmgr);
             Assert.AreEqual(expectedCount, nodes.Count, String.Format("Could not fine element {0}", elementName));
 
             if (expectedCount > 0)
@@ -116,11 +69,11 @@ namespace XmlSnRTest
 
         }
 
-        private void AssertAttributeValueInFirstNamedElement(XmlDocument actualDoc, string elementName, string attributeName, string expectedValue)
+        private void AssertAttributeValueInFirstNamedElement(XmlDocument actualDoc, string elementName, string attributeName, string expectedValue, XmlNamespaceManager nsmgr = null)
         {
-            XmlNode node = actualDoc.SelectSingleNode("//" + elementName + "/@" + attributeName);
+            XmlNode node = actualDoc.SelectSingleNode("//" + elementName + "/@" + attributeName, nsmgr);
 
-            Assert.IsNotNull(node, String.Format("Could not find attribute {0} in element {1}", elementName, attributeName));
+            Assert.IsNotNull(node, String.Format("Could not find attribute {0} in element {1}", attributeName, elementName));
             Assert.AreEqual(expectedValue, node.Value, String.Format("Attribute value mismatch for attribute {0}", attributeName));
         }
 
@@ -622,9 +575,35 @@ namespace XmlSnRTest
             Assert.AreEqual(2, nodes.Count);
             Assert.AreEqual("abra", nodes[0].InnerText);
             Assert.AreEqual("babra", nodes[1].InnerText);
-
-
-            //AssertAttributeCount(actualDoc, "id", 0);
         }
+
+//        [TestMethod]
+//        public void Replace_XMLNSAttributeName()
+//        {
+//            List<string> searchStrings = new List<string>() { "xmlns:ns" };
+//            List<string> replaceStrings = new List<string>() { "xmlns:test" };
+
+//            string xml = @"<ns:Library xmlns:ns=""http://blahblah.com/ns"">
+//    <ns:Book>a</ns:Book>
+//    <ns:Book>b</ns:Book>
+//</ns:Library>";
+//            XmlDocument xmlDoc = new XmlDocument();
+            
+//            xmlDoc.LoadXml(xml);
+
+//            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceAttributeName, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
+
+//            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
+
+            
+            
+
+//            XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);
+            
+//            mgr.AddNamespace("test", "http://blahblah.com/ns");
+//            mgr.AddNamespace("ns", "http://blahblah.com/ns");
+
+//            AssertAttributeValueInFirstNamedElement(actualDoc, "Library", "xmlns:test", "http://blahblah.com/ns", mgr);
+//        }
     }
 }

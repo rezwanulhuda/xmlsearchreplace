@@ -171,9 +171,29 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
   </books>
 </Library>";
 
-            string paramFile = TestHelper.CreateParameterFile(new string[] { @"/S=""book""" });
+            string paramFile = TestHelper.CreateParameterFile(new string[] { @"/S=""book"" /L" });
 
-            string commandLine = String.Format(@"/F=""{0}"" /O=en,an /P={1} /L /I", _TestFile, paramFile);
+            string commandLine = String.Format(@"/F=""{0}"" /O=en,an /P={1} /I", _TestFile, paramFile);
+
+            SetupAndAssert(expectedContent, commandLine);
+        }
+
+        [TestMethod]
+        public void Start_ElementNameLCaseInsideParamFileIgnoreCase()
+        {
+            string expectedContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Library>
+  <books>
+    <book bookId=""1"">
+      <BookTitle>Bourne Superemecy</BookTitle>
+      <Author>Robert Ludlum</Author>
+    </book>
+  </books>
+</Library>";
+
+            string paramFile = TestHelper.CreateParameterFile(new string[] { @"/S=book /L", "/S=Title /R=BookTitle" });
+
+            string commandLine = String.Format(@"/F=""{0}"" /O=en,an /P={1} /I", _TestFile, paramFile);
 
             SetupAndAssert(expectedContent, commandLine);
         }
