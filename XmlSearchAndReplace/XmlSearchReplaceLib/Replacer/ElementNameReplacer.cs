@@ -12,9 +12,9 @@ namespace XmlSearchReplaceLib
         {
             if (node.NodeType != XmlNodeType.Element) return;           
 
-            string newNodeName = engine.Replace(node.Name, searchString, replaceString);
+            string newNodeName = engine.Replace(node.LocalName, searchString, replaceString);
             
-            if (String.Compare(newNodeName, node.Name) != 0)
+            if (String.Compare(newNodeName, node.LocalName) != 0)
             {
                 ReplaceNode(node, newNodeName);
             }
@@ -28,14 +28,7 @@ namespace XmlSearchReplaceLib
 
             if (String.IsNullOrEmpty(newNodeName))
             {
-                if (oldNode.ParentNode != null)
-                {
-                    oldNode.ParentNode.RemoveChild(oldNode);
-                }
-                else
-                {
-                    document.RemoveChild(oldNode);
-                }
+                DeleteNode(document, oldNode);
             }
             else
             {
@@ -43,9 +36,21 @@ namespace XmlSearchReplaceLib
             }
         }
 
-        private void CreateSubstitueNodeWithNewValue(XmlNode oldNode, string newNodeName, XmlDocument document)
+        private static void DeleteNode(XmlDocument document, XmlNode nodeToDelete)
         {
-            XmlNode newNode = document.CreateElement(newNodeName);
+            if (nodeToDelete.ParentNode != null)
+            {
+                nodeToDelete.ParentNode.RemoveChild(nodeToDelete);
+            }
+            else
+            {
+                document.RemoveChild(nodeToDelete);
+            }
+        }
+
+        private void CreateSubstitueNodeWithNewValue(XmlNode oldNode, string newNodeName, XmlDocument document)
+        {            
+            XmlNode newNode = document.CreateElement(oldNode.Prefix, newNodeName, oldNode.NamespaceURI);
             newNode.InnerXml = oldNode.InnerXml;
             CopyAttributes(newNode, oldNode);
             XmlNode parent = oldNode.ParentNode;

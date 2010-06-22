@@ -1,12 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TestRunConfiguration name="Local Test Run" id="a7f14c4e-1b85-4d9f-a9ae-b932208bd5c5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestSettings name="Local Test Run" id="a7f14c4e-1b85-4d9f-a9ae-b932208bd5c5" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>This is a default test run configuration for a local test run.</Description>
-  <CodeCoverage enabled="true">
-    <Regular>
-      <CodeCoverageItem binaryFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.dll" pdbFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.pdb" instrumentInPlace="true" />
-      <CodeCoverageItem binaryFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.dll" pdbFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.pdb" instrumentInPlace="true" />
-      <CodeCoverageItem binaryFile="XmlSearchReplace\bin\Debug\XmlSearchReplace.exe" pdbFile="XmlSearchReplace\bin\Debug\XmlSearchReplace.pdb" instrumentInPlace="true" />
-    </Regular>
-  </CodeCoverage>
-  <TestTypeSpecific />
-</TestRunConfiguration>
+  <Deployment enabled="false" />
+  <Execution>
+    <TestTypeSpecific>
+      <UnitTestRunConfig testTypeId="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b">
+        <AssemblyResolution>
+          <TestDirectory useLoadContext="true" />
+        </AssemblyResolution>
+      </UnitTestRunConfig>
+    </TestTypeSpecific>
+    <AgentRule name="LocalMachineDefaultRole">
+      <DataCollectors>
+        <DataCollector uri="datacollector://Microsoft/CodeCoverage/1.0" assemblyQualifiedName="Microsoft.VisualStudio.TestTools.CodeCoverage.CoveragePlugIn, Microsoft.VisualStudio.QualityTools.Plugins.CodeCoverage, PublicKeyToken=b03f5f7f11d50a3a">
+          <Configuration>
+            <CodeCoverage xmlns="">
+              <Regular>
+                <CodeCoverageItem binaryFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.dll" pdbFile="XmlSearchReplaceLib\bin\Debug\XmlSearchReplaceLib.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.dll" pdbFile="XmlSearchReplaceConsoleLib\bin\Debug\XmlSearchReplaceConsoleLib.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="XmlSearchReplace\bin\Debug\XmlSearchReplace.exe" pdbFile="XmlSearchReplace\bin\Debug\XmlSearchReplace.pdb" instrumentInPlace="true" />
+              </Regular>
+            </CodeCoverage>
+          </Configuration>
+        </DataCollector>
+      </DataCollectors>
+    </AgentRule>
+  </Execution>
+</TestSettings>

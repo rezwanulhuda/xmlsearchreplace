@@ -13,6 +13,7 @@ namespace XmlSearchReplaceConsoleLib.Validator
         {
             _MandatoryParameters = mandatoryParameters;
         }
+
         public bool IsValid(CommandLineParameterWithValueCollection parameters)
         {
             foreach (CommandLineParameter mandatoryParam in _MandatoryParameters)

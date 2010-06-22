@@ -16,6 +16,29 @@ namespace XmlSearchReplaceLib
             ReplaceAttributes(node, replacedAttributes);
         }
 
+        private List<KeyValuePair<XmlAttribute, XmlAttribute>> GetReplacedAttributes(XmlNode node, string searchString, string replaceString, IReplacerEngine engine)
+        {
+            List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes = new List<KeyValuePair<XmlAttribute, XmlAttribute>>();
+            foreach (XmlAttribute attribute in node.Attributes)
+            {
+                string newAttributeName = engine.Replace(attribute.LocalName, searchString, replaceString);
+
+                if (String.Compare(newAttributeName, attribute.LocalName) == 0) continue;
+
+                XmlAttribute newAttribute = null;
+
+                if (!String.IsNullOrEmpty(newAttributeName))
+                {
+                    newAttribute = node.OwnerDocument.CreateAttribute(attribute.Prefix, newAttributeName, attribute.NamespaceURI);
+                    newAttribute.Value = attribute.Value;
+                }
+
+                replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, newAttribute));
+
+            }
+            return replacedAttributes;
+        }
+
         private void ReplaceAttributes(XmlNode node, List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes)
         {
             foreach (KeyValuePair<XmlAttribute, XmlAttribute> attributes in replacedAttributes)
@@ -26,29 +49,7 @@ namespace XmlSearchReplaceLib
             }
         }
 
-        private List<KeyValuePair<XmlAttribute, XmlAttribute>> GetReplacedAttributes(XmlNode node, string searchString, string replaceString, IReplacerEngine engine)
-        {
-            List<KeyValuePair<XmlAttribute, XmlAttribute>> replacedAttributes = new List<KeyValuePair<XmlAttribute,XmlAttribute>>();
-            foreach (XmlAttribute attribute in node.Attributes)
-            {
-                string newAttributeName = engine.Replace(attribute.Name, searchString, replaceString);
-
-
-                if (String.Compare(newAttributeName, attribute.Name) != 0)
-                {
-                    XmlAttribute newAttribute = null;
-
-                    if (!String.IsNullOrEmpty(newAttributeName))
-                    {
-                        newAttribute = node.OwnerDocument.CreateAttribute(newAttributeName);
-                        newAttribute.Value = attribute.Value;                        
-                    }
-
-                    replacedAttributes.Add(new KeyValuePair<XmlAttribute, XmlAttribute>(attribute, newAttribute));
-                }
-            }
-            return replacedAttributes;
-        }
+        
 
     }
 }

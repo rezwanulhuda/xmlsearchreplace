@@ -49,13 +49,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         public void CheckParameters_MissingS_ThrowsInvalidArgumentOptionException()
         {
             SetupAndAssert(@"Missing search string (/S) in command line", "/O=abc /F=abc");
-        }
-
-        [TestMethod, Ignore]
-        public void CheckParameters_S_But_No_R_ThrowsInvalidArgumentOptionException()
-        {
-            SetupAndAssert(@"", "/O=abc /F=abc /S=abc");
-        }
+        }        
 
         [TestMethod]
         public void CheckParameters_P_Contains_S_But_No_R_ThrowsInvalidArgumentOptionException()
@@ -70,13 +64,7 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
             SetupAndAssert(@"Search string missing in param file", String.Format("/O=abc /F=abc /P={0}", TestHelper.CreateParameterFile(new string[] { "/R=abc" })));
             TestHelper.DeleteLastParameterFile();
         }
-
-        [TestMethod, Ignore]        
-        public void CheckParameters_Contains_FORS_ButRContainsSpace_ThrowsInvalidArugmentOptionException()
-        {
-            SetupAndAssert("One or more replace string contains invalid element or attribute names. When replace location contains element/attribute name, replace strings must be valid names suitable for element/attribute names", "/F=abc /O=en,an /R=je lo /S=ok");
-        }
-
+        
         [TestMethod]
         public void CheckParameters_Contains_FORS_ButODoesNotContain_ENEV_ReturnsOK()
         {
@@ -89,11 +77,13 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest.ValidatorTest
         {
             DefaultParameterValidator validator = new DefaultParameterValidator();
             validator.CheckParameters(TestHelper.GetCommandLineParameters("/F=abc /O=abc /R=jelo /S=ok"));
+        }       
+
+        [TestMethod, Ignore]
+        public void CheckParameters_Contains_FORS_ButRContainsSpace_ThrowsInvalidArugmentOptionException()
+        {
+            SetupAndAssert("One or more replace string contains invalid element or attribute names. When replace location contains element/attribute name, replace strings must be valid names suitable for element/attribute names", "/F=abc /O=en,an /R=je lo /S=ok");
         }
-
-
-
-        
 
 
     }

@@ -41,29 +41,29 @@ namespace XmlSnRTest
             string xPath = @"//" + elementName;
             
             XmlNodeList nodes = doc.SelectNodes(xPath, nsmgr);
-            Assert.AreEqual(expectedCount, nodes.Count, String.Format("Could not fine element {0}", elementName));
+            Assert.AreEqual(expectedCount, nodes.Count, String.Format("Could not find element {0}", elementName));
 
             if (expectedCount > 0)
             {
-                Assert.AreEqual(expectedFirstvalue, doc.SelectSingleNode(xPath).SelectSingleNode("text()").InnerText);
+                Assert.AreEqual(expectedFirstvalue, doc.SelectSingleNode(xPath, nsmgr).SelectSingleNode("text()").InnerText);
             }
         }
 
-        private void AssertFirstAttributeValue(XmlDocument document, string attributeName, string expectedValue)
+        private void AssertFirstAttributeValue(XmlDocument document, string attributeName, string expectedValue, XmlNamespaceManager nsmgr = null)
         {
             string xPath = @"//@" + attributeName;
-            
-            XmlNode node = document.SelectSingleNode(xPath);
+
+            XmlNode node = document.SelectSingleNode(xPath, nsmgr);
             Assert.IsNotNull(node);
             Assert.AreEqual(expectedValue, node.Value);
             
         }
 
-        private void AssertAttributeCount(XmlDocument document, string attributeName, int expectedCount)
+        private void AssertAttributeCount(XmlDocument document, string attributeName, int expectedCount, XmlNamespaceManager nsmgr = null)
         {
             string xPath = @"//@" + attributeName;
 
-            XmlNodeList nodes = document.SelectNodes(xPath);
+            XmlNodeList nodes = document.SelectNodes(xPath, nsmgr);
             
             Assert.AreEqual(expectedCount, nodes.Count);
 
@@ -577,33 +577,54 @@ namespace XmlSnRTest
             Assert.AreEqual("babra", nodes[1].InnerText);
         }
 
-//        [TestMethod]
-//        public void Replace_XMLNSAttributeName()
-//        {
-//            List<string> searchStrings = new List<string>() { "xmlns:ns" };
-//            List<string> replaceStrings = new List<string>() { "xmlns:test" };
+        [TestMethod]
+        public void Replace_ElementNameWithNameSpace_WillOnlyReplaceTheLocalNameOfElement()
+        {
+            List<string> searchStrings = new List<string>() { "Book" };
+            List<string> replaceStrings = new List<string>() { "LibraryBook" };
 
-//            string xml = @"<ns:Library xmlns:ns=""http://blahblah.com/ns"">
-//    <ns:Book>a</ns:Book>
-//    <ns:Book>b</ns:Book>
-//</ns:Library>";
-//            XmlDocument xmlDoc = new XmlDocument();
+            string xml = @"<ns:Library xmlns:ns=""http://blahblah.com/ns"">
+    <ns:Book>a</ns:Book>
+    <ns:Book>b</ns:Book>
+</ns:Library>";
+            XmlDocument xmlDoc = new XmlDocument();
+
+            xmlDoc.LoadXml(xml);
+
+            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceElementName, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
+
+            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
+
+            XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);
             
-//            xmlDoc.LoadXml(xml);
+            mgr.AddNamespace("ns", "http://blahblah.com/ns");
 
-//            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceAttributeName, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
+            AssertFirstElementValue(actualDoc, "ns:LibraryBook", 2, "a", mgr);
+        }
 
-//            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
+        [TestMethod]
+        public void Replace_AttributeNameWithNameSpace_WillOnlyReplaceTheLocalNameOfAttribute()
+        {
+            List<string> searchStrings = new List<string>() { "Book" };
+            List<string> replaceStrings = new List<string>() { "LibraryBook" };
 
-            
-            
+            string xml = @"<ns:Library xmlns:ns=""http://blahblah.com/ns"">
+    <ns:Book ns:Book=""something"">a</ns:Book>
+    <ns:Book ns:Book=""some beautiful thing"">b</ns:Book>
+</ns:Library>";
+            XmlDocument xmlDoc = new XmlDocument();
 
-//            XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);
-            
-//            mgr.AddNamespace("test", "http://blahblah.com/ns");
-//            mgr.AddNamespace("ns", "http://blahblah.com/ns");
+            xmlDoc.LoadXml(xml);
 
-//            AssertAttributeValueInFirstNamedElement(actualDoc, "Library", "xmlns:test", "http://blahblah.com/ns", mgr);
-//        }
+            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceAttributeName, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
+
+            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
+
+            XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);
+
+            mgr.AddNamespace("ns", "http://blahblah.com/ns");
+
+            AssertAttributeValueInFirstNamedElement(actualDoc, "ns:Book", "ns:LibraryBook", "something", mgr);
+        }
     }
 }
