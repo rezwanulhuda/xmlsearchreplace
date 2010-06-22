@@ -19,7 +19,7 @@ namespace XmlSnRTest
 
         XmlDocument _Document = new XmlDocument();
 
-        private void InitializeReplacer(string xml, SearchReplaceLocationOptions options, string searchString, string replaceString)
+        private void InitializeReplacerPartialWordCaseSensitive(string xml, SearchReplaceLocationOptions options, string searchString, string replaceString)
         {            
             InitializeReplacer(xml, options, searchString, replaceString, false, false);
         }
@@ -80,7 +80,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_InSide1ElementWholeWord()
         {
-            InitializeReplacer("<document>Hello</document>", SearchReplaceLocationOptions.ReplaceElementValue, "Hello", "Hi");            
+            InitializeReplacerPartialWordCaseSensitive("<document>Hello</document>", SearchReplaceLocationOptions.ReplaceElementValue, "Hello", "Hi");            
             
             XmlDocument actualDocument = _Replacer.Replace(_Document);
 
@@ -90,7 +90,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_InSide2ElementWholeWord()
         {
-            InitializeReplacer("<document><Page>Hello</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Hello", "Hi");
+            InitializeReplacerPartialWordCaseSensitive("<document><Page>Hello</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Hello", "Hi");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
             AssertFirstElementValue(actualDocument, "Page", 1, "Hi");
@@ -100,7 +100,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_2ElemsHavingSameThing()
         {
-            InitializeReplacer("<document>Hello<Page>Hello</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Hello", "Hi");
+            InitializeReplacerPartialWordCaseSensitive("<document>Hello<Page>Hello</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Hello", "Hi");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
             AssertFirstElementValue(actualDocument, "document", 1, "Hi");
@@ -111,7 +111,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_ElemsAndValueHavingSameThing()
         {
-            InitializeReplacer("<document><Page>Page 1</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive("<document><Page>Page 1</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
             AssertFirstElementValue(actualDocument, "Page", 1, "Paper 1");
@@ -121,7 +121,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_ElemsAndValueHavingSameThing2Places()
         {
-            InitializeReplacer("<document>Pages<Page>Page 1</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive("<document>Pages<Page>Page 1</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
 
@@ -132,7 +132,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_Attributes()
         {
-            InitializeReplacer(@"<document name=""Pages""><Page pageName=""StartPage""></Page></document>", SearchReplaceLocationOptions.ReplaceAttributeValue | SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive(@"<document name=""Pages""><Page pageName=""StartPage""></Page></document>", SearchReplaceLocationOptions.ReplaceAttributeValue | SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
             AssertFirstAttributeValue(actualDocument, "name", "Papers");
@@ -142,7 +142,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_AttributesAndElements()
         {
-            InitializeReplacer(@"<document name=""Pages"">Page<Page pageName=""StartPage"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceAttributeValue | SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive(@"<document name=""Pages"">Page<Page pageName=""StartPage"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceAttributeValue | SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
             AssertFirstAttributeValue(actualDocument, "name", "Papers");
@@ -154,7 +154,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_ElementsOnlyButNoAttributes()
         {
-            InitializeReplacer(@"<document name=""Pages"">Page<Page pageName=""StartPage"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive(@"<document name=""Pages"">Page<Page pageName=""StartPage"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceElementValue, "Page", "Paper");
 
             XmlDocument actualDocument = _Replacer.Replace(_Document);
             AssertFirstAttributeValue(actualDocument, "name", "Pages");
@@ -166,7 +166,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_MoreThan1ElementName()
         {
-            InitializeReplacer("<document>hello<pages><page>some value</page><page></page></pages><pages><page></page></pages></document>", SearchReplaceLocationOptions.ReplaceElementName, "page", "paper");
+            InitializeReplacerPartialWordCaseSensitive("<document>hello<pages><page>some value</page><page></page></pages><pages><page></page></pages></document>", SearchReplaceLocationOptions.ReplaceElementName, "page", "paper");
             XmlDocument actualDoc = _Replacer.Replace(_Document);
 
             AssertFirstElementValue(actualDoc, "paper", 3, "some value");
@@ -175,7 +175,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_ValueInLastChild()
         {
-            InitializeReplacer("<document>hello<pages><page>some value</page><page>some value</page></pages><pages><page>some value</page></pages></document>", SearchReplaceLocationOptions.ReplaceElementValue, "some value", "blah blah");
+            InitializeReplacerPartialWordCaseSensitive("<document>hello<pages><page>some value</page><page>some value</page></pages><pages><page>some value</page></pages></document>", SearchReplaceLocationOptions.ReplaceElementValue, "some value", "blah blah");
             XmlDocument actualDoc = _Replacer.Replace(_Document);
 
             AssertFirstElementValue(actualDoc, "page", 3, "blah blah");
@@ -184,7 +184,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_All()
         {
-            InitializeReplacer(@"<document>Pages<Page Page=""Page1"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceAll, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive(@"<document>Pages<Page Page=""Page1"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceAll, "Page", "Paper");
             XmlDocument actualDoc = _Replacer.Replace(_Document);
             string actualXml = actualDoc.OuterXml;
             string expectedXml = @"<document>Papers<Paper Paper=""Paper1"">Paper</Paper></document>";
@@ -194,7 +194,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_ElementNameContainingAttributes()
         {
-            InitializeReplacer(@"<document>Pages<Page id=""Page1"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceElementName, "Page", "Paper");
+            InitializeReplacerPartialWordCaseSensitive(@"<document>Pages<Page id=""Page1"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceElementName, "Page", "Paper");
             XmlDocument actualDoc = _Replacer.Replace(_Document);
             AssertFirstElementValue(actualDoc, "Paper", 1, "Page");
             AssertFirstAttributeValue(actualDoc, "id", "Page1");            
@@ -203,7 +203,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_AttributeNameIn1Element()
         {
-            InitializeReplacer(@"<document>Pages<Page id=""Page1"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceAttributeName, "id", "pageId");
+            InitializeReplacerPartialWordCaseSensitive(@"<document>Pages<Page id=""Page1"">Page</Page></document>", SearchReplaceLocationOptions.ReplaceAttributeName, "id", "pageId");
             XmlDocument actualDoc = _Replacer.Replace(_Document);
             AssertFirstElementValue(actualDoc, "Page", 1, "Page");
             AssertFirstAttributeValue(actualDoc, "pageId", "Page1");
@@ -212,7 +212,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_AttributeNameIn2Elements()
         {
-            InitializeReplacer(@"
+            InitializeReplacerPartialWordCaseSensitive(@"
 <document>Pages
     <Book id=""1"">
         <Page id=""Page1"">Page</Page>
@@ -229,7 +229,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_PartialAttributeNameIn2Elements()
         {
-            InitializeReplacer(@"
+            InitializeReplacerPartialWordCaseSensitive(@"
 <document>Pages
     <Book BookIdInBook=""1"">
         <Page BookIdInPage=""100"">Page</Page>
@@ -247,7 +247,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_FullElementNameSameElementIn2Elements()
         {
-            InitializeReplacer(@"
+            InitializeReplacerPartialWordCaseSensitive(@"
 <document>Pages
     <Book BookIdInBook=""1"">Test<Book BookIdInPage=""100"">Page</Book>
     </Book>
@@ -261,7 +261,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_PartialElementNameIn2Elements()
         {
-            InitializeReplacer(@"
+            InitializeReplacerPartialWordCaseSensitive(@"
 <document>Pages
     <Book BookIdInBook=""1"">Test<Book BookIdInPage=""100"">Page</Book>
     </Book>
@@ -580,24 +580,17 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_ElementNameWithNameSpace_WillOnlyReplaceTheLocalNameOfElement()
         {
-            List<string> searchStrings = new List<string>() { "Book" };
-            List<string> replaceStrings = new List<string>() { "LibraryBook" };
 
             string xml = @"<ns:Library xmlns:ns=""http://blahblah.com/ns"">
     <ns:Book>a</ns:Book>
     <ns:Book>b</ns:Book>
 </ns:Library>";
-            XmlDocument xmlDoc = new XmlDocument();
-
-            xmlDoc.LoadXml(xml);
-
-            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceElementName, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
-
-            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
-
-            XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);
             
-            mgr.AddNamespace("ns", "http://blahblah.com/ns");
+            InitializeReplacer(xml, SearchReplaceLocationOptions.ReplaceElementName, "Book", "LibraryBook", true, false);
+            
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+            XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);            
+            mgr.AddNamespace("ns", "http://blahblah.com/ns");            
 
             AssertFirstElementValue(actualDoc, "ns:LibraryBook", 2, "a", mgr);
         }
@@ -605,24 +598,16 @@ namespace XmlSnRTest
         [TestMethod]
         public void Replace_AttributeNameWithNameSpace_WillOnlyReplaceTheLocalNameOfAttribute()
         {
-            List<string> searchStrings = new List<string>() { "Book" };
-            List<string> replaceStrings = new List<string>() { "LibraryBook" };
-
             string xml = @"<ns:Library xmlns:ns=""http://blahblah.com/ns"">
     <ns:Book ns:Book=""something"">a</ns:Book>
     <ns:Book ns:Book=""some beautiful thing"">b</ns:Book>
 </ns:Library>";
-            XmlDocument xmlDoc = new XmlDocument();
 
-            xmlDoc.LoadXml(xml);
+            InitializeReplacer(xml, SearchReplaceLocationOptions.ReplaceAttributeName, "Book", "LibraryBook", true, false);
 
-            _Replacer = new XmlSearchReplace(SearchReplaceLocationOptions.ReplaceAttributeName, SearchReplaceOperationOptions.WholeWordOnly, searchStrings, replaceStrings);
-
-            XmlDocument actualDoc = _Replacer.Replace(xmlDoc);
-
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
             XmlNamespaceManager mgr = new XmlNamespaceManager(actualDoc.NameTable);
-
-            mgr.AddNamespace("ns", "http://blahblah.com/ns");
+            mgr.AddNamespace("ns", "http://blahblah.com/ns");            
 
             AssertAttributeValueInFirstNamedElement(actualDoc, "ns:Book", "ns:LibraryBook", "something", mgr);
         }
