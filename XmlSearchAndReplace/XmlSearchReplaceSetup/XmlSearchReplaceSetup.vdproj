@@ -21,7 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5EE30BCD6C016F8CAC1D10F1D1F76995"
+        "MsmKey" = "8:_6ECB446AFAF97A7F540F21B8CF11A6F6"
+        "OwnerKey" = "8:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6ECB446AFAF97A7F540F21B8CF11A6F6"
         "OwnerKey" = "8:_38B63B478D594E2A858D7ED3FCD8171F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,13 +39,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_981EC65E9D3B2EE3C83EDC5E4D8820D2"
-        "OwnerKey" = "8:_5EE30BCD6C016F8CAC1D10F1D1F76995"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_981EC65E9D3B2EE3C83EDC5E4D8820D2"
+        "MsmKey" = "8:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
         "OwnerKey" = "8:_38B63B478D594E2A858D7ED3FCD8171F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -52,13 +52,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5EE30BCD6C016F8CAC1D10F1D1F76995"
+        "OwnerKey" = "8:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_981EC65E9D3B2EE3C83EDC5E4D8820D2"
+        "OwnerKey" = "8:_6ECB446AFAF97A7F540F21B8CF11A6F6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -86,6 +86,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Package"
@@ -147,6 +160,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -169,7 +195,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v3.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.0,Profile=Client"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://www.microsoft.com/downLoads/details.aspx?familyid=AB99342F-5D1A-413D-8319-81DA479AB0D7&displaylang=en"
                 }
@@ -177,20 +203,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5EE30BCD6C016F8CAC1D10F1D1F76995"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6ECB446AFAF97A7F540F21B8CF11A6F6"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:XmlSearchReplaceConsoleLib, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:XmlSearchReplaceLib, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5EE30BCD6C016F8CAC1D10F1D1F76995"
+                    "_6ECB446AFAF97A7F540F21B8CF11A6F6"
                     {
-                    "Name" = "8:XmlSearchReplaceConsoleLib.dll"
+                    "Name" = "8:XmlSearchReplaceLib.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:XmlSearchReplaceConsoleLib.dll"
+            "SourcePath" = "8:XmlSearchReplaceLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"
@@ -228,20 +254,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_981EC65E9D3B2EE3C83EDC5E4D8820D2"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:XmlSearchReplaceLib, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:XmlSearchReplaceConsoleLib, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_981EC65E9D3B2EE3C83EDC5E4D8820D2"
+                    "_CE9D4E6CF355B7E6AB7286FCD64E8A65"
                     {
-                    "Name" = "8:XmlSearchReplaceLib.dll"
+                    "Name" = "8:XmlSearchReplaceConsoleLib.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:XmlSearchReplaceLib.dll"
+            "SourcePath" = "8:XmlSearchReplaceConsoleLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"
@@ -884,7 +910,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_38B63B478D594E2A858D7ED3FCD8171F"
             {
-            "SourcePath" = "8:..\\XmlSearchReplace\\obj\\Package\\XmlSearchReplace.exe"
+            "SourcePath" = "8:..\\XmlSearchReplace\\obj\\Debug\\XmlSearchReplace.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"

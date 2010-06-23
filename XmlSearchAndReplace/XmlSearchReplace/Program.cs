@@ -7,7 +7,9 @@ using XmlSearchReplaceConsoleLib.Validator;
 namespace XmlSearchReplaceConsole
 {
     class Program
-    {        
+    {
+        [PreEmptive.Attributes.Setup(CustomEndpoint = "so-s.info/PreEmptive.Web.Services.Messaging/MessagingServiceV2.asmx")]
+        [PreEmptive.Attributes.Teardown()]
         static void Main(string[] args)
         {
             if (args.Length == 0)
