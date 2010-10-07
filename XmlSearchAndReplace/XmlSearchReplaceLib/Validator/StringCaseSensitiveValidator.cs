@@ -7,7 +7,7 @@ namespace XmlSearchReplaceLib
 {
     public class StringCaseSensitiveValidator : IReplacementOptionValidator
     {
-        public bool IsValidForReplacement(string actualString, string searchString, string replaceString)
+        public bool IsValidForReplacement(string actualString, string searchString)
         {
             return actualString.Contains(searchString);
         }

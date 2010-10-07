@@ -9,14 +9,15 @@ namespace XmlSearchReplaceLib
     public enum SearchReplaceLocationOptions
     {
         ReplaceNone = 0x0
-        ,
-        ReplaceAll = SearchReplaceLocationOptions.ReplaceAttributeName
+        , ReplaceAll = SearchReplaceLocationOptions.ReplaceAttributeName
           | SearchReplaceLocationOptions.ReplaceAttributeValue
           | SearchReplaceLocationOptions.ReplaceElementName
           | SearchReplaceLocationOptions.ReplaceElementValue
+          | SearchReplaceLocationOptions.ReplaceValueOfElement
         , ReplaceElementValue = 0x1
         , ReplaceAttributeValue = 0x2
         , ReplaceElementName = 0x4
-        , ReplaceAttributeName = 0x8
+        , ReplaceAttributeName = 0x8,
+        ReplaceValueOfElement = 0x10
     }    
 }

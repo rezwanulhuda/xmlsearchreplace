@@ -7,11 +7,11 @@ namespace XmlSearchReplaceLib
 {
     public class ReplacementOptionValidatorList : List<IReplacementOptionValidator>
     {
-        public bool IsValidForReplacement(string actualString, string searchString, string replaceString)
+        public bool IsValidForReplacement(string actualString, string searchString)
         {
             foreach (IReplacementOptionValidator validator in this)
             {
-                if (!validator.IsValidForReplacement(actualString, searchString, replaceString))
+                if (!validator.IsValidForReplacement(actualString, searchString))
                     return false;
             }
             return true;

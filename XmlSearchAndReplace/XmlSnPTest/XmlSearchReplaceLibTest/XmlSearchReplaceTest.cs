@@ -611,5 +611,19 @@ namespace XmlSnRTest
 
             AssertAttributeValueInFirstNamedElement(actualDoc, "ns:Book", "ns:LibraryBook", "something", mgr);
         }
+
+        [TestMethod]
+        public void Replace_ValueOfElement_WillReplaceValueOfElement()
+        {
+            string xml = @"<Library>
+    <Book Book=""something"">a</Book>    
+</Library>";
+
+            InitializeReplacer(xml, SearchReplaceLocationOptions.ReplaceValueOfElement, "Book", "LibraryBook", true, false);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);
+            AssertFirstElementValue(actualDoc, "Book", 1, "LibraryBook");
+            //AssertAttributeValueInFirstNamedElement(actualDoc, "ns:Book", "ns:LibraryBook", "something");
+        }
     }
 }

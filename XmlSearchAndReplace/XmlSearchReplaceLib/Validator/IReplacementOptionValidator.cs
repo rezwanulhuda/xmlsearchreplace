@@ -7,6 +7,6 @@ namespace XmlSearchReplaceLib
 {
     public interface IReplacementOptionValidator
     {
-        bool IsValidForReplacement(string actualString, string searchString, string replaceString);
+        bool IsValidForReplacement(string actualString, string searchString);
     }
 }
