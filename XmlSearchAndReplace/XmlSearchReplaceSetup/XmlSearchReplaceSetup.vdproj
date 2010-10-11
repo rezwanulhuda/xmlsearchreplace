@@ -15,20 +15,20 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_38B63B478D594E2A858D7ED3FCD8171F"
+        "MsmKey" = "8:_0C24C27B66F25B9627539B307BFA0F9D"
+        "OwnerKey" = "8:_DED7A1D55BC0F5A95F31A6C5E2C00966"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0C24C27B66F25B9627539B307BFA0F9D"
+        "OwnerKey" = "8:_26A2CFEA0F6840DFA01E124460D9A7CD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_26A2CFEA0F6840DFA01E124460D9A7CD"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6ECB446AFAF97A7F540F21B8CF11A6F6"
-        "OwnerKey" = "8:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6ECB446AFAF97A7F540F21B8CF11A6F6"
-        "OwnerKey" = "8:_38B63B478D594E2A858D7ED3FCD8171F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,26 +39,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
-        "OwnerKey" = "8:_38B63B478D594E2A858D7ED3FCD8171F"
+        "MsmKey" = "8:_DED7A1D55BC0F5A95F31A6C5E2C00966"
+        "OwnerKey" = "8:_26A2CFEA0F6840DFA01E124460D9A7CD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_38B63B478D594E2A858D7ED3FCD8171F"
+        "OwnerKey" = "8:_0C24C27B66F25B9627539B307BFA0F9D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
+        "OwnerKey" = "8:_26A2CFEA0F6840DFA01E124460D9A7CD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6ECB446AFAF97A7F540F21B8CF11A6F6"
+        "OwnerKey" = "8:_DED7A1D55BC0F5A95F31A6C5E2C00966"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -203,20 +203,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6ECB446AFAF97A7F540F21B8CF11A6F6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0C24C27B66F25B9627539B307BFA0F9D"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:XmlSearchReplaceLib, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6ECB446AFAF97A7F540F21B8CF11A6F6"
+                    "_0C24C27B66F25B9627539B307BFA0F9D"
                     {
-                    "Name" = "8:XmlSearchReplaceLib.dll"
+                    "Name" = "8:XmlSearchReplaceLib.DLL"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:XmlSearchReplaceLib.dll"
+            "SourcePath" = "8:XmlSearchReplaceLib.DLL"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"
@@ -232,6 +232,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_26A2CFEA0F6840DFA01E124460D9A7CD"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:XmlSearchReplace, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_26A2CFEA0F6840DFA01E124460D9A7CD"
+                    {
+                    "Name" = "8:XmlSearchReplace.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\XmlSearchReplaceDotFuscator\\Dotfuscated\\XmlSearchReplace.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_835A64EA86054D3F8F88B5C1A5364E63"
@@ -254,20 +285,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CE9D4E6CF355B7E6AB7286FCD64E8A65"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DED7A1D55BC0F5A95F31A6C5E2C00966"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:XmlSearchReplaceConsoleLib, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CE9D4E6CF355B7E6AB7286FCD64E8A65"
+                    "_DED7A1D55BC0F5A95F31A6C5E2C00966"
                     {
-                    "Name" = "8:XmlSearchReplaceConsoleLib.dll"
+                    "Name" = "8:XmlSearchReplaceConsoleLib.DLL"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:XmlSearchReplaceConsoleLib.dll"
+            "SourcePath" = "8:XmlSearchReplaceConsoleLib.DLL"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"
@@ -342,7 +373,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:XmlSearchReplace"
         "ProductCode" = "8:{CD59EF69-3503-4E24-8CEA-70953060F674}"
-        "PackageCode" = "8:{1CC3E9FF-1FDC-4832-8029-42F368EC2294}"
+        "PackageCode" = "8:{3DE4B16F-848F-418E-BF35-FD2C810886C4}"
         "UpgradeCode" = "8:{6315FC23-4120-468A-8900-0B73810B4CF9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -908,35 +939,6 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_38B63B478D594E2A858D7ED3FCD8171F"
-            {
-            "SourcePath" = "8:..\\XmlSearchReplace\\obj\\Debug\\XmlSearchReplace.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2E5C6A2518C14192B21F804B073C2412"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{75C646E2-F468-4F94-8D58-FC223C78B8DA}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                "ExcludeFilter" = "8:*.config"
-                }
-            }
         }
     }
 }
