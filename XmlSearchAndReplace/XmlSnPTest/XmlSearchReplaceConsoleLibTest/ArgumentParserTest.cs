@@ -11,7 +11,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckArgumentsAreFine()
         {
-            string[] args = { "/O=", "av,ev,en,an", "/R=replace ", "/F=c:\\documents", "and", "settings\\desktop\\file.xml", "/S=search /W /i /c" };
+            string[] args = { "/O=", "av,ev,en,an,va,ve", "/R=replace ", "/F=c:\\documents", "and", "settings\\desktop\\file.xml", "/S=search /W /i /c" };
             
             ISearchReplaceParameter param = TestHelper.GetParameters(args);
             Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, param.GetLocationOptions());
@@ -25,7 +25,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void StringArgumentsWithMoreThanOneEqualsSignShouldWork()
         {
-            string[] args = { "/O=", "av,ev,en,an", @"/R==", "/F=c:\\documents", "and", "settings\\desktop\\file.xml", "/S=Equals /W /i /c" };
+            string[] args = { "/O=", "av,ev,en,an,va,ve", @"/R==", "/F=c:\\documents", "and", "settings\\desktop\\file.xml", "/S=Equals /W /i /c" };
 
             ISearchReplaceParameter parameters = TestHelper.GetParameters(args);
             Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, parameters.GetLocationOptions());
@@ -39,10 +39,10 @@ namespace XmlSnRTest
         [TestMethod]
         public void CheckArgumentsAreFineWithActualValue()
         {
-            string[] args = { "/O=", "av,ev,en", "/S=\\\\server04\\spfiles", "/R=L:", "/F=c:\\documents", "and", "settings\\desktop\\file.xml" };
+            string[] args = { "/O=", "av,ev,en,an,ve,va", "/S=\\\\server04\\spfiles", "/R=L:", "/F=c:\\documents", "and", "settings\\desktop\\file.xml" };
 
             ISearchReplaceParameter argParser = TestHelper.GetParameters(args);
-            Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, argParser.GetLocationOptions() | SearchReplaceLocationOptions.ReplaceAttributeName);
+            Assert.AreEqual(SearchReplaceLocationOptions.ReplaceAll, argParser.GetLocationOptions());
             Assert.AreEqual("c:\\documents and settings\\desktop\\file.xml", argParser.GetFileName());
             Assert.AreEqual("\\\\server04\\spfiles", argParser.GetSearchString()[0]);
             Assert.AreEqual("L:", argParser.GetReplaceString()[0]);

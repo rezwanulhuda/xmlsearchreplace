@@ -61,6 +61,11 @@ namespace XmlSearchReplaceLib
             {
                 _Processors.Add(new ValueOfElementReplacer());
             }
+
+            if (_LocationOptions.IsSet(SearchReplaceLocationOptions.ReplaceValueOfAttribute))
+            {
+                _Processors.Add(new ValueOfAttributeReplacer());
+            }
         }
 
         public XmlDocument Replace(XmlDocument doc)

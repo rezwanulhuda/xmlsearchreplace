@@ -38,15 +38,7 @@ namespace XmlSearchReplaceConsoleLib
             List<string> replaceStrings = null;
 
             if (HasParamFile())
-            {
-                //if (_Parameters.GetBoolValue("L"))
-                //{
-                //    replaceStrings = ToLowerArray(_Reader.GetAllSearchStrings());
-                //}
-                //else
-                //{
-                    
-                //}
+            {                
                 replaceStrings = _Reader.GetAllReplaceStrings();
             }
             else
@@ -171,6 +163,16 @@ namespace XmlSearchReplaceConsoleLib
             if (optionsS.Contains("an"))
             {
                 options |= SearchReplaceLocationOptions.ReplaceAttributeName;
+            }
+
+            if (optionsS.Contains("va"))
+            {
+                options |= SearchReplaceLocationOptions.ReplaceValueOfAttribute;
+            }
+
+            if (optionsS.Contains("ve"))
+            {
+                options |= SearchReplaceLocationOptions.ReplaceValueOfElement;
             }
 
             return options;

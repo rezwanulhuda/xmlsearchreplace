@@ -575,6 +575,7 @@ namespace XmlSnRTest
             Assert.AreEqual(2, nodes.Count);
             Assert.AreEqual("abra", nodes[0].InnerText);
             Assert.AreEqual("babra", nodes[1].InnerText);
+
         }
 
         [TestMethod]
@@ -624,6 +625,19 @@ namespace XmlSnRTest
             XmlDocument actualDoc = _Replacer.Replace(_Document);
             AssertFirstElementValue(actualDoc, "Book", 1, "LibraryBook");
             //AssertAttributeValueInFirstNamedElement(actualDoc, "ns:Book", "ns:LibraryBook", "something");
+        }
+
+        [TestMethod]
+        public void Replace_ValueOfAttribute_WillReplaceValueOfAttribute()
+        {
+            string xml = @"<Library>
+    <Book Book=""something"">a</Book>    
+</Library>";
+
+            InitializeReplacer(xml, SearchReplaceLocationOptions.ReplaceValueOfAttribute, "Book", "LibraryBook", true, false);
+
+            XmlDocument actualDoc = _Replacer.Replace(_Document);            
+            AssertAttributeValueInFirstNamedElement(actualDoc, "Book", "Book", "LibraryBook");
         }
     }
 }

@@ -35,7 +35,7 @@ namespace XmlSearchReplaceConsoleLib
                     _SupportedParams = new CommandLineParameterCollection();
                     _SupportedParams.Add(new CommandLineParameter("S", @"""search""", HelpText.SearchString, false));
                     _SupportedParams.Add(new CommandLineParameter("R", @"""replace""", HelpText.ReplaceString, false));
-                    _SupportedParams.Add(new CommandLineParameter("O", @"en,ev,an,av", HelpText.Option, true));
+                    _SupportedParams.Add(new CommandLineParameter("O", @"en,ev,an,av,va,ve", HelpText.Option, true));
                     _SupportedParams.Add(new CommandLineParameter("F", @"""C:\Files\*.xml""", HelpText.FileName, true));
                     _SupportedParams.Add(new CommandLineParameter("C", String.Empty, HelpText.ContinueOnError, false));
                     _SupportedParams.Add(new CommandLineParameter("I", String.Empty, HelpText.IgnoreCase, false));

@@ -91,6 +91,7 @@
     <Compile Include="ReplacerEngineType.cs" />
     <Compile Include="Replacer\AttributeNameReplacer.cs" />
     <Compile Include="Replacer\AttributeValueReplacer.cs" />
+    <Compile Include="Replacer\ValueOfAttributeReplacer.cs" />
     <Compile Include="Replacer\ValueOfElementReplacer.cs" />
     <Compile Include="Validator\StringCaseInsensitiveValidator.cs" />
     <Compile Include="Validator\StringCaseSensitiveValidator.cs" />

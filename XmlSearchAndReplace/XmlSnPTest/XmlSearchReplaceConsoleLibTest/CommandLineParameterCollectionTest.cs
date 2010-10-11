@@ -34,7 +34,7 @@ namespace XmlSnRTest
         [TestMethod]
         public void GetUsage_WillReturnValidUsage()
         {
-            string expectedCommandLine = @"[/S]=""search"" [/R]=""replace"" /O=en,ev,an,av /F=""C:\Files\*.xml"" [/C] [/I] [/W] [/D] [/L] [/P]=""C:\Files\params.txt""";
+            string expectedCommandLine = @"[/S]=""search"" [/R]=""replace"" /O=en,ev,an,av,va,ve /F=""C:\Files\*.xml"" [/C] [/I] [/W] [/D] [/L] [/P]=""C:\Files\params.txt""";
             Assert.AreEqual(expectedCommandLine, CommandLineParameterCollection.GetUsage());
         }
 

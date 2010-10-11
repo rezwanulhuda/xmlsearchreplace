@@ -7,7 +7,7 @@ namespace XmlSearchReplaceConsoleLib
 {
     public static class HelpText
     {
-        public const string Option = "Options for searching. Can have the following values: ev - element value, en - element name, an - attribute name, av - attribute value. Separate options with comma, semicolon or space";
+        public const string Option = "Options for searching. Can have the following values: ev - element value, en - element name, an - attribute name, av - attribute value, va - value of attribute matching search string, ve - value of element matching search string. Separate options with comma, semicolon or space";
         public const string SearchString = "String to search in the xml. If string contains front slash (/) then it must be surrounded by double quotes(\"). If \" needs to be searched, then use \\\" with the entire string inside \"";
         public const string ReplaceString = "String to replace with in the xml. If string contains front slash (/) then it must be surrounded by double quotes(\"). If \" needs to be searched, then use \\\" with the entire string inside \"";
         public const string WholeWordOnly = "Whole word search. When searching values, whole word means the entire value.";
