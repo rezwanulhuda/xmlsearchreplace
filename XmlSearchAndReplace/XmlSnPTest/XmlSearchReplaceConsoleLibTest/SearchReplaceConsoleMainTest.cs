@@ -69,8 +69,12 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
             File.WriteAllText(_ExpectedFile, content);
         }
 
-        private void SetupAndAssert(string expectedContent, string commandLine)
+        private void SetupAndAssert(string expectedContent, string commandLine, string testFileContent = "")
         {
+            if (!String.IsNullOrEmpty(testFileContent))
+            {
+                SetupTestFile(testFileContent);
+            }
             SetupExpectedFile(expectedContent);
 
             SearchReplaceConsoleMain main = new SearchReplaceConsoleMain();
@@ -198,38 +202,34 @@ namespace XmlSnRTest.XmlSearchReplaceConsoleLibTest
             SetupAndAssert(expectedContent, commandLine);
         }
 
-//        [TestMethod]
-//        public void Start_ElementNameWithNameSpaceParamFileLowerCaseIgnoreCase()
-//        {
-//            string testFileContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
-//<h:Library xmlns:h=""http://www.w3.org/TR/html4/"">
-//  <h:Books>
-//    <h:Book bookId=""1"">
-//      <h:Title>Bourne Superemecy</h:Title>
-//      <h:Author>Robert Ludlum</h:Author>
-//    </h:Book>
-//  </h:Books>
-//</h:Library>";
 
-//            SetupTestFile(testFileContent);
-            
-//            string expectedContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
-//<h:Library xmlns:h=""http://www.w3.org/TR/html4/"">
-//  <h:books>
-//    <h:book bookId=""1"">
-//      <h:Title>Bourne Superemecy</h:Title>
-//      <h:Author>Robert Ludlum</h:Author>
-//    </h:book>
-//  </h:books>
-//</h:Library>";
+        [TestMethod]
+        public void Start_ValueOfElementAndAttribute()
+        {
+            string testContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Connectors>
+  <Connector class=""CAssetCenterConnector"">
+    <Configuration>
+      <Comment>connnector to Hardware table</Comment>
+      <Server Serverid=""my server id"">The MT Server</Server>
+    </Configuration>
+  </Connector>
+</Connectors>";
 
-//            string paramFile = TestHelper.CreateParameterFile(new string[] { @"/S=h:book" });
 
-//            string commandLine = String.Format(@"/F=""{0}"" /O=en,an /P={1} /I /L", _TestFile, paramFile);
+            string expectedContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Connectors>
+  <Connector class=""CAssetCenterConnector"">
+    <Configuration>
+      <Comment>connnector to Hardware table</Comment>
+      <Server Serverid=""MTSERVER"">MTSERVER</Server>
+    </Configuration>
+  </Connector>
+</Connectors>";
 
-//            SetupAndAssert(expectedContent, commandLine);
-//        }
-
-        
+            SetupTestFile(testContent);
+            string commandLine = String.Format(@"/F=""{0}"" /O=ve,va /I /S=""Server"" /R=""MTSERVER""" , _TestFile);
+            SetupAndAssert(expectedContent, commandLine);
+        }
     }
 }
