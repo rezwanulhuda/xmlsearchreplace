@@ -10,7 +10,7 @@ XmlSearchReplace tries to overcome this by allowing users to specify where they 
 
 I started working with the tool when I sometimes needed to change some reference from .csproj files of Visual Studio and it was getting tiresome to try and change 20-30 project references manually. I also wanted to practice some TDD - and started the development with a TDD approach.
 
-I believe, apart from being a tool to replace texts from within xmls, the search replace engine can also be used by developers as an independent library in their projects where they needs such features.
+I believe, apart from being a tool to replace texts from within xmls, the search replace engine can also be used by developers as an independent library in their projects where they need such features.
 
 # Usage
 ```
